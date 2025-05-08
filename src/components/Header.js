@@ -6,6 +6,7 @@ export const Header = () => {
     <header className="header">
       <div className="header-left">
         <button className="menu-button">☰</button>
+        {/* 이게 주석이라고?ㅋㅋㅋ */}
         <div className="nav-links">
           <a href="/">MUSINSA</a>
           <a href="/">BEAUTY</a>
