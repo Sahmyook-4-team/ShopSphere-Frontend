@@ -1,0 +1,554 @@
+.box {
+    height: 1026px;
+    width: 1919px;
+  }
+  
+  /* style.css에서 기존에 fixed였던 것 수정 */
+.box .view {
+    position: relative; /* ✅ fixed 제거 */
+    width: auto;        /* or 적절한 width */
+    height: auto;
+  }
+  
+  .box .overlap {
+    background-color: #ffffff;
+    height: 1026px;
+    position: relative;
+    width: 1919px;
+  }
+  
+  .box .rectangle {
+    background-color: #ffffff80;
+    height: 1026px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 1919px;
+  }
+  
+  .box .nav {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    height: 70px;
+    justify-content: center;
+    left: 51px;
+    position: absolute;
+    top: 0;
+    width: 1799px;
+  }
+  
+  .box .navbar {
+    align-self: stretch;
+    background-color: #1a1b1f;
+    flex: 1;
+    flex-grow: 1;
+    position: relative;
+    width: 100%;
+  }
+  
+  .box .component {
+    height: 28px !important;
+    left: 12px !important;
+    position: absolute !important;
+    top: 14px !important;
+    width: 24px !important;
+  }
+  
+  .box .vertical-divider {
+    background-color: #ffffff66;
+    height: 16px;
+    left: 52px;
+    position: absolute;
+    top: 27px;
+    width: 1px;
+  }
+  
+  .box .link-MUSINSA-MUSINSA {
+    color: #ffffffcc;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 14.4px;
+    font-weight: 500;
+    height: 22px;
+    left: 69px;
+    letter-spacing: 0;
+    line-height: 22px;
+    position: absolute;
+    top: 22px;
+    white-space: nowrap;
+    width: 67px;
+  }
+  
+  .box .link-BEAUTY-BEAUTY {
+    color: #ffffffcc;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 15.2px;
+    font-weight: 500;
+    height: 22px;
+    left: 152px;
+    letter-spacing: 0;
+    line-height: 22px;
+    position: absolute;
+    top: 22px;
+    white-space: nowrap;
+    width: 62px;
+  }
+  
+  .box .link-PLAYER-PLAYER {
+    color: #ffffffcc;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 15.2px;
+    font-weight: 500;
+    height: 22px;
+    left: 229px;
+    letter-spacing: 0;
+    line-height: 22px;
+    position: absolute;
+    top: 22px;
+    white-space: nowrap;
+    width: 58px;
+  }
+  
+  .box .link-OUTLET-OUTLET {
+    color: #ffffffcc;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 15.2px;
+    font-weight: 500;
+    height: 22px;
+    left: 303px;
+    letter-spacing: 0;
+    line-height: 22px;
+    position: absolute;
+    top: 22px;
+    white-space: nowrap;
+    width: 61px;
+  }
+  
+  .box .link-BOUTIQUE {
+    color: #ffffffcc;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 15.2px;
+    font-weight: 500;
+    height: 22px;
+    left: 380px;
+    letter-spacing: 0;
+    line-height: 22px;
+    position: absolute;
+    top: 22px;
+    white-space: nowrap;
+    width: 80px;
+  }
+  
+  .box .link-SHOES-SHOES {
+    color: #ffffffcc;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 15.2px;
+    font-weight: 500;
+    height: 22px;
+    left: 476px;
+    letter-spacing: 0;
+    line-height: 22px;
+    position: absolute;
+    top: 22px;
+    white-space: nowrap;
+    width: 52px;
+  }
+  
+  .box .link-KIDS-KIDS {
+    color: #ffffffcc;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 15.2px;
+    font-weight: 500;
+    height: 22px;
+    left: 544px;
+    letter-spacing: 0;
+    line-height: 22px;
+    position: absolute;
+    top: 22px;
+    white-space: nowrap;
+    width: 35px;
+  }
+  
+  .box .div {
+    background-color: #ffffff66;
+    height: 16px;
+    left: 591px;
+    position: absolute;
+    top: 27px;
+    width: 1px;
+  }
+  
+  .box .link {
+    align-items: center;
+    display: inline-flex;
+    gap: 4px;
+    height: 56px;
+    left: 596px;
+    padding: 16.5px 8px 17.5px;
+    position: absolute;
+    top: 7px;
+  }
+  
+  .box .variant-2 {
+    height: 20px !important;
+    position: relative !important;
+    width: 20px !important;
+  }
+  
+  .box .text-wrapper {
+    color: #ffffffcc;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 15.2px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 22px;
+    margin-top: -1.00px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  .box .link-2 {
+    color: #ffffffcc;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 13.1px;
+    font-weight: 500;
+    height: 20px;
+    left: 1457px;
+    letter-spacing: 0;
+    line-height: 20px;
+    position: absolute;
+    top: 24px;
+    white-space: nowrap;
+    width: 88px;
+  }
+  
+  .box .vertical-divider-2 {
+    background-color: #ffffff66;
+    height: 16px;
+    left: 1562px;
+    position: absolute;
+    top: 27px;
+    width: 1px;
+  }
+  
+  .box .button {
+    all: unset;
+    box-sizing: border-box;
+    color: #ffffffcc;
+    font-family: var(--www-musinsa-com-semantic-button-font-family);
+    font-size: var(--www-musinsa-com-semantic-button-font-size);
+    font-style: var(--www-musinsa-com-semantic-button-font-style);
+    font-weight: var(--www-musinsa-com-semantic-button-font-weight);
+    height: 20px;
+    left: 1677px;
+    letter-spacing: var(--www-musinsa-com-semantic-button-letter-spacing);
+    line-height: var(--www-musinsa-com-semantic-button-line-height);
+    position: absolute;
+    text-align: center;
+    top: 24px;
+    white-space: nowrap;
+    width: 24px;
+  }
+  
+  .box .link-3 {
+    color: #ffffffcc;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 13.1px;
+    font-weight: 500;
+    height: 20px;
+    left: 1576px;
+    letter-spacing: 0;
+    line-height: 20px;
+    position: absolute;
+    top: 24px;
+    white-space: nowrap;
+    width: 37px;
+  }
+  
+  .box .link-4 {
+    color: #ffffffcc;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 13.2px;
+    font-weight: 500;
+    height: 20px;
+    left: 1632px;
+    letter-spacing: 0;
+    line-height: 20px;
+    position: absolute;
+    top: 24px;
+    white-space: nowrap;
+    width: 24px;
+  }
+  
+  .box .link-5 {
+    color: #ffffffcc;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 13.1px;
+    font-weight: 500;
+    height: 20px;
+    left: 1722px;
+    letter-spacing: 0;
+    line-height: 20px;
+    position: absolute;
+    top: 24px;
+    white-space: nowrap;
+    width: 49px;
+  }
+  
+  .box .horizontal-divider {
+    background-color: #0000001a;
+    height: 1px;
+    left: 0;
+    position: absolute;
+    top: 69px;
+    width: 1799px;
+  }
+  
+  .box .rectangle-2 {
+    background-color: #ffffff;
+    height: 889px;
+    left: 578px;
+    position: absolute;
+    top: 137px;
+    width: 744px;
+  }
+  
+  .box .view-2 {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    height: 42px;
+    left: 595px;
+    position: absolute;
+    top: 203px;
+    width: 710px;
+  }
+  
+  .box .view-3 {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    height: 42px;
+    left: 595px;
+    position: absolute;
+    top: 313px;
+    width: 710px;
+  }
+  
+  .box .view-4 {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    height: 42px;
+    left: 595px;
+    position: absolute;
+    top: 470px;
+    width: 710px;
+  }
+  
+  .box .view-5 {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    height: 42px;
+    left: 595px;
+    position: absolute;
+    top: 620px;
+    width: 710px;
+  }
+  
+  .box .view-6 {
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #000000;
+    border-radius: 5px;
+    height: 42px;
+    left: 595px;
+    position: absolute;
+    top: 627px;
+    width: 710px;
+  }
+  
+  .box .text-wrapper-2 {
+    color: #000000;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-size: 17px;
+    font-weight: 600;
+    height: 21px;
+    left: 595px;
+    letter-spacing: 0;
+    line-height: 20px;
+    position: absolute;
+    top: 280px;
+    white-space: nowrap;
+    width: 79px;
+  }
+  
+  .box .text-wrapper-3 {
+    color: #000000;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-size: 17px;
+    font-weight: 600;
+    height: 21px;
+    left: 595px;
+    letter-spacing: 0;
+    line-height: 20px;
+    position: absolute;
+    top: 170px;
+    white-space: nowrap;
+    width: 62px;
+  }
+  
+  .box .text-wrapper-4 {
+    color: #000000;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-size: 17px;
+    font-weight: 600;
+    height: 21px;
+    left: 595px;
+    letter-spacing: 0;
+    line-height: 20px;
+    position: absolute;
+    top: 454px;
+    white-space: nowrap;
+    width: 62px;
+  }
+  
+  .box .text-wrapper-5 {
+    color: #000000;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-size: 17px;
+    font-weight: 600;
+    height: 21px;
+    left: 595px;
+    letter-spacing: 0;
+    line-height: 20px;
+    position: absolute;
+    top: 593px;
+    white-space: nowrap;
+    width: 305px;
+  }
+  
+  .box .overlap-group-wrapper {
+    height: 64px;
+    left: 578px;
+    position: absolute;
+    top: 73px;
+    width: 750px;
+  }
+  
+  .box .overlap-group {
+    background-color: #fafafa;
+    height: 64px;
+    position: relative;
+    width: 748px;
+  }
+  
+  .box .text-wrapper-6 {
+    color: #000000;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    height: 22px;
+    left: 12px;
+    letter-spacing: 0;
+    line-height: 20px;
+    position: absolute;
+    top: 19px;
+    white-space: nowrap;
+    width: 84px;
+  }
+  
+  .box .p {
+    color: #000000;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 13px;
+    font-weight: 500;
+    height: 23px;
+    left: 595px;
+    letter-spacing: 0;
+    line-height: 20px;
+    position: absolute;
+    top: 539px;
+    white-space: nowrap;
+    width: 296px;
+  }
+  
+  .box .view-7 {
+    background-color: #cccccc;
+    border: 1px solid;
+    border-radius: 5px;
+    height: 54px;
+    left: 595px;
+    position: absolute;
+    top: 750px;
+    width: 710px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .box .text-wrapper-7 {
+    color: #000000;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    height: 35px;
+    left: 300px;
+    letter-spacing: 0;
+    line-height: 20px;
+    position: absolute;
+    top: 20px;
+    width: 78px;
+}
+  
+  .box .text-wrapper-8 {
+    color: #000000;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 13px;
+    font-weight: 500;
+    height: 23px;
+    left: 595px;
+    letter-spacing: 0;
+    line-height: 20px;
+    position: absolute;
+    top: 676px;
+    white-space: nowrap;
+    width: 339px;
+  }
+
+  .box .text-wrapper-9 {
+    color: #000000;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-size: 17px;
+    font-weight: 600;
+    height: 21px;
+    left: 595px;
+    position: absolute;
+    top: 361px; /* 기존 view-3: top: 313px → view-4: top: 379px 사이 */
+    white-space: nowrap;
+    width: 120px;
+  }
+  
+  .box .view-9 {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    height: 42px;
+    left: 595px;
+    position: absolute;
+    top: 390px; /* 기존 view-4 위치를 밑으로 밀어야 함 */
+    width: 710px;
+  }
+  
+  .box-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* 또는 center로 하면 수직 중앙 */
+    min-height: 100vh;
+    padding-top: 100px;      /* Header와 겹치지 않게 */
+    background-color: #ffffff;
+    box-sizing: border-box;
+  }
+  

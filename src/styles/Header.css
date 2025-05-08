@@ -1,0 +1,43 @@
+.header {
+    position: fixed;           /* 상단 고정 */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;             /* Box보다 앞에 보이도록 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1a1b1f;
+    padding: 10px 20px;
+    color: #ffffffcc;
+    font-family: 'Inter', sans-serif;
+    height: 60px;
+  }
+  
+  .header a {
+    color: #ffffffcc;
+    text-decoration: none;
+    margin: 0 8px;
+    font-weight: 500;
+    font-size: 14px;
+  }
+  
+  .menu-button {
+    background: none;
+    border: none;
+    color: #ffffffcc;
+    font-size: 20px;
+    margin-right: 12px;
+    cursor: pointer;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .header-left,
+  .header-right {
+    display: flex;
+    align-items: center;
+  }

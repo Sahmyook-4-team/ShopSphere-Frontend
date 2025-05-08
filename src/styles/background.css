@@ -1,0 +1,215 @@
+.background {
+    background-color: #fafafa;
+    height: 1288px;
+    width: 1440px;
+  }
+  
+  .background .overlap {
+    height: 1288px;
+    position: relative;
+  }
+  
+  .background .main {
+    background-color: #ffffff;
+    height: 1180px;
+    left: 420px;
+    position: absolute;
+    top: 108px;
+    width: 600px;
+  }
+  
+  .background .section {
+    height: 463px;
+    position: relative;
+  }
+  
+  .background .form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 568px;
+  }
+  
+  .background .label-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-top: 15px;     /* ✅ 글자 위 여백 추가 */
+    margin-bottom: 4px;
+  }
+  
+  .background .input-box {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    height: 36px;
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+  
+  .background .login-button {
+    background-color: #000000;
+    color: white;
+    height: 44px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid black;
+    cursor: pointer;
+  }
+  
+  .background .signup-button {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background-color: #fff;
+    height: 31px;
+    width: 100%;
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    color: black;
+  }
+  
+  .background .text-wrapper-4 {
+    color: #666;
+    font-size: 13px;
+    font-family: "Roboto-Regular", Helvetica;
+    margin-left: 4px;
+  }
+  
+  .background .list {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    font-size: 13px;
+    color: #8a8a8a;
+  }
+  
+  .background .container-2 {
+    margin-top: 16px;
+    position: relative;
+    width: 568px;
+  }
+  
+  .background .link-2,
+  .background .link-3 {
+    height: 40px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  
+  .background .link-2 {
+    background-color: #fee500;
+    border: 1px solid #fee500;
+  }
+  
+  .background .link-3 {
+    border: 1px solid #e0e0e0;
+  }
+  
+  .background .header {
+    background-color: #f5f5f5;
+    height: 52px;
+    width: 600px;
+    position: absolute;
+    left: 420px;
+    top: 56px; /* nav 바로 아래로 내려오게 */
+    z-index: 20; /* nav보다 높게 설정 */
+  }
+  
+  
+  .background .heading {
+    padding: 14px 16px;
+  }
+  
+  .background .text-wrapper-8 {
+    position: absolute;
+    top: 20px; /* 기존 -12px이었으면 내려주는 값으로 */
+    left: -1;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 15px;
+    font-weight: 500;
+    color: #000000;
+    line-height: 60px;
+    white-space: nowrap;
+  }
+  
+  .background .nav {
+    background-color: #1a1b1f;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10; /* 너무 높지 않게 설정 */
+  }
+  
+  .background .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 20px;
+    height: 50px;
+  }
+  
+  .background .right-menus {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .background .button-3 {
+    all: unset;
+    cursor: pointer;
+    color: #ffffffcc;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    padding: 0 10px;
+  }
+  
+  .background .link-6,
+  .background .link-7,
+  .background .link-8,
+  .background .link-9 {
+    color: #ffffffcc;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  
+  .background .find-info {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  
+  .background .find-link {
+    font-size: 13px;
+    color: #8a8a8a;
+    text-decoration: none;
+  }
+  
+  .background .divider {
+    color: #8a8a8a;
+  }
+  
