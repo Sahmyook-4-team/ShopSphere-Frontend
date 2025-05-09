@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SVG2 from "../assets/SVG-2.svg";
 import SVG from "../assets/SVG.svg";
@@ -6,8 +6,37 @@ import ButtonSVG from "../assets/button-SVG.svg";
 import Image from "../assets/image.svg";
 import "../styles/background.css";
 import { Header } from "./Header";
+import axios from 'axios';
 
 const Background = () => {
+
+  // 로그인
+  const [id, setId] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const [loggedInUser, setLoggedInUser] = useState(null);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:8080/api/users/login', {
+        id,
+        password,
+      });
+      setMessage('로그인 성공!');
+      setLoggedInUser(response.data);
+      console.log('로그인 성공:', response.data);
+      alert("로그인 성공");
+      // 성공 후 처리 (예: 메인 페이지로 리디렉션, 사용자 정보 저장)
+    } catch (error) {
+      setMessage('로그인 실패: ' + error.response.data.message);
+      console.error('로그인 실패:', error);
+      setLoggedInUser(null);
+      alert("로그인 실패");
+    }
+  };
+
+  // 회원 가입 이동
   const navigate = useNavigate();
 
   const handleSignup = () => {
@@ -27,10 +56,11 @@ const Background = () => {
                   아이디
                 </label>
                 <input
-                  id="username"
                   type="text"
-                  className="input-box"
-                  placeholder="아이디"
+                  id="id"
+                  value={id}
+                  onChange={(e) => setId(e.target.value)}
+                  required
                 />
 
                 {/* 비밀번호 입력 */}
@@ -38,14 +68,15 @@ const Background = () => {
                   비밀번호
                 </label>
                 <input
-                  id="password"
                   type="password"
-                  className="input-box"
-                  placeholder="비밀번호"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
 
                 {/* 로그인 버튼 */}
-                <button className="login-button">로그인</button>
+                <button className="login-button" onClick={handleSubmit}>로그인</button>
 
                 {/* 자동 로그인 */}
                 <div className="label">
