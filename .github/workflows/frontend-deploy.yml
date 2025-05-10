@@ -37,7 +37,7 @@ jobs:
         aws-region: ${{ secrets.AWS_REGION }}
 
     - name: Upload to S3
-      run: aws s3 sync ./build s3://${{ secrets.FRONTEND_S3_BUCKET_NAME }} --delete
+      run: aws s3 sync ./build s3://${{ secrets.S3_BUCKET_FRONTEND }} --delete
       working-directory: ./
 
     - name: Invalidate CloudFront Cache
