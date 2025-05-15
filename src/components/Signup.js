@@ -27,6 +27,11 @@ export const Signup = () => {
         name,
         phoneNumber,
         address,
+      }, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
       alert("회원가입 성공");
       // 성공 후 처리 (예: 로그인 페이지로 리디렉션)
