@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import SVG2 from "../assets/SVG-2.svg";
-import SVG from "../assets/SVG.svg";
-import ButtonSVG from "../assets/button-SVG.svg";
-import Image from "../assets/image.svg";
+import SVG2 from "../assets/Login/SVG-2.svg";
+import SVG from "../assets/Login/SVG.svg";
+import ButtonSVG from "../assets/Login/button-SVG.svg";
+import Image from "../assets/Login/image.svg";
 import "../styles/Login.css";
 import { Header } from "./Header";
 import axios from 'axios';
