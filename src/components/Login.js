@@ -7,6 +7,7 @@ import Image from "../assets/image.svg";
 import "../styles/Login.css";
 import { Header } from "./Header";
 import axios from 'axios';
+import { useEffect } from "react";
 
 const Login = () => {
 
@@ -34,6 +35,7 @@ const Login = () => {
       setLoggedInUser(null);
       alert("로그인 실패");
     }
+
   };
 
   // 회원 가입 이동
@@ -42,6 +44,30 @@ const Login = () => {
   const handleSignup = () => {
     navigate("/signup");
   };
+
+const handleKakaoLogin = () => {
+  if (!window.Kakao || !window.Kakao.Auth) {
+    alert("Kakao SDK가 아직 로드되지 않았습니다.");
+    return;
+  }
+
+  window.Kakao.Auth.authorize({
+    redirectUri: "http://localhost:8080/oauth/kakao/callback",
+  });
+
+
+};
+
+useEffect(() => {
+  if (window.Kakao && !window.Kakao.isInitialized()) {
+    window.Kakao.init("a2b2dd3527355a719a1c8b5e4a7959bc"); // 👉 JavaScript 키 입력
+    console.log("✅ Kakao SDK Initialized");
+  }
+}, []);
+
+
+
+
 
   return (
     <>
@@ -102,19 +128,21 @@ const Login = () => {
                 </div>
 
                 {/* 간편 로그인 */}
+                {/*카카오 로그인*/}
                 <div className="container-2">
-                  <div
-                    className="link-2"
-                    style={{ transform: "translateX(-10px)" }}
-                  >
-                    <img
-                      className="SVG"
-                      alt="kakao"
-                      src={SVG}
-                      style={{ transform: "translateX(-10px)" }}
-                    />
-                    <div className="text-wrapper-5">카카오 로그인</div>
-                  </div>
+        <div
+          className="link-2"
+          style={{ transform: "translateX(-10px)", cursor: 'pointer' }} // cursor 추가
+          onClick={handleKakaoLogin} // 클릭 이벤트 핸들러 추가
+        >
+          <img
+            className="SVG"
+            alt="kakao"
+            src={require("../assets/kakao-icon.svg")}
+            style={{ transform: "translateX(-10px)" }}
+          />
+          <div className="text-wrapper-5">카카오 로그인</div>
+        </div>
 
                   <div
                     className="link-3"
