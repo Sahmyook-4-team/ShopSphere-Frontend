@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import "../styles/style.css";
+import "../styles/Signup.css";
 import { Header } from "./Header";
 
-export const Box = () => {
+export const Signup = () => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -27,6 +27,11 @@ export const Box = () => {
         name,
         phoneNumber,
         address,
+      }, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
       alert("회원가입 성공");
       // 성공 후 처리 (예: 로그인 페이지로 리디렉션)
@@ -98,4 +103,4 @@ export const Box = () => {
   );
 };
 
-export default Box;
+export default Signup;

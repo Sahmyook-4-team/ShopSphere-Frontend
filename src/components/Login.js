@@ -4,11 +4,11 @@ import SVG2 from "../assets/SVG-2.svg";
 import SVG from "../assets/SVG.svg";
 import ButtonSVG from "../assets/button-SVG.svg";
 import Image from "../assets/image.svg";
-import "../styles/background.css";
+import "../styles/Login.css";
 import { Header } from "./Header";
 import axios from 'axios';
 
-const Background = () => {
+const Login = () => {
 
   // 로그인
   const [id, setId] = useState('');
@@ -40,7 +40,7 @@ const Background = () => {
   const navigate = useNavigate();
 
   const handleSignup = () => {
-    navigate("/box");
+    navigate("/signup");
   };
 
   return (
@@ -152,4 +152,4 @@ const Background = () => {
   );
 };
 
-export default Background;
+export default Login;

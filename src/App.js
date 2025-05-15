@@ -6,8 +6,8 @@ import {
   Link,
   useLocation,
 } from "react-router-dom";
-import Box from "./components/Box";
-import Background from "./components/Background"; // 로그인 페이지
+import Signup from "./components/Signup";
+import Login from "./components/Login"; // 로그인 페이지
 import "./App.css";
 
 function App() {
@@ -28,15 +28,15 @@ function MainLayout() {
     <>
       {!hideNav && (
         <nav>
-          <Link to="/box">회원가입</Link>
+          <Link to="/signup">회원가입</Link>
           <span> </span> {/* 공백 추가 ㅋㅋ */}
           <Link to="/login">로그인</Link>
         </nav>
       )}
 
       <Routes>
-        <Route path="/box" element={<Box />} />
-        <Route path="/login" element={<Background />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </>
   );
