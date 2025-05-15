@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Signup from "./components/Signup";
 import Login from "./components/Login"; // 로그인 페이지
+import Mypage from "./components/Mypage"; // 마이페이지
 import "./App.css";
 
 function App() {
@@ -21,8 +22,8 @@ function App() {
 function MainLayout() {
   const location = useLocation();
 
-  // "/login" 경로에서는 nav 숨김
-  const hideNav = location.pathname === "/login";
+  const hiddenNavPaths = ["/login", "/mypage"];
+  const hideNav = hiddenNavPaths.includes(location.pathname);
 
   return (
     <>
@@ -31,12 +32,15 @@ function MainLayout() {
           <Link to="/signup">회원가입</Link>
           <span> </span> {/* 공백 추가 ㅋㅋ */}
           <Link to="/login">로그인</Link>
+          <span> </span> {/* 공백 추가 ㅋㅋ */}
+          <Link to="/mypage">마이페이지</Link>
         </nav>
       )}
 
       <Routes>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/mypage" element={<Mypage />} />
       </Routes>
     </>
   );
