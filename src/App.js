@@ -9,7 +9,9 @@ import {
 import Signup from "./components/Signup";
 import Login from "./components/Login"; // 로그인 페이지
 import Mypage from "./components/Mypage"; // 마이페이지
+import CartOption from "./components/CartOption"; // 장바구니
 import "./App.css";
+
 
 function App() {
   return (
@@ -22,7 +24,7 @@ function App() {
 function MainLayout() {
   const location = useLocation();
 
-  const hiddenNavPaths = ["/login", "/mypage"];
+  const hiddenNavPaths = ["/login", "/mypage", "/cartoption"];
   const hideNav = hiddenNavPaths.includes(location.pathname);
 
   return (
@@ -34,13 +36,15 @@ function MainLayout() {
           <Link to="/login">로그인</Link>
           <span> </span> {/* 공백 추가 ㅋㅋ */}
           <Link to="/mypage">마이페이지</Link>
+          <span> </span> {/* 공백 추가 ㅋㅋ */}
+          <Link to="/cartoption">장바구니</Link>
         </nav>
       )}
-
       <Routes>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mypage" element={<Mypage />} />
+        <Route path="/cartoption" element={<CartOption />} />
       </Routes>
     </>
   );
