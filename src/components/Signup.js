@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import "../styles/style.css";
+import "../styles/Signup.css";
 import { Header } from "./Header";
 
-export const Box = () => {
+export const Signup = () => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -98,4 +98,4 @@ export const Box = () => {
   );
 };
 
-export default Box;
+export default Signup;
