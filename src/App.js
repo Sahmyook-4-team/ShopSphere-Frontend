@@ -7,25 +7,28 @@ import {
   useLocation,
 } from "react-router-dom";
 import Signup from "./components/Signup";
-import Login from "./components/Login"; // 로그인 페이지
-import Mypage from "./components/Mypage"; // 마이페이지
-import CartOption from "./components/CartOption"; // 마이페이지
-import SearchDialog from "./components/SearchDialog"; // 마이페이지
-
+import Login from "./components/Login";
+import Mypage from "./components/Mypage";
+import CartOption from "./components/CartOption";
+import Profile from "./components/Profile"; // ✅ 추가
+import { AuthProvider } from "./components/contexts/AuthContext"; // ✅ 추가
+import SearchDialog from "./components/SearchDialog"; // 검색 다이얼로그 ✅ 추가
 import "./App.css";
+import KakaoCallback from "./components/KakaoCallback";
 
 function App() {
   return (
-    <Router>
-      <MainLayout />
-    </Router>
+    <AuthProvider> {/* ✅ 전역 상태 감싸기 */}
+      <Router>
+        <MainLayout />
+      </Router>
+    </AuthProvider>
   );
 }
 
 function MainLayout() {
   const location = useLocation();
-
-  const hiddenNavPaths = ["/login", "/mypage"];
+  const hiddenNavPaths = ["/login", "/mypage", "/cartoption", "/mypage/profile"];
   const hideNav = hiddenNavPaths.includes(location.pathname);
 
   return (
@@ -33,25 +36,24 @@ function MainLayout() {
       {!hideNav && (
         <nav>
           <Link to="/signup">회원가입</Link>
-          <span> </span> {/* 공백 추가 ㅋㅋ */}
+          <span> </span>
           <Link to="/login">로그인</Link>
-          <span> </span> {/* 공백 추가 ㅋㅋ */}
+          <span> </span>
           <Link to="/mypage">마이페이지</Link>
           <span> </span> {/* 공백 추가 ㅋㅋ */}
-          <Link to="/cartoption">장바구니</Link>
-          <span> </span> {/* 공백 추가 ㅋㅋ */}
           <Link to="/searchdialog">검색창</Link>
-
+          <span> </span>
+          <Link to="/cartoption">장바구니</Link>
         </nav>
       )}
-
       <Routes>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mypage" element={<Mypage />} />
+        <Route path="/mypage/profile" element={<Profile />} /> {/* ✅ 추가 */}
+        <Route path="/kakao-callback" element={<KakaoCallback />} />
         <Route path="/cartoption" element={<CartOption />} />
-        <Route path="/searchdialog" element={<SearchDialog />} />
-
+          <Route path="/searchdialog" element={<SearchDialog />} />
       </Routes>
     </>
   );

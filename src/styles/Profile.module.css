@@ -1,0 +1,188 @@
+.screen {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .div {
+    background-color: #ffffff;
+    height: 958px;
+    position: relative;
+    width: 750px;
+  }
+  
+  /* 헤더 영역 */
+  .view {
+    background-color: #f5f5f5;
+    height: 62px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 750px;
+  }
+  
+  .view2 {
+    background-color: #ffffff;
+    height: 896px;
+    left: 0;
+    position: absolute;
+    top: 60px;
+    width: 750px;
+  }
+  
+  .textWrapper {
+    color: #000000;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-size: 19px;
+    font-weight: 600;
+    left: 31px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 18px;
+  }
+  
+  /* 프로필 이미지 */
+  .view3 {
+    background-color: #d9d9d9;
+    border-radius: 35px / 34px;
+    height: 68px;
+    left: 21px;
+    position: absolute;
+    top: 96px;
+    width: 70px;
+  }
+  
+  .textWrapper2 {
+    color: #000000;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 17px;
+    font-weight: 500;
+    left: 98px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 118px;
+  }
+  
+  /* 버튼: 프로필 이미지 변경 */
+  .divWrapper {
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    display: flex;
+    gap: 10px;
+    height: 39px;
+    justify-content: center;
+    left: 21px;
+    padding: 10px 112px;
+    position: absolute;
+    top: 186px;
+    width: 123px;
+  }
+  
+  .textWrapper3 {
+    color: #000000;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-top: -1px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  /* 버튼: 닉네임 변경 */
+  .view4 {
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    display: flex;
+    gap: 10px;
+    height: 39px;
+    justify-content: center;
+    left: 378px;
+    padding: 10px 112px;
+    position: absolute;
+    top: 186px;
+    width: 123px;
+  }
+  
+  /* 설명 텍스트 */
+  .textWrapper4 {
+    color: #000000;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    left: 21px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 258px;
+    white-space: nowrap;
+  }
+  
+  .textWrapper5 {
+    color: #000000;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    left: 21px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 313px;
+    white-space: nowrap;
+  }
+  
+  .p {
+    color: #000000;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    left: 22px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 378px;
+    white-space: nowrap;
+  }
+  
+  /* 구분선 */
+  .image {
+    height: 2px;
+    left: 25px;
+    object-fit: cover;
+    position: absolute;
+    top: 355px;
+    width: 700px;
+  }
+  
+  /* 오른쪽 화살표 아이콘 */
+  .chevronRight {
+    height: 27px;
+    left: 708px;
+    position: absolute;
+    top: 254px;
+    width: 24px;
+  }
+  
+  .img {
+    height: 27px;
+    left: 708px;
+    position: absolute;
+    top: 310px;
+    width: 24px;
+  }
+
+  .infoHint {
+    font-size: 14px;
+    color: #888888;
+  }
+  
