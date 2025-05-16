@@ -12,6 +12,7 @@ import Mypage from "./components/Mypage";
 import CartOption from "./components/CartOption";
 import { AuthProvider } from "./components/contexts/AuthContext"; // ✅ 추가
 import "./App.css";
+import KakaoCallback from "./components/KakaoCallback";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function MainLayout() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mypage" element={<Mypage />} />
+        <Route path="/kakao-callback" element={<KakaoCallback />} />
         <Route path="/cartoption" element={<CartOption />} />
       </Routes>
     </>

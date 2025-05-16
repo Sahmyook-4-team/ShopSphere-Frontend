@@ -48,6 +48,27 @@ const Login = () => {
       alert("Kakao SDK가 아직 로드되지 않았습니다.");
       return;
     }
+const handleKakaoLogin = () => {
+  if (!window.Kakao || !window.Kakao.Auth) {
+    alert("Kakao SDK가 아직 로드되지 않았습니다.");
+    return;
+  }
+
+  window.Kakao.Auth.authorize({
+    redirectUri: "http://localhost:3000/kakao-callback",
+  });
+
+
+};
+
+useEffect(() => {
+  if (window.Kakao && !window.Kakao.isInitialized()) {
+    window.Kakao.init("a2b2dd3527355a719a1c8b5e4a7959bc"); // 👉 JavaScript 키 입력
+    console.log("✅ Kakao SDK Initialized");
+  }
+}, []);
+
+
 
     window.Kakao.Auth.authorize({
       redirectUri: "http://localhost:8080/oauth/kakao/callback",
