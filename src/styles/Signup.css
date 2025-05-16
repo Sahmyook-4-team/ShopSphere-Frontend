@@ -482,7 +482,7 @@
     height: 54px;
     left: 595px;
     position: absolute;
-    top: 750px;
+    top: 1000px;
     width: 710px;
     display: flex;
     align-items: center;
@@ -550,5 +550,57 @@
     padding-top: 100px;      /* Header와 겹치지 않게 */
     background-color: #ffffff;
     box-sizing: border-box;
+  }
+
+  .box .text-wrapper-10 {
+    color: #000000;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-size: 17px;
+    font-weight: 600;
+    height: 21px;
+    left: 595px;
+    letter-spacing: 0;
+    line-height: 20px;
+    position: absolute;
+    top: 701px;
+    white-space: nowrap;
+    width: 339px;
+  }
+
+  .box .view-10 {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    height: 42px;
+    left: 595px;
+    position: absolute;
+    top: 732px;
+    width: 710px;
+  }
+
+  .box .text-wrapper-11 {
+    color: #000000;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-size: 17px;
+    font-weight: 600;
+    height: 21px;
+    left: 595px;
+    letter-spacing: 0;
+    line-height: 20px;
+    position: absolute;
+    top: 827px;
+    white-space: nowrap;
+    width: 339px;
+  }
+
+  .box .view-11 {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    height: 42px;
+    left: 595px;
+    position: absolute;
+    top: 857px;
+    width: 710px;
   }
   
