@@ -3,8 +3,11 @@ import styles from "../../styles/UserInfoModal.module.css";
 import { useAuth } from "../contexts/AuthContext";
 import axios from "axios";
 
+
+
 const UserInfoModal = ({ onClose }) => {
   const { userInfo, setUserInfo } = useAuth();
+
 
   const [formData, setFormData] = useState({
     name: userInfo?.name || "",
@@ -18,20 +21,38 @@ const UserInfoModal = ({ onClose }) => {
   };
 
   const handleSave = async () => {
+    let response;
+  
     try {
-      const response = await axios.patch(`http://localhost:8080/api/users/${userInfo.id}`, formData);
+      console.log("📡 PATCH 요청 URL:", `http://localhost:8080/api/users/${userInfo.id}`);
+      console.log("📡 formData:", formData);
+  
+      response = await axios.patch(
+        `http://localhost:8080/api/users/${userInfo.id}`,
+        formData,
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      console.log("✅ 성공:", response.data);
+  
       if (!userInfo) {
         console.warn("🚨 userInfo가 null입니다. 로그인 정보가 없는 상태에서 모달 열림");
         return null;
       }
+  
       alert("회원정보가 수정되었습니다.");
-      setUserInfo(response.data); // 전역 상태도 갱신
+      setUserInfo(response.data); // ✅ 이제 바깥에서도 접근 가능
       onClose();
     } catch (err) {
-      console.error(err);
+      console.error("❌ 에러:", err);
       alert("수정 실패: " + (err.response?.data?.message || "서버 오류"));
     }
   };
+
 
   if (!userInfo) return null;
 
