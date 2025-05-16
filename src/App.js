@@ -12,6 +12,7 @@ import Mypage from "./components/Mypage";
 import CartOption from "./components/CartOption";
 import Profile from "./components/Profile"; // ✅ 추가
 import { AuthProvider } from "./components/contexts/AuthContext"; // ✅ 추가
+import SearchDialog from "./components/SearchDialog"; // 검색 다이얼로그 ✅ 추가
 import "./App.css";
 import KakaoCallback from "./components/KakaoCallback";
 
@@ -39,6 +40,8 @@ function MainLayout() {
           <Link to="/login">로그인</Link>
           <span> </span>
           <Link to="/mypage">마이페이지</Link>
+          <span> </span> {/* 공백 추가 ㅋㅋ */}
+          <Link to="/searchdialog">검색창</Link>
           <span> </span>
           <Link to="/cartoption">장바구니</Link>
         </nav>
@@ -50,6 +53,7 @@ function MainLayout() {
         <Route path="/mypage/profile" element={<Profile />} /> {/* ✅ 추가 */}
         <Route path="/kakao-callback" element={<KakaoCallback />} />
         <Route path="/cartoption" element={<CartOption />} />
+          <Route path="/searchdialog" element={<SearchDialog />} />
       </Routes>
     </>
   );
