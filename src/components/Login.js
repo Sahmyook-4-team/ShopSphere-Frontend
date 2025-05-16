@@ -14,7 +14,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const { setIsLoggedIn, setUserName } = useAuth(); // ✅ 전역 상태 사용
+  const { setIsLoggedIn, setUserName, setUserInfo } = useAuth(); // ✅ userInfo 추가
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -28,14 +28,16 @@ const Login = () => {
       alert("로그인 성공");
       setMessage("로그인 성공!");
       setIsLoggedIn(true);
-      setUserName(response.data.name); // ⚠️ 서버에서 유저 이름을 반환한다고 가정
-      navigate("/mypage"); // ✅ 마이페이지로 이동
+      setUserName(response.data.name); // ✅ 이름만 따로 저장
+      setUserInfo(response.data);      // ✅ 전체 사용자 정보 저장
+      navigate("/mypage");
 
     } catch (error) {
       alert("로그인 실패");
       setMessage("로그인 실패: " + (error.response?.data?.message || "서버 오류"));
       setIsLoggedIn(false);
       setUserName("");
+      setUserInfo(null); // ✅ 실패 시 초기화
     }
   };
 
@@ -56,7 +58,7 @@ const Login = () => {
 
   useEffect(() => {
     if (window.Kakao && !window.Kakao.isInitialized()) {
-      window.Kakao.init("a2b2dd3527355a719a1c8b5e4a7959bc"); // 👉 JavaScript 키 입력
+      window.Kakao.init("a2b2dd3527355a719a1c8b5e4a7959bc");
       console.log("✅ Kakao SDK Initialized");
     }
   }, []);
