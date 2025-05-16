@@ -17,12 +17,24 @@ const Mypage = () => {
       <div className="screen">
         <div className="div">
           <div className="overlap">
-            <div className="bell">
-              <div className="overlap-group">
-                <img className="vector" alt="Vector" src={vector} />
-              </div>
-            </div>
-            <img className="settings" alt="Settings" src={settings} />
+            {isLoggedIn && (
+              <>
+                <div className="bell">
+                  <div className="overlap-group">
+                    <img className="vector" alt="Vector" src={vector} />
+                  </div>
+                </div>
+                {/* settings 클릭 시 이동 */}
+                <img
+                  className="settings"
+                  alt="Settings"
+                  src={settings}
+                  onClick={() => navigate("/mypage/profile")}
+                  style={{ cursor: "pointer" }} // 마우스 오버 시 포인터
+                />
+              </>
+            )}
+
 
             {isLoggedIn ? (
               <div className="profile-section">
@@ -30,7 +42,6 @@ const Mypage = () => {
                   <div className="profile-image" />
                   <div className="text-wrapper">{"최진환"}</div>
                 </div>
-                <button className="edit-profile-btn">프로필 편집</button>
               </div>
             ) : (
               <div

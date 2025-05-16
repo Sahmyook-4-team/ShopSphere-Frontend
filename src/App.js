@@ -10,6 +10,7 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Mypage from "./components/Mypage";
 import CartOption from "./components/CartOption";
+import Profile from "./components/Profile"; // ✅ 추가
 import { AuthProvider } from "./components/contexts/AuthContext"; // ✅ 추가
 import "./App.css";
 import KakaoCallback from "./components/KakaoCallback";
@@ -26,7 +27,7 @@ function App() {
 
 function MainLayout() {
   const location = useLocation();
-  const hiddenNavPaths = ["/login", "/mypage", "/cartoption"];
+  const hiddenNavPaths = ["/login", "/mypage", "/cartoption", "/mypage/profile"];
   const hideNav = hiddenNavPaths.includes(location.pathname);
 
   return (
@@ -46,6 +47,7 @@ function MainLayout() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mypage" element={<Mypage />} />
+        <Route path="/mypage/profile" element={<Profile />} /> {/* ✅ 추가 */}
         <Route path="/kakao-callback" element={<KakaoCallback />} />
         <Route path="/cartoption" element={<CartOption />} />
       </Routes>
