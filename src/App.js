@@ -42,6 +42,9 @@ function MainLayout() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mypage" element={<Mypage />} />
+
+
+        
         <Route path="/kakao-callback" element={<KakaoCallback />} />
       </Routes>
     </>
