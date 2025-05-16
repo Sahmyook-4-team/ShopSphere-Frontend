@@ -52,7 +52,7 @@ const handleKakaoLogin = () => {
   }
 
   window.Kakao.Auth.authorize({
-    redirectUri: "http://localhost:8080/oauth/kakao/callback",
+    redirectUri: "http://localhost:3000/kakao-callback",
   });
 
 
