@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SVG2 from "../assets/Login/SVG-2.svg";
 import SVG from "../assets/Login/SVG.svg";
@@ -6,68 +6,60 @@ import ButtonSVG from "../assets/Login/button-SVG.svg";
 import Image from "../assets/Login/image.svg";
 import "../styles/Login.css";
 import { Header } from "./Header";
-import axios from 'axios';
-import { useEffect } from "react";
+import axios from "axios";
+import { useAuth } from "./contexts/AuthContext"; // ✅ 추가
 
 const Login = () => {
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
-  // 로그인
-  const [id, setId] = useState('');
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
-  const [loggedInUser, setLoggedInUser] = useState(null);
+  const { setIsLoggedIn, setUserName } = useAuth(); // ✅ 전역 상태 사용
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/api/users/login', {
+      const response = await axios.post("http://localhost:8080/api/users/login", {
         id,
         password,
       });
-      setMessage('로그인 성공!');
-      setLoggedInUser(response.data);
-      console.log('로그인 성공:', response.data);
+
       alert("로그인 성공");
-      // 성공 후 처리 (예: 메인 페이지로 리디렉션, 사용자 정보 저장)
+      setMessage("로그인 성공!");
+      setIsLoggedIn(true);
+      setUserName(response.data.name); // ⚠️ 서버에서 유저 이름을 반환한다고 가정
+      navigate("/mypage"); // ✅ 마이페이지로 이동
+
     } catch (error) {
-      setMessage('로그인 실패: ' + error.response.data.message);
-      console.error('로그인 실패:', error);
-      setLoggedInUser(null);
       alert("로그인 실패");
+      setMessage("로그인 실패: " + (error.response?.data?.message || "서버 오류"));
+      setIsLoggedIn(false);
+      setUserName("");
     }
-
   };
-
-  // 회원 가입 이동
-  const navigate = useNavigate();
 
   const handleSignup = () => {
     navigate("/signup");
   };
 
-const handleKakaoLogin = () => {
-  if (!window.Kakao || !window.Kakao.Auth) {
-    alert("Kakao SDK가 아직 로드되지 않았습니다.");
-    return;
-  }
+  const handleKakaoLogin = () => {
+    if (!window.Kakao || !window.Kakao.Auth) {
+      alert("Kakao SDK가 아직 로드되지 않았습니다.");
+      return;
+    }
 
-  window.Kakao.Auth.authorize({
-    redirectUri: "http://localhost:8080/oauth/kakao/callback",
-  });
+    window.Kakao.Auth.authorize({
+      redirectUri: "http://localhost:8080/oauth/kakao/callback",
+    });
+  };
 
-
-};
-
-useEffect(() => {
-  if (window.Kakao && !window.Kakao.isInitialized()) {
-    window.Kakao.init("a2b2dd3527355a719a1c8b5e4a7959bc"); // 👉 JavaScript 키 입력
-    console.log("✅ Kakao SDK Initialized");
-  }
-}, []);
-
-
-
-
+  useEffect(() => {
+    if (window.Kakao && !window.Kakao.isInitialized()) {
+      window.Kakao.init("a2b2dd3527355a719a1c8b5e4a7959bc");
+      console.log("✅ Kakao SDK Initialized");
+    }
+  }, []);
 
   return (
     <>
@@ -78,27 +70,25 @@ useEffect(() => {
             <div className="section">
               <div className="form">
                 {/* 아이디 입력 */}
-                <label htmlFor="username" className="label-text">
-                  아이디
-                </label>
+                <label htmlFor="username" className="label-text">아이디</label>
                 <input
                   type="text"
                   id="id"
                   value={id}
                   onChange={(e) => setId(e.target.value)}
                   required
+                  className="login-input"
                 />
 
                 {/* 비밀번호 입력 */}
-                <label htmlFor="password" className="label-text">
-                  비밀번호
-                </label>
+                <label htmlFor="password" className="label-text">비밀번호</label>
                 <input
                   type="password"
                   id="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
+                  className="login-input"
                 />
 
                 {/* 로그인 버튼 */}
@@ -107,47 +97,39 @@ useEffect(() => {
                 {/* 자동 로그인 */}
                 <div className="label">
                   <input type="checkbox" id="auto-login" />
-                  <label htmlFor="auto-login" className="text-wrapper-4">
-                    자동 로그인
-                  </label>
+                  <label htmlFor="auto-login" className="text-wrapper-4">자동 로그인</label>
                 </div>
 
                 {/* 아이디/비번 찾기 */}
                 <div className="list">
                   <div className="overlap-group">
                     <div className="find-info">
-                      <a href="#" className="find-link">
-                        아이디 찾기
-                      </a>
+                      <a href="#" className="find-link">아이디 찾기</a>
                       <span className="divider">|</span>
-                      <a href="#" className="find-link">
-                        비밀번호 찾기
-                      </a>
+                      <a href="#" className="find-link">비밀번호 찾기</a>
                     </div>
                   </div>
                 </div>
 
                 {/* 간편 로그인 */}
-                {/*카카오 로그인*/}
                 <div className="container-2">
-        <div
-          className="link-2"
-          style={{ transform: "translateX(-10px)", cursor: 'pointer' }} // cursor 추가
-          onClick={handleKakaoLogin} // 클릭 이벤트 핸들러 추가
-        >
-          <img
-            className="SVG"
-            alt="kakao"
-            src={require("../assets/kakao-icon.svg")}
-            style={{ transform: "translateX(-10px)" }}
-          />
-          <div className="text-wrapper-5">카카오 로그인</div>
-        </div>
-
+                  {/* 카카오 로그인 */}
                   <div
-                    className="link-3"
-                    style={{ transform: "translateX(-10px)" }}
+                    className="link-2"
+                    style={{ transform: "translateX(-10px)", cursor: "pointer" }}
+                    onClick={handleKakaoLogin}
                   >
+                    <img
+                      className="SVG"
+                      alt="kakao"
+                      src={SVG}
+                      style={{ transform: "translateX(-10px)" }}
+                    />
+                    <div className="text-wrapper-5">카카오 로그인</div>
+                  </div>
+
+                  {/* Apple 로그인 */}
+                  <div className="link-3" style={{ transform: "translateX(-10px)" }}>
                     <img
                       className="SVG"
                       alt="apple"
@@ -160,6 +142,9 @@ useEffect(() => {
 
                 {/* 회원가입 버튼 */}
                 <button className="signup-button" onClick={handleSignup}>회원가입</button>
+
+                {/* 메시지 표시 */}
+                <div className="login-message">{message}</div>
               </div>
             </div>
           </div>

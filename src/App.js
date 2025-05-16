@@ -7,23 +7,24 @@ import {
   useLocation,
 } from "react-router-dom";
 import Signup from "./components/Signup";
-import Login from "./components/Login"; // 로그인 페이지
-import Mypage from "./components/Mypage"; // 마이페이지
-import CartOption from "./components/CartOption"; // 장바구니
+import Login from "./components/Login";
+import Mypage from "./components/Mypage";
+import CartOption from "./components/CartOption";
+import { AuthProvider } from "./components/contexts/AuthContext"; // ✅ 추가
 import "./App.css";
-
 
 function App() {
   return (
-    <Router>
-      <MainLayout />
-    </Router>
+    <AuthProvider> {/* ✅ 전역 상태 감싸기 */}
+      <Router>
+        <MainLayout />
+      </Router>
+    </AuthProvider>
   );
 }
 
 function MainLayout() {
   const location = useLocation();
-
   const hiddenNavPaths = ["/login", "/mypage", "/cartoption"];
   const hideNav = hiddenNavPaths.includes(location.pathname);
 
@@ -32,11 +33,11 @@ function MainLayout() {
       {!hideNav && (
         <nav>
           <Link to="/signup">회원가입</Link>
-          <span> </span> {/* 공백 추가 ㅋㅋ */}
+          <span> </span>
           <Link to="/login">로그인</Link>
-          <span> </span> {/* 공백 추가 ㅋㅋ */}
+          <span> </span>
           <Link to="/mypage">마이페이지</Link>
-          <span> </span> {/* 공백 추가 ㅋㅋ */}
+          <span> </span>
           <Link to="/cartoption">장바구니</Link>
         </nav>
       )}
