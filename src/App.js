@@ -9,6 +9,9 @@ import {
 import Signup from "./components/Signup";
 import Login from "./components/Login"; // 로그인 페이지
 import Mypage from "./components/Mypage"; // 마이페이지
+import CartOption from "./components/CartOption"; // 마이페이지
+import SearchDialog from "./components/SearchDialog"; // 마이페이지
+
 import "./App.css";
 
 function App() {
@@ -34,6 +37,11 @@ function MainLayout() {
           <Link to="/login">로그인</Link>
           <span> </span> {/* 공백 추가 ㅋㅋ */}
           <Link to="/mypage">마이페이지</Link>
+          <span> </span> {/* 공백 추가 ㅋㅋ */}
+          <Link to="/cartoption">장바구니</Link>
+          <span> </span> {/* 공백 추가 ㅋㅋ */}
+          <Link to="/searchdialog">검색창</Link>
+
         </nav>
       )}
 
@@ -41,6 +49,9 @@ function MainLayout() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mypage" element={<Mypage />} />
+        <Route path="/cartoption" element={<CartOption />} />
+        <Route path="/searchdialog" element={<SearchDialog />} />
+
       </Routes>
     </>
   );
