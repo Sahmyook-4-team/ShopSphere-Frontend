@@ -11,6 +11,7 @@ import Login from "./components/Login"; // 로그인 페이지
 import Mypage from "./components/Mypage"; // 마이페이지
 import CartOption from "./components/CartOption"; // 장바구니
 import "./App.css";
+import KakaoCallback from "./components/KakaoCallback";
 
 
 function App() {
@@ -44,6 +45,7 @@ function MainLayout() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mypage" element={<Mypage />} />
+        <Route path="/kakao-callback" element={<KakaoCallback />} />
         <Route path="/cartoption" element={<CartOption />} />
       </Routes>
     </>
