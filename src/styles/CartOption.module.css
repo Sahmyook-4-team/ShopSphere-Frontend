@@ -1,0 +1,92 @@
+.container {
+  padding: 20px;
+  background-color: #f5f5f5;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header {
+  background-color: #fff;
+  padding: 16px;
+  font-size: 20px;
+  font-weight: 600;
+  border-bottom: 1px solid #ddd;
+}
+
+.selectBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 12px 16px;
+  margin-top: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.brandRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #fff;
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.itemBox {
+  display: flex;
+  background-color: #fff;
+  padding: 16px;
+  gap: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.thumbnail {
+  width: 90px;
+  height: 90px;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.itemInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.itemTitle {
+  font-weight: 600;
+}
+
+.itemOption {
+  color: #999;
+  font-size: 14px;
+}
+
+.itemPrice {
+  font-weight: bold;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.button {
+  flex: -1;
+  border: 1px solid #ddd;
+  padding: 8px;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: 500;
+  background: #fff;
+  cursor: pointer;
+}
+
+.deleteIcon {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
