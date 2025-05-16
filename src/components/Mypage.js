@@ -9,7 +9,7 @@ import vector from "../assets/Mypage/vector.svg";
 import Header from "./Header";
 
 const Mypage = () => {
-  const { isLoggedIn, userName } = useAuth();
+  const { isLoggedIn, userInfo } = useAuth();
   const navigate = useNavigate(); // ✅ 추가
   return (
     <>
@@ -40,7 +40,8 @@ const Mypage = () => {
               <div className="profile-section">
                 <div className="profile-info">
                   <div className="profile-image" />
-                  <div className="text-wrapper">{"최진환"}</div>
+                  <div className="text-wrapper">{userInfo?.name || "사용자"}</div>
+
                 </div>
               </div>
             ) : (

@@ -6,10 +6,37 @@ import styles from "../styles/Profile.module.css";
 import Header from "./Header";
 import UserInfoModal from "./modal/UserInfoModal"; // 👈 모달 컴포넌트 import
 import { useAuth } from "./contexts/AuthContext"; // ✅ 전역 상태에서 userInfo 가져오기
+import UserDeleteModal from "./modal/UserDeleteModal"; // 👈 모달 import
+import PasswordChangeModal from "./modal/PasswordChangeModal"; // 👈 import
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export const Profile = () => {
   const [showModal, setShowModal] = useState(false); // 👈 모달 상태
-  const { userInfo } = useAuth(); // ✅ 로그인한 사용자 정보
+  const { userInfo, setUserInfo } = useAuth(); // ✅ 로그인한 사용자 정보
+  const [showDeleteModal, setShowDeleteModal] = useState(false); // 👈 추가
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const navigate = useNavigate();
+
+
+  const handleDelete = async () => {
+    if (!userInfo) return;
+
+    const userId = userInfo.id; // 💡 미리 저장해둬서 안전하게 사용
+    try {
+      await axios.delete(`http://localhost:8080/api/users/${userId}`, {
+        withCredentials: true,
+      });
+      alert("탈퇴 완료되었습니다.");
+      setUserInfo(null);
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+      alert("탈퇴 실패: " + (err.response?.data?.message || "서버 오류"));
+    }
+  };
+
+
 
   return (
     <>
@@ -51,7 +78,13 @@ export const Profile = () => {
             </div>
           </div>
 
-          <div className={styles.textWrapper5}>비밀번호변경</div>
+          <div
+            className={styles.textWrapper5}
+            onClick={() => setShowPasswordModal(true)}
+            style={{ cursor: "pointer" }}
+          >
+            비밀번호변경
+          </div>
           <p className={styles.p}>개인정보 수집 및 이용 안내</p>
 
           {/* 이미지 및 아이콘 */}
@@ -77,6 +110,29 @@ export const Profile = () => {
       {showModal && userInfo && (
         <UserInfoModal onClose={() => setShowModal(false)} />
       )}
+
+      <a
+        href="#"
+        className={styles.withdrawLink}
+        onClick={(e) => {
+          e.preventDefault();
+          setShowDeleteModal(true); // 👈 모달 열기
+        }}
+      >
+        회원 탈퇴
+      </a>
+
+      {showDeleteModal && (
+        <UserDeleteModal
+          onClose={() => setShowDeleteModal(false)}
+          onConfirm={handleDelete}
+        />
+      )}
+
+      {showPasswordModal && (
+        <PasswordChangeModal onClose={() => setShowPasswordModal(false)} />
+      )}
+
     </>
   );
 };
