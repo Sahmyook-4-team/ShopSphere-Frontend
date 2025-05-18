@@ -377,3 +377,16 @@
   position: relative;
   width: fit-content;
 }
+
+.logout-link {
+  position: absolute;
+  bottom: 20px;
+  left: 11px;
+  color: #000000;
+  font-size: 8px;
+  text-decoration: underline;
+  cursor: pointer;
+  top: 406px;
+}
+
+

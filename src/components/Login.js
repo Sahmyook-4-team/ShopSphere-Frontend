@@ -27,10 +27,19 @@ const Login = () => {
 
       alert("로그인 성공");
       setMessage("로그인 성공!");
+      console.log("✅ 로그인 응답 데이터:", response.data);
+
       setIsLoggedIn(true);
-      setUserName(response.data.name); // ✅ 이름만 따로 저장
-      setUserInfo(response.data);      // ✅ 전체 사용자 정보 저장
-      navigate("/mypage");
+      setUserInfo(response.data);
+      setUserName(response.data.name || response.data.username); // ✅ 유효한 필드 선택
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("userName", response.data.name || response.data.username);
+      localStorage.setItem("userInfo", JSON.stringify(response.data));
+
+      // ✅ 상태가 반영되도록 다음 tick에 이동
+      setTimeout(() => {
+        navigate("/mypage");
+      }, 50);
 
     } catch (error) {
       alert("로그인 실패");
@@ -38,6 +47,9 @@ const Login = () => {
       setIsLoggedIn(false);
       setUserName("");
       setUserInfo(null); // ✅ 실패 시 초기화
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("userName");
+      localStorage.removeItem("userInfo");
     }
   };
 

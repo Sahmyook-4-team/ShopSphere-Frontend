@@ -1,9 +1,11 @@
 import React, { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import "../styles/Signup.css";
 import { Header } from "./Header";
 
 export const Signup = () => {
+  const navigate = useNavigate();
   const confirmPasswordRef = useRef(null);
 
   const [id, setId] = useState('');
@@ -40,7 +42,8 @@ export const Signup = () => {
       console.log(response); // 또는
       console.log(response.data);
       alert("회원가입 성공");
-      // 성공 후 처리 (예: 로그인 페이지로 리디렉션)
+      // 회원가입 성공 후 로그인 페이지로 이동
+      navigate("/login");
     } catch (error) {
       alert('회원가입 실패:', error);
     }
