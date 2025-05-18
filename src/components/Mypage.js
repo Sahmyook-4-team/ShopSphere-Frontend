@@ -1,6 +1,6 @@
 import React from "react";
 import { useAuth } from "./contexts/AuthContext";
-import { useNavigate } from "react-router-dom"; // ✅ 추가
+import { useNavigate } from "react-router-dom";
 import "../styles/Mypage.css";
 import chevronRight from "../assets/Mypage/chevron-right.svg";
 import image2 from "../assets/Mypage/image-2.svg";
@@ -9,8 +9,17 @@ import vector from "../assets/Mypage/vector.svg";
 import Header from "./Header";
 
 const Mypage = () => {
-  const { isLoggedIn, userInfo } = useAuth();
-  const navigate = useNavigate(); // ✅ 추가
+  const { isLoggedIn, userInfo, logout, isInitialized } = useAuth(); // ✅ isInitialized 사용
+  const navigate = useNavigate();
+
+  const Logout = () => {
+    logout();
+    navigate("/login"); // ✅ 여기서 라우터 안이므로 정상 동작
+  };
+
+  // ✅ 복구 안 되었으면 대기
+  if (!isInitialized) return null;
+
   return (
     <>
       <Header />
@@ -24,31 +33,34 @@ const Mypage = () => {
                     <img className="vector" alt="Vector" src={vector} />
                   </div>
                 </div>
-                {/* settings 클릭 시 이동 */}
                 <img
                   className="settings"
                   alt="Settings"
                   src={settings}
                   onClick={() => navigate("/mypage/profile")}
-                  style={{ cursor: "pointer" }} // 마우스 오버 시 포인터
+                  style={{ cursor: "pointer" }}
                 />
+
+                <a className="logout-link" onClick={Logout}>
+                  로그아웃
+                </a>
               </>
             )}
-
 
             {isLoggedIn ? (
               <div className="profile-section">
                 <div className="profile-info">
                   <div className="profile-image" />
-                  <div className="text-wrapper">{userInfo?.name || "사용자"}</div>
-
+                  <div className="text-wrapper">
+                    {userInfo?.name || "사용자"}
+                  </div>
                 </div>
               </div>
             ) : (
               <div
                 className="text-wrapper-2"
-                onClick={() => navigate("/login")} // ✅ 클릭 시 로그인 페이지로 이동
-                style={{ cursor: "pointer" }}      // ✅ 시각적 피드백
+                onClick={() => navigate("/login")}
+                style={{ cursor: "pointer" }}
               >
                 로그인/회원가입하기
               </div>
@@ -68,7 +80,6 @@ const Mypage = () => {
             </div>
           </div>
 
-          {/* 메뉴 항목 리스트 */}
           {[
             "주문 내역",
             "취소/반품/교환 내역",
