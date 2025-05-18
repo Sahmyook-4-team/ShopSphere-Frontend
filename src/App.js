@@ -10,10 +10,8 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Mypage from "./components/Mypage";
 import CartOption from "./components/CartOption";
-import Profile from "./components/Profile";
 import { AuthProvider, useAuth } from "./components/contexts/AuthContext";
 import Profile from "./components/Profile"; // ✅ 추가
-import { AuthProvider } from "./components/contexts/AuthContext"; // ✅ 추가
 import SearchDialog from "./components/SearchDialog"; // 검색 다이얼로그 ✅ 추가
 import "./App.css";
 import KakaoCallback from "./components/KakaoCallback";
