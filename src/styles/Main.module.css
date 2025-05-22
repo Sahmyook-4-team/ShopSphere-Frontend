@@ -1,0 +1,11 @@
+.wrapperRow {
+    display: grid;
+    grid-template-columns: 373px 373px;  /* 각 Bottom의 정확한 너비로 열 생성 */
+    justify-content: center;             /* 가운데 정렬 */
+    gap: 24px 20px;                      /* 가로 24px, 세로 20px 간격 */
+    margin: 0 auto;
+    position: relative;
+    left: -500px;
+    top: 25px;
+  }
+  

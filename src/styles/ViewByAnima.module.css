@@ -1,0 +1,87 @@
+.viewByAnima {
+    display: flex;
+    gap: 12px;
+    padding: 16px 0;
+    overflow-x: auto;
+    position: relative;
+    left: -3px
+  }
+  
+  /* 공통 레이아웃 */
+  .div,
+  .element2,
+  .element3,
+  .element4,
+  .element5,
+  .element6 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 70px;
+    cursor: pointer;
+  }
+  
+  /* 원형 뷰 (동그란 배경) */
+  .view {
+    width: 48px;
+    height: 48px;
+    background-color: #d9d9d9;
+    border-radius: 50%;
+    margin-bottom: 8px;
+  }
+  
+  /* 텍스트 스타일 */
+  .textWrapper {
+    font-size: 12px;
+    white-space: nowrap;
+    color: #000000;
+  }
+  
+  .textWrapper2 {
+    font-size: 12px;
+    white-space: nowrap;
+    color: #444444;
+  }
+  
+  .textWrapper3 {
+    font-size: 12px;
+    white-space: nowrap;
+    color: #007b55;
+  }
+  
+  .textWrapper4 {
+    font-size: 12px;
+    white-space: nowrap;
+    color: #555555;
+  }
+  
+  .roundButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  
+    padding: 8px 14px;
+    border: 1px solid #ddd;
+    border-radius: 999px;
+  
+    background-color: #ffffff;
+    font-size: 14px;
+    color: #000000;
+  
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+  
+  .roundButton:hover {
+    border-color: #aaa;
+    background-color: #f9f9f9;
+  }
+  
+  .roundIcon {
+    width: 20px;
+    height: 20px;
+    background-color: #d9d9d9;
+    border-radius: 50%;
+  }
+  
