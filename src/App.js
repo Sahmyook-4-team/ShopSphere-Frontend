@@ -9,7 +9,7 @@ import {
 import Mypage from "./components/Mypage";
 import { AuthProvider, useAuth } from "./components/contexts/AuthContext";
 import "./App.css";
-import Main from "./components/Main";
+import Main from "./components/main";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Profile from "./components/Profile";
