@@ -1,6 +1,6 @@
 import React from "react";
 import { useAuth } from "./contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "../styles/Mypage.css";
 import chevronRight from "../assets/Mypage/chevron-right.svg";
 import image2 from "../assets/Mypage/image-2.svg";
@@ -71,13 +71,13 @@ const Mypage = () => {
                 </div>
               </div>
             ) : (
-              <div
+              <Link
                 className="text-wrapper-2"
-                onClick={() => navigate("/login")}
+                to="/login"
                 style={{ cursor: "pointer" }}
               >
                 로그인/회원가입하기
-              </div>
+              </Link>
             )}
 
             <div className="view">

@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/Header.css";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   return (
@@ -18,13 +19,15 @@ export const Header = () => {
           <a href="/">ISI SNAP</a>
         </div>
       </div>
+      
       <div className="header-right">
-        <a href="/">오프라인 스토어</a>
-        <a href="/">좋아요</a>
-        <a href="/">마이</a>
-        <a href="/">검색</a>
-        <a href="/">장바구니</a>
+        <Link to="/store">오프라인 스토어</Link>
+        <Link to="/likes">좋아요</Link>
+        <Link to="/mypage">마이</Link> {/* ✅ 수정됨 */}
+        <Link to="/search">검색</Link>
+        <Link to="/cart">장바구니</Link>
       </div>
+
     </header>
   );
 };

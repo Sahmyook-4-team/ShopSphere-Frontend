@@ -9,9 +9,9 @@ export const AuthProvider = ({ children }) => {
   const [isInitialized, setIsInitialized] = useState(false); // ✅ 추가
 
   useEffect(() => {
-    const savedLogin = localStorage.getItem("isLoggedIn");
-    const savedName = localStorage.getItem("userName");
-    const savedUserInfo = localStorage.getItem("userInfo");
+    const savedLogin = sessionStorage.getItem("isLoggedIn");
+    const savedName = sessionStorage.getItem("userName");
+    const savedUserInfo = sessionStorage.getItem("userInfo");
   
     console.log("복구된 값", {
       savedLogin,
@@ -34,10 +34,10 @@ export const AuthProvider = ({ children }) => {
   
 
   useEffect(() => {
-    localStorage.setItem("isLoggedIn", isLoggedIn);
-    localStorage.setItem("userName", userName);
+    sessionStorage.setItem("isLoggedIn", isLoggedIn);
+    sessionStorage.setItem("userName", userName);
     if (userInfo) {
-      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
     }
   }, [isLoggedIn, userName, userInfo]);
 
@@ -45,9 +45,9 @@ export const AuthProvider = ({ children }) => {
     setIsLoggedIn(false);
     setUserName("");
     setUserInfo(null);
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("userName");
-    localStorage.removeItem("userInfo");
+    sessionStorage.removeItem("isLoggedIn");
+    sessionStorage.removeItem("userName");
+    sessionStorage.removeItem("userInfo");
   };
 
   return (

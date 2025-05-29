@@ -6,16 +6,17 @@ import {
   Link,
   useLocation,
 } from "react-router-dom";
-import Signup from "./components/Signup";
-import Login from "./components/Login";
 import Mypage from "./components/Mypage";
-import CartOption from "./components/CartOption";
 import { AuthProvider, useAuth } from "./components/contexts/AuthContext";
-import Profile from "./components/Profile"; // ✅ 추가
-import SearchDialog from "./components/SearchDialog"; // 검색 다이얼로그 ✅ 추가
 import "./App.css";
+
 import KakaoCallback from "./components/KakaoCallback";
 import InquiryHistory from "./components/InquiryHistory";
+import Main from "./components/Main";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import Profile from "./components/Profile";
+
 
 // ✅ 인증 복구가 끝난 후에만 렌더링
 function App() {
@@ -43,27 +44,16 @@ function MainLayout() {
 
   return (
     <>
-      {!hideNav && (
-        <nav>
-          <Link to="/signup">회원가입</Link>
-          <span> </span>
-          <Link to="/login">로그인</Link>
-          <span> </span>
-          <Link to="/mypage">마이페이지</Link>
-          <span> </span> {/* 공백 추가 ㅋㅋ */}
-          <Link to="/searchdialog">검색창</Link>
-          <span> </span>
-          <Link to="/cartoption">장바구니</Link>
-        </nav>
-      )}
       <Routes>
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/mypage" element={<Mypage />} />
         <Route path="/kakao-callback" element={<KakaoCallback />} />
         <Route path="/cartoption" element={<CartOption />} />
-          <Route path="/searchdialog" element={<SearchDialog />} />
-          <Route path="/mypage/inquiries" element={<InquiryHistory />} />
+        <Route path="/searchdialog" element={<SearchDialog />} />
+        <Route path="/mypage/inquiries" element={<InquiryHistory />} />
+        <Route path="/" element={<Main />} />
+        <Route path="/login" element={<Login />} />      {/* ✅ 여기 있어야 함 */}
+        <Route path="/signup" element={<Signup />} /> {/* ✅ 회원가입 라우팅 */}
+        <Route path="/mypage" element={<Mypage />} /> {/* ✅ 마이페이지 라우팅 */}
+        <Route path="/mypage/profile" element={<Profile />} /> {/* ✅ 프로필 라우팅 */}
       </Routes>
     </>
   );
