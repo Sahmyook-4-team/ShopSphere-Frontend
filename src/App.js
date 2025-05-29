@@ -60,7 +60,6 @@ function MainLayout() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mypage" element={<Mypage />} />
-        <Route path="/mypage/profile" element={<Profile />} />
         <Route path="/kakao-callback" element={<KakaoCallback />} />
         <Route path="/cartoption" element={<CartOption />} />
           <Route path="/searchdialog" element={<SearchDialog />} />
