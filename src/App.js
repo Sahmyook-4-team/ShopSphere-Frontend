@@ -15,6 +15,7 @@ import Profile from "./components/Profile"; // ✅ 추가
 import SearchDialog from "./components/SearchDialog"; // 검색 다이얼로그 ✅ 추가
 import "./App.css";
 import KakaoCallback from "./components/KakaoCallback";
+import InquiryHistory from "./components/InquiryHistory";
 
 // ✅ 인증 복구가 끝난 후에만 렌더링
 function App() {
@@ -63,6 +64,7 @@ function MainLayout() {
         <Route path="/kakao-callback" element={<KakaoCallback />} />
         <Route path="/cartoption" element={<CartOption />} />
           <Route path="/searchdialog" element={<SearchDialog />} />
+          <Route path="/mypage/inquiries" element={<InquiryHistory />} />
       </Routes>
     </>
   );
