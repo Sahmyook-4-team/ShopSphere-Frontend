@@ -45,7 +45,8 @@ export const Signup = () => {
       // 회원가입 성공 후 로그인 페이지로 이동
       navigate("/login");
     } catch (error) {
-      alert('회원가입 실패:', error);
+      alert('회원가입 실패: ' + error.message); 
+      console.error(error);
     }
   };
 
