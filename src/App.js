@@ -17,6 +17,9 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Profile from "./components/Profile";
 
+import  CartOption from "./components/CartOption";
+import SearchDialog from "./components/SearchDialog";
+
 
 // ✅ 인증 복구가 끝난 후에만 렌더링
 function App() {
