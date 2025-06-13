@@ -4,6 +4,7 @@ import Header from "./Header";
 import Top from "./main/Top";
 import Middle from "./main/Middle";
 import Bottom from "./main/Bottom";
+import ChatBot from "./chatbot/ChatBot";
 import styles from "../styles/Main.module.css";
 
 export const Main = () => {
@@ -20,6 +21,7 @@ export const Main = () => {
                     <Bottom />
                 </div>
             </div>
+            <ChatBot />
         </>
     );
 };
