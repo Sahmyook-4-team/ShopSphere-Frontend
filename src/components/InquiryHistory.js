@@ -1,55 +1,46 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, ChevronDown, Home } from "lucide-react";
 import React from "react";
+// CSS 파일을 import 합니다.
+import "../styles/InquiryHistory.css";
 
-
-const InquiryHistory = () => { 
+const InquiryHistory = () => {
   return (
-    <div className="w-[300px] h-[733px]">
-      <Card className="fixed w-[302px] h-[733px] top-0 left-0 rounded-none">
-        <CardContent className="relative w-[300px] h-[733px] p-0">
-          {/* Background with overlay */}
-          <div className="absolute w-full h-full top-0 left-0 bg-white bg-[url(/image.png)] bg-cover bg-[50%_50%]">
-            <div className="h-full bg-white opacity-50" />
+    <div className="inquiry-page-container">
+      {/* 고정된 모바일 뷰 컨테이너 */}
+      <Card className="inquiry-card">
+        <CardContent className="inquiry-card-content">
+          {/* 배경 이미지 및 오버레이 */}
+          <div className="inquiry-background">
+            <div className="inquiry-overlay" />
           </div>
 
-          {/* Bottom inquiry button */}
-          <div className="absolute w-full h-[31px] bottom-0 left-0 flex items-center justify-center">
-            <span className="text-white text-[8px] [font-family:'Inter-Regular',Helvetica] font-normal">
-              1:1문의하기
-            </span>
-          </div>
+          {/* Header Section */}
+          <header className="inquiry-header">
+            <div className="inquiry-header-top">
+              <ArrowLeft className="inquiry-icon arrow-left-icon" />
+              <h1 className="inquiry-title">1:1 문의내역</h1>
+              <Home className="inquiry-icon home-icon" />
+            </div>
 
-          {/* Header section */}
-          <header className="absolute w-full h-[49px] top-0 left-0 overflow-hidden">
-            <div className="flex flex-col">
-              <div className="flex items-center justify-between px-3 pt-1.5">
-                <ArrowLeft className="w-2 h-3.5" />
-                <span className="text-black text-[8px] [font-family:'Inter-Regular',Helvetica] font-normal">
-                  1:1문의내역
-                </span>
-                <Home className="w-6 h-[22px]" />
-              </div>
-
-              <div className="flex justify-between px-2 mt-1">
-                <span className="text-black text-[8px] [font-family:'Inter-Regular',Helvetica] font-normal">
-                  전체보기
-                </span>
-                <div className="flex items-center">
-                  <span className="text-[#000000f2] text-[7px] [font-family:'Inter-Regular',Helvetica] font-normal mr-2">
-                    전체 시기
-                  </span>
-                  <ChevronDown className="w-2 h-1.5" />
-                </div>
+            <div className="inquiry-header-bottom">
+              <span className="inquiry-view-all">전체보기</span>
+              <div className="inquiry-filter">
+                <span className="inquiry-filter-text">전체 시기</span>
+                <ChevronDown className="inquiry-icon chevron-down-icon" />
               </div>
             </div>
           </header>
 
-          {/* Empty state message */}
-          <div className="absolute top-[387px] w-full flex justify-center">
-            <span className="text-black text-[7px] [font-family:'Inter-Regular',Helvetica] font-normal">
-              문의하신 내역이 없습니다.
-            </span>
+          {/* Content Area - 문의 내역이 없을 때 메시지 */}
+          <main className="inquiry-main-content">
+            <p className="inquiry-empty-message">문의하신 내역이 없습니다.</p>
+            {/* 여기에 실제 문의 내역 리스트가 들어갈 수 있습니다. */}
+          </main>
+
+          {/* Bottom Inquiry Button */}
+          <div className="inquiry-ask-button">
+            <span className="inquiry-ask-button-text">1:1문의하기</span>
           </div>
         </CardContent>
       </Card>
