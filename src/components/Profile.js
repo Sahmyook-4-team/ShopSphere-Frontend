@@ -5,7 +5,6 @@ import image from "../assets/Profile/image.svg";
 import styles from "../styles/Profile.module.css";
 import Header from "./Header";
 import UserInfoModal from "./modal/UserInfoModal";
-import { useAuth } from "./contexts/AuthContext"; // ✅ isInitialized 가져오기
 import UserDeleteModal from "./modal/UserDeleteModal";
 import PasswordChangeModal from "./modal/PasswordChangeModal";
 import { useNavigate } from "react-router-dom";
@@ -15,11 +14,8 @@ export const Profile = () => {
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
-  const { userInfo, setUserInfo, isInitialized } = useAuth(); // ✅ 추가
+  const [userInfo, setUserInfo] = useState({ name: "Guest" }); // Default user info
   const navigate = useNavigate();
-
-  // ✅ 로그인 복구 중일 때 렌더링 보류
-  if (!isInitialized) return null;
 
   const handleDelete = async () => {
     if (!userInfo) return;

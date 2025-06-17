@@ -7,7 +7,6 @@ import {
   useLocation,
 } from "react-router-dom";
 import Mypage from "./components/Mypage";
-import { AuthProvider, useAuth } from "./components/contexts/AuthContext";
 import "./App.css";
 
 import KakaoCallback from "./components/KakaoCallback";
@@ -21,23 +20,12 @@ import  CartOption from "./components/CartOption";
 import SearchDialog from "./components/SearchDialog";
 
 
-// ✅ 인증 복구가 끝난 후에만 렌더링
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <AppContent />
-      </Router>
-    </AuthProvider>
+    <Router>
+      <MainLayout />
+    </Router>
   );
-}
-
-function AppContent() {
-  const { isInitialized } = useAuth();
-
-  if (!isInitialized) return <div>로딩 중...</div>; // ✅ 복구 전에는 대기
-
-  return <MainLayout />;
 }
 
 function MainLayout() {
