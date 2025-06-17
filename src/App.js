@@ -12,7 +12,7 @@ import "./App.css";
 
 import KakaoCallback from "./components/KakaoCallback";
 import InquiryHistory from "./components/InquiryHistory";
-import Main from "./components/Main"; // 바꿈
+import Main from "./components/Main1"; // 바꿈
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Profile from "./components/Profile";
