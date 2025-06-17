@@ -20,7 +20,7 @@ export const Main = () => {
                     <Bottom />
                     <Bottom />
                 </div>
-            </div>
+            </div>{/* position: relative */}
             <ChatBot />
         </>
     );
