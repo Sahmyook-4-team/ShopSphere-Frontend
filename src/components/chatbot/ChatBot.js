@@ -44,6 +44,10 @@ const ChatBot = () => {
       model = initModel(bots.bots[2]);
       chat = initChat(model, messages);
       break;
+    case "채나윤":
+      model = initModel(bots.bots[3]);
+      chat = initChat(model, messages);
+      break;
     default:
       break;
   }
@@ -58,6 +62,10 @@ const ChatBot = () => {
 
     // 이스터에그
     switch (inputValue) {
+      case "쇼핑몰":
+        setModelName("쇼핑몰");
+        console.log("쇼핑몰 모델로 전환");
+        break;
       case "미카사":
         setModelName("미카사");
         console.log("미카사 모델로 전환");
@@ -65,6 +73,10 @@ const ChatBot = () => {
       case "성진우":
         setModelName("성진우");
         console.log("성진우 모델로 전환");
+        break;
+      case "채나윤":
+        setModelName("채나윤");
+        console.log("채나윤 모델로 전환");
         break;
       default:
         break;
