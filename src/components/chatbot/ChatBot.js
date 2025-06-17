@@ -4,23 +4,49 @@ import styles from '../../styles/ChatBot.module.css';
 import bots from './bots.json';
 
 
+
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  const [modelName, setModelName] = useState("쇼핑몰");
 
   const genAi = new GoogleGenerativeAI(process.env.REACT_APP_GOOGLE_AI_API_KEY);
-  const model = genAi.getGenerativeModel(
-    bots.bots[0]
-  );
 
-  // 전체 대화 기록을 포함하여 전송
-  const chat = model.startChat({
-    history: messages.map(msg => ({
-      role: msg.sender === 'user' ? 'user' : 'model',
-      parts: [{ text: msg.text }]
-    }))
-  });
+  // 모델 초기화 함수
+  const initModel = (botConfig) => {
+    return genAi.getGenerativeModel(botConfig);
+  };
+
+  // 채팅 세션 초기화 함수
+  const initChat = (modelInstance, messageHistory) => {
+    return modelInstance.startChat({
+      history: messageHistory.map(msg => ({
+        role: msg.sender === 'user' ? 'user' : 'model',
+        parts: [{ text: msg.text }]
+      })),
+    });
+  };
+
+  // 초기 모델 및 채팅 설정
+  let model;
+  let chat;
+  switch (modelName) {
+    case "쇼핑몰":
+      model = initModel(bots.bots[0]);
+      chat = initChat(model, messages);
+      break;
+    case "미카사":
+      model = initModel(bots.bots[1]);
+      chat = initChat(model, messages);
+      break;
+    case "성진우":
+      model = initModel(bots.bots[2]);
+      chat = initChat(model, messages);
+      break;
+    default:
+      break;
+  }
 
   const toggleChat = () => {
     setIsOpen(!isOpen);
@@ -29,6 +55,23 @@ const ChatBot = () => {
   const handleSendMessage = async (e) => {
     e.preventDefault();
     if (!inputValue.trim()) return;
+
+    // 이스터에그
+    switch (inputValue) {
+      case "미카사":
+        setModelName("미카사");
+        console.log("미카사 모델로 전환");
+        break;
+      case "성진우":
+        setModelName("성진우");
+        console.log("성진우 모델로 전환");
+        break;
+      default:
+        break;
+    }
+
+
+
 
     // 사용자 메시지 추가
     const userMessage = { text: inputValue, sender: 'user' };
@@ -60,14 +103,14 @@ const ChatBot = () => {
       {isOpen && (
         <div className={styles.chatModal}>
           <div className={styles.chatHeader}>
-            <h3>쇼핑몰 챗봇</h3>
+            <h3>{modelName} 챗봇</h3>
             <button onClick={toggleChat} className={styles.closeButton}>&times;</button>
           </div>
           <div className={styles.chatMessages}>
             <div 
                 className={`${styles.message} ${styles.botMessage}`}
               >
-                안녕하세요! 쇼핑몰 챗봇입니다. 무엇을 도와드릴까요?
+                안녕하세요! {modelName} 챗봇입니다. 무엇을 도와드릴까요?
               </div>
             {messages.map((message, index) => (
               <div 
