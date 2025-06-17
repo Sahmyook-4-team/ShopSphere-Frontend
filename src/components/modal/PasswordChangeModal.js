@@ -1,8 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "../../styles/UserInfoModal.module.css";
-import axios from "axios";
 
-const PasswordChangeModal = ({ onClose }) => {
+const PasswordChangeModal = ({ onChangePassword, onClose }) => {
     const currentPwRef = useRef();
 
     const [form, setForm] = useState({
@@ -16,46 +15,57 @@ const PasswordChangeModal = ({ onClose }) => {
         setForm((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = async () => {
-        if (form.newPassword !== form.confirmPassword) {
-            alert("새 비밀번호가 일치하지 않습니다.");
-            return;
+    const [error, setError] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const validateForm = () => {
+        if (!form.currentPassword) {
+            setError("현재 비밀번호를 입력해주세요.");
+            currentPwRef.current?.focus();
+            return false;
         }
+        if (!form.newPassword) {
+            setError("새 비밀번호를 입력해주세요.");
+            return false;
+        }
+        if (form.newPassword !== form.confirmPassword) {
+            setError("새 비밀번호가 일치하지 않습니다.");
+            return false;
+        }
+        return true;
+    };
+
+    const handleSubmit = async () => {
+        if (isSubmitting) return;
+        
+        if (!validateForm()) return;
+        
+        setError("");
+        setIsSubmitting(true);
 
         try {
-            // TODO: 사용자 ID를 어떻게 가져올지 결정해야 함
-            const userId = 1; // 임시 사용자 ID
-            await axios.patch(`http://localhost:8080/api/users/${userId}/password`, form, {
-                withCredentials: true,
-            });
-
-            alert("비밀번호가 변경되었습니다.");
-
-            // 🔄 form 전체 초기화
-            setForm({
-                currentPassword: "",
-                newPassword: "",
-                confirmPassword: "",
-            });
-
-            onClose(); // 모달 닫기
-
-        } catch (err) {
-            const msg = err.response?.data?.message || "서버 오류";
-
-            if (msg.includes("일치하지 않습니다")) {
-                alert("현재 비밀번호가 일치하지 않습니다.");
-
-                // 🔄 currentPassword만 초기화하고 포커스
-                setForm((prev) => ({
-                    ...prev,
-                    currentPassword: "",
-                }));
-                currentPwRef.current?.focus();
-                return;
+            const result = await onChangePassword(form.currentPassword, form.newPassword);
+            
+            if (result.success) {
+                alert("비밀번호가 성공적으로 변경되었습니다.");
+                onClose();
+            } else {
+                if (result.error?.includes("일치하지 않습니다")) {
+                    setError("현재 비밀번호가 일치하지 않습니다.");
+                    setForm(prev => ({
+                        ...prev,
+                        currentPassword: ""
+                    }));
+                    currentPwRef.current?.focus();
+                } else {
+                    setError(result.error || "비밀번호 변경에 실패했습니다.");
+                }
             }
-
-            alert("변경 실패: " + msg);
+        } catch (err) {
+            console.error("비밀번호 변경 중 오류 발생:", err);
+            setError("처리 중 오류가 발생했습니다. 다시 시도해주세요.");
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -93,7 +103,23 @@ const PasswordChangeModal = ({ onClose }) => {
                     onChange={handleChange}
                     className={styles.input}
                 /><br/><br/>
-                <button className={styles.closeBtn} onClick={handleSubmit}>변경하기</button>
+                {error && <div className={styles.errorMessage} style={{ marginBottom: '15px' }}>{error}</div>}
+                <div className={styles.buttonContainer}>
+                    <button 
+                        className={`${styles.button} ${styles.cancelButton}`}
+                        onClick={onClose}
+                        disabled={isSubmitting}
+                    >
+                        취소
+                    </button>
+                    <button 
+                        className={`${styles.button} ${styles.saveButton}`}
+                        onClick={handleSubmit}
+                        disabled={isSubmitting}
+                    >
+                        {isSubmitting ? '변경 중...' : '변경하기'}
+                    </button>
+                </div>
             </div>
         </div>
     );

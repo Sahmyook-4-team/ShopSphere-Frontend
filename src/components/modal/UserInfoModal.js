@@ -1,13 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../styles/UserInfoModal.module.css";
-import axios from "axios";
 
-const UserInfoModal = ({ onClose }) => {
+const UserInfoModal = ({ userInfo, onUpdate, onClose }) => {
   const [formData, setFormData] = useState({
     name: "",
     phoneNumber: "",
     email: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
+
+  // Initialize form with user data when component mounts or userInfo changes
+  useEffect(() => {
+    if (userInfo) {
+      setFormData({
+        name: userInfo.name || "",
+        phoneNumber: userInfo.phoneNumber || "",
+        email: userInfo.email || "",
+      });
+    }
+  }, [userInfo]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,30 +27,24 @@ const UserInfoModal = ({ onClose }) => {
   };
 
   const handleSave = async () => {
+    if (isSubmitting) return;
+    
+    setError("");
+    setIsSubmitting(true);
+    
     try {
-      // TODO: 사용자 ID를 어떻게 가져올지 결정해야 함
-      const userId = 1; // 임시 사용자 ID
-      
-      console.log("📡 PATCH 요청 URL:", `http://localhost:8080/api/users/${userId}`);
-      console.log("📡 formData:", formData);
-  
-      const response = await axios.patch(
-        `http://localhost:8080/api/users/${userId}`,
-        formData,
-        {
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }
-      );
-      console.log("✅ 성공:", response.data);
-  
-      alert("회원정보가 수정되었습니다.");
-      onClose();
+      const result = await onUpdate(formData);
+      if (result.success) {
+        alert("회원정보가 성공적으로 수정되었습니다.");
+        onClose();
+      } else {
+        setError(result.error || "정보 수정에 실패했습니다.");
+      }
     } catch (err) {
       console.error("❌ 에러:", err);
-      alert("수정 실패: " + (err.response?.data?.message || "서버 오류"));
+      setError("처리 중 오류가 발생했습니다. 다시 시도해주세요.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -78,7 +84,23 @@ const UserInfoModal = ({ onClose }) => {
           />
         </div>
 
-        <button className={styles.closeBtn} onClick={handleSave}>확인</button>
+        {error && <div className={styles.errorMessage}>{error}</div>}
+        <div className={styles.buttonContainer}>
+          <button 
+            className={`${styles.button} ${styles.cancelButton}`} 
+            onClick={onClose}
+            disabled={isSubmitting}
+          >
+            취소
+          </button>
+          <button 
+            className={`${styles.button} ${styles.saveButton}`} 
+            onClick={handleSave}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? '저장 중...' : '저장'}
+          </button>
+        </div>
       </div>
     </div>
   );
