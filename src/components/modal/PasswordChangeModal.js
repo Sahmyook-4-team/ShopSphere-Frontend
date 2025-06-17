@@ -1,11 +1,8 @@
 import React, { useState, useRef } from "react";
 import styles from "../../styles/UserInfoModal.module.css";
 import axios from "axios";
-import { useAuth } from "../contexts/AuthContext";
-
 
 const PasswordChangeModal = ({ onClose }) => {
-    const { userInfo } = useAuth();
     const currentPwRef = useRef();
 
     const [form, setForm] = useState({
@@ -26,7 +23,9 @@ const PasswordChangeModal = ({ onClose }) => {
         }
 
         try {
-            await axios.patch(`http://localhost:8080/api/users/${userInfo.id}/password`, form, {
+            // TODO: 사용자 ID를 어떻게 가져올지 결정해야 함
+            const userId = 1; // 임시 사용자 ID
+            await axios.patch(`http://localhost:8080/api/users/${userId}/password`, form, {
                 withCredentials: true,
             });
 

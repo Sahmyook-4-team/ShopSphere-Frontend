@@ -1,5 +1,4 @@
 import React from "react";
-import { useAuth } from "./contexts/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import "../styles/Mypage.css";
 import chevronRight from "../assets/Mypage/chevron-right.svg";
@@ -9,15 +8,9 @@ import vector from "../assets/Mypage/vector.svg";
 import Header from "./Header";
 
 const Mypage = () => {
-  const { isLoggedIn, userInfo, logout, isInitialized } = useAuth();
   const navigate = useNavigate();
-
-  const Logout = () => {
-    logout();
-    navigate("/login");
-  };
-
-  if (!isInitialized) return null;
+  const isLoggedIn = false; // Default to false since auth is removed
+  const userInfo = { name: "Guest" }; // Default user info
 
   // 문의 내역으로 이동하는 핸들러 함수
   const handleInquiryClick = () => {
@@ -55,7 +48,7 @@ const Mypage = () => {
                   style={{ cursor: "pointer" }}
                 />
 
-                <a className="logout-link" onClick={Logout}>
+                <a className="logout-link" onClick={() => navigate('/login')}>
                   로그아웃
                 </a>
               </>

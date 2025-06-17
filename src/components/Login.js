@@ -7,14 +7,11 @@ import Image from "../assets/Login/image.svg";
 import "../styles/Login.css";
 import { Header } from "./Header";
 import axios from "axios";
-import { useAuth } from "./contexts/AuthContext"; // ✅ 추가
-
 const Login = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const { setIsLoggedIn, setUserName, setUserInfo } = useAuth(); // ✅ userInfo 추가
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -28,28 +25,13 @@ const Login = () => {
       alert("로그인 성공");
       setMessage("로그인 성공!");
       console.log("✅ 로그인 응답 데이터:", response.data);
-
-      setIsLoggedIn(true);
-      setUserInfo(response.data);
-      setUserName(response.data.name || response.data.username); // ✅ 유효한 필드 선택
-      localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("userName", response.data.name || response.data.username);
-      localStorage.setItem("userInfo", JSON.stringify(response.data));
-
-      // ✅ 상태가 반영되도록 다음 tick에 이동
-      setTimeout(() => {
-        navigate("/mypage");
-      }, 50);
+      
+      // 로그인 성공 시 마이페이지로 이동
+      navigate("/mypage");
 
     } catch (error) {
       alert("로그인 실패");
       setMessage("로그인 실패: " + (error.response?.data?.message || "서버 오류"));
-      setIsLoggedIn(false);
-      setUserName("");
-      setUserInfo(null); // ✅ 실패 시 초기화
-      localStorage.removeItem("isLoggedIn");
-      localStorage.removeItem("userName");
-      localStorage.removeItem("userInfo");
     }
   };
 

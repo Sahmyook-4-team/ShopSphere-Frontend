@@ -1,18 +1,12 @@
 import React, { useState } from "react";
 import styles from "../../styles/UserInfoModal.module.css";
-import { useAuth } from "../contexts/AuthContext";
 import axios from "axios";
 
-
-
 const UserInfoModal = ({ onClose }) => {
-  const { userInfo, setUserInfo } = useAuth();
-
-
   const [formData, setFormData] = useState({
-    name: userInfo?.name || "",
-    phoneNumber: userInfo?.phoneNumber || "",
-    email: userInfo?.email || "",
+    name: "",
+    phoneNumber: "",
+    email: "",
   });
 
   const handleChange = (e) => {
@@ -21,14 +15,15 @@ const UserInfoModal = ({ onClose }) => {
   };
 
   const handleSave = async () => {
-    let response;
-  
     try {
-      console.log("📡 PATCH 요청 URL:", `http://localhost:8080/api/users/${userInfo.id}`);
+      // TODO: 사용자 ID를 어떻게 가져올지 결정해야 함
+      const userId = 1; // 임시 사용자 ID
+      
+      console.log("📡 PATCH 요청 URL:", `http://localhost:8080/api/users/${userId}`);
       console.log("📡 formData:", formData);
   
-      response = await axios.patch(
-        `http://localhost:8080/api/users/${userInfo.id}`,
+      const response = await axios.patch(
+        `http://localhost:8080/api/users/${userId}`,
         formData,
         {
           withCredentials: true,
@@ -39,13 +34,7 @@ const UserInfoModal = ({ onClose }) => {
       );
       console.log("✅ 성공:", response.data);
   
-      if (!userInfo) {
-        console.warn("🚨 userInfo가 null입니다. 로그인 정보가 없는 상태에서 모달 열림");
-        return null;
-      }
-  
       alert("회원정보가 수정되었습니다.");
-      setUserInfo(response.data); // ✅ 이제 바깥에서도 접근 가능
       onClose();
     } catch (err) {
       console.error("❌ 에러:", err);
@@ -53,8 +42,6 @@ const UserInfoModal = ({ onClose }) => {
     }
   };
 
-
-  if (!userInfo) return null;
 
   return (
     <div className={styles.modalBackdrop} onClick={onClose}>
