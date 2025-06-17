@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import chevronRight2 from "../assets/Profile/chevron-right-2.svg";
 import chevronRight from "../assets/Profile/chevron-right.svg";
 import image from "../assets/Profile/image.svg";
@@ -14,23 +14,102 @@ export const Profile = () => {
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
-  const [userInfo, setUserInfo] = useState({ name: "Guest" }); // Default user info
+  const [userInfo, setUserInfo] = useState({ name: "Guest" });
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
+
+  // Fetch user data on component mount
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/users/me", {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        setUserInfo(response.data);
+      } catch (err) {
+        console.error("사용자 정보를 불러오는 중 오류 발생:", err);
+        setError("사용자 정보를 불러오는 데 실패했습니다.");
+        if (err.response?.status === 401) {
+          navigate("/login");
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, [navigate]);
+
+  // Handle user info update
+  const handleUserInfoUpdate = async (updatedInfo) => {
+    try {
+      const response = await axios.patch(
+        `http://localhost:8080/api/users/update`,
+        updatedInfo,
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      setUserInfo(prev => ({ ...prev, ...response.data }));
+      return { success: true };
+    } catch (err) {
+      console.error("사용자 정보 업데이트 중 오류 발생:", err);
+      return { 
+        success: false, 
+        error: err.response?.data?.message || "업데이트에 실패했습니다." 
+      };
+    }
+  };
+
+  // Handle password change
+  const handlePasswordChange = async (currentPassword, newPassword) => {
+    try {
+      await axios.patch(
+        `http://localhost:8080/api/users/${userInfo.id}/password`,
+        { currentPassword, newPassword },
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      return { success: true };
+    } catch (err) {
+      console.error("비밀번호 변경 중 오류 발생:", err);
+      return { 
+        success: false, 
+        error: err.response?.data?.message || "비밀번호 변경에 실패했습니다." 
+      };
+    }
+  };
 
   const handleDelete = async () => {
     if (!userInfo) return;
 
-    const userId = userInfo.id;
     try {
-      await axios.delete(`http://localhost:8080/api/users/${userId}`, {
+      await axios.delete(`http://localhost:8080/api/users/${userInfo.id}`, {
         withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
-      alert("탈퇴 완료되었습니다.");
-      setUserInfo(null);
+      alert("탈퇴가 완료되었습니다.");
+      // Clear any existing user data
+      setUserInfo({ name: "Guest" });
+      // Redirect to home or login page
       navigate("/");
     } catch (err) {
-      console.error(err);
+      console.error("회원 탈퇴 중 오류 발생:", err);
       alert("탈퇴 실패: " + (err.response?.data?.message || "서버 오류"));
+      return { success: false };
     }
   };
 
@@ -46,7 +125,7 @@ export const Profile = () => {
 
           <div className={styles.view3} />
           <div className={styles.textWrapper2}>
-            {userInfo?.name || "순수한라탄백"}
+            {isLoading ? '로딩 중...' : userInfo?.name || "순수한라탄백"}
           </div>
 
           <div className={styles.divWrapper}>
@@ -85,7 +164,11 @@ export const Profile = () => {
       </div>
 
       {showModal && userInfo && (
-        <UserInfoModal onClose={() => setShowModal(false)} />
+        <UserInfoModal 
+          userInfo={userInfo}
+          onUpdate={handleUserInfoUpdate}
+          onClose={() => setShowModal(false)} 
+        />
       )}
 
       <a
@@ -107,7 +190,10 @@ export const Profile = () => {
       )}
 
       {showPasswordModal && (
-        <PasswordChangeModal onClose={() => setShowPasswordModal(false)} />
+        <PasswordChangeModal 
+          onClose={() => setShowPasswordModal(false)}
+          onChangePassword={handlePasswordChange}
+        />
       )}
     </>
   );
