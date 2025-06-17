@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../styles/Mypage.css";
 import chevronRight from "../assets/Mypage/chevron-right.svg";
@@ -6,11 +6,102 @@ import image2 from "../assets/Mypage/image-2.svg";
 import settings from "../assets/Mypage/settings.svg";
 import vector from "../assets/Mypage/vector.svg";
 import Header from "./Header";
+import axios from "axios";
 
 const Mypage = () => {
   const navigate = useNavigate();
-  const isLoggedIn = false; // Default to false since auth is removed
-  const userInfo = { name: "Guest" }; // Default user info
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userInfo, setUserInfo] = useState({ name: "Guest" });
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        //console.log("사용자 정보 요청 시작...");
+        
+        // 1. 먼저 세션 체크
+        const checkResponse = await axios.get(
+          "http://localhost:8080/api/users/check",
+          { 
+            withCredentials: true,
+            validateStatus: (status) => status < 500
+          }
+        );
+        
+        //console.log("세션 체크 응답:", checkResponse.data);
+  
+        if (checkResponse.data.isLoggedIn) {
+          // 2. 로그인된 경우에만 사용자 정보 요청
+          //console.log("사용자 정보 요청 중...");
+          const userResponse = await axios.get(
+            "http://localhost:8080/api/users/me",
+            { 
+              withCredentials: true,
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              }
+            }
+          );
+          
+          //console.log("사용자 정보 응답:", userResponse);
+          
+          if (userResponse.status === 200) {
+            setUserInfo({
+              name: userResponse.data.name || "사용자",
+              email: userResponse.data.email || "",
+              id: userResponse.data.id || "",
+              phoneNumber: userResponse.data.phoneNumber || "",
+              address: userResponse.data.address || "",
+              role: userResponse.data.role || "USER"
+            });
+            setIsLoggedIn(true);
+          } else {
+            throw new Error(`사용자 정보 조회 실패: ${userResponse.status}`);
+          }
+        } else {
+          navigate("/login");
+        }
+      } catch (error) {
+        console.error("오류 발생:", {
+          message: error.message,
+          response: error.response?.data,
+          status: error.response?.status
+        });
+        navigate("/login");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+  
+    fetchUserInfo();
+  }, [navigate]);
+
+  const handleLogout = async () => {
+    try {
+      await axios.post(
+        "http://localhost:8080/api/users/logout",
+        {},
+        { withCredentials: true }
+      );
+      setIsLoggedIn(false);
+      setUserInfo({ name: "Guest" });
+      navigate("/login");
+    } catch (error) {
+      console.error("로그아웃 중 오류:", error);
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <>
+        <Header />
+        <div className="screen" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
+          <div>로딩 중...</div>
+        </div>
+      </>
+    );
+  }
 
   // 문의 내역으로 이동하는 핸들러 함수
   const handleInquiryClick = () => {
@@ -48,9 +139,21 @@ const Mypage = () => {
                   style={{ cursor: "pointer" }}
                 />
 
-                <a className="logout-link" onClick={() => navigate('/login')}>
+                <button 
+                  className="logout-link" 
+                  onClick={handleLogout}
+                  style={{ 
+                    background: 'none',
+                    border: 'none',
+                    padding: 0,
+                    font: 'inherit',
+                    cursor: 'pointer',
+                    color: 'inherit',
+                    textDecoration: 'underline'
+                  }}
+                >
                   로그아웃
-                </a>
+                </button>
               </>
             )}
 

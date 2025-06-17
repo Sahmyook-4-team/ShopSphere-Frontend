@@ -17,21 +17,48 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/api/users/login", {
-        id,
-        password,
-      });
+      // 1. 로그인 요청
+      const response = await axios.post(
+        "http://localhost:8080/api/users/login", 
+        { id, password },
+        {
+          withCredentials: true, // 쿠키를 포함하기 위한 옵션 추가
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
 
+      console.log("✅ 로그인 응답 데이터:", response.data);
       alert("로그인 성공");
       setMessage("로그인 성공!");
-      console.log("✅ 로그인 응답 데이터:", response.data);
-      
-      // 로그인 성공 시 마이페이지로 이동
+
+      // 2. 로그인 성공 후 세션 상태 확인 (디버깅용)
+      try {
+        const checkResponse = await axios.get(
+          "http://localhost:8080/api/users/check",
+          { 
+            withCredentials: true,
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }
+        );
+        console.log("🔍 세션 상태 확인:", checkResponse.data);
+      } catch (checkError) {
+        console.error("세션 확인 중 오류:", checkError);
+      }
+
+      // 3. 마이페이지로 이동
       navigate("/mypage");
 
     } catch (error) {
-      alert("로그인 실패");
-      setMessage("로그인 실패: " + (error.response?.data?.message || "서버 오류"));
+      console.error("❌ 로그인 오류:", error);
+      const errorMessage = error.response?.data?.message || 
+                         error.message || 
+                         "로그인 중 오류가 발생했습니다.";
+      alert(`로그인 실패: ${errorMessage}`);
+      setMessage(`로그인 실패: ${errorMessage}`);
     }
   };
 
