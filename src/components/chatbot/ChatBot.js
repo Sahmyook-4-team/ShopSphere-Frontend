@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import styles from '../../styles/ChatBot.module.css';
+import bots from './bots.json';
 
 
 const ChatBot = () => {
@@ -9,22 +10,9 @@ const ChatBot = () => {
   const [inputValue, setInputValue] = useState('');
 
   const genAi = new GoogleGenerativeAI(process.env.REACT_APP_GOOGLE_AI_API_KEY);
-  const model = genAi.getGenerativeModel({ 
-    model: "gemini-2.0-flash",
-    systemInstruction: {
-      role: "system",
-      parts: [{
-        text: `당신은 쇼핑몰 고객 서비스 챗봇입니다. 다음 가이드라인을 따라주세요:
-        
-        1. 항상 친절하고 예의 바른 말투를 사용하세요.
-        2. 사용자에게 상품 추천, 주문 조회, 반품/교환 안내, 배송 조회 등 쇼핑 관련 질문에 답변하세요.
-        3. 모르는 질문을 받으면 정확히 알려드릴 수 없다고 솔직히 말하고, 대신 고객센터 연락처를 안내해주세요.
-        4. 가격, 할인, 프로모션 관련 질문에는 정확한 정보를 제공하세요.
-        5. 사용자의 감정을 고려한 공감대를 형성하세요.
-        6. 간결하고 명확하게 답변하세요.`
-      }]
-    }
-  });
+  const model = genAi.getGenerativeModel(
+    bots.bots[0]
+  );
 
   // 전체 대화 기록을 포함하여 전송
   const chat = model.startChat({

@@ -23,7 +23,7 @@ const UserInfoModal = ({ onClose }) => {
       console.log("📡 formData:", formData);
   
       const response = await axios.patch(
-        `http://localhost:8080/api/users/${userId}`,
+        `http://localhost:8080/api/users/update`,
         formData,
         {
           withCredentials: true,
