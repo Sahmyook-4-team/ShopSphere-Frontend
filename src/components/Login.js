@@ -79,7 +79,7 @@ const Login = () => {
 
   useEffect(() => {
     if (window.Kakao && !window.Kakao.isInitialized()) {
-      window.Kakao.init("a2b2dd3527355a719a1c8b5e4a7959bc");
+      window.Kakao.init("6bd8b03c0cd2c7eb82ee108592c52dc3");
       console.log("✅ Kakao SDK Initialized");
     }
   }, []);
