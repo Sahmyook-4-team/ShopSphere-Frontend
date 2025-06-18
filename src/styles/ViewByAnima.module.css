@@ -74,8 +74,13 @@
   }
   
   .roundButton:hover {
-    border-color: #aaa;
-    background-color: #f9f9f9;
+    width: 20px;
+  height: 20px;
+  background-color: #d9d9d9;
+  border-radius: 50%;
+  background-size: cover; /* Ensures the image covers the entire circle */
+  background-position: center; /* Centers the image within the circle */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
   }
   
   .roundIcon {
@@ -84,4 +89,35 @@
     background-color: #d9d9d9;
     border-radius: 50%;
   }
-  
+  .bagImage {
+  background-image: url("../assets/Top/가방지갑.png");
+    background-size: cover; /* 또는 contain */
+  background-position: center;
+  background-repeat: no-repeat;
+  /* width: 20px; */ /* .roundIcon에 이미 설정되어 있다면 필요 없습니다. */
+  /* height: 20px; */ /* .roundIcon에 이미 설정되어 있다면 필요 없습니다. */
+}
+
+/*.shirtImage {
+  background-image: url("http://googleusercontent.com/image_generation_content/3");
+}
+
+.hatImage {
+  background-image: url("http://googleusercontent.com/image_generation_content/4");
+}
+
+.trainingImage {
+  background-image: url("http://googleusercontent.com/image_generation_content/1");
+}
+
+.digitalImage {
+  background-image: url("http://googleusercontent.com/image_generation_content/5");
+}
+
+.fashionImage {
+  background-image: url("http://googleusercontent.com/image_generation_content/6");
+}
+
+.underwearImage {
+  background-image: url("http://googleusercontent.com/image_generation_content/0");
+}*/
