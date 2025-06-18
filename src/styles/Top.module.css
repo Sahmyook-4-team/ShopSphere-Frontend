@@ -254,31 +254,37 @@
   
   .box .overlap-group {
     position: relative;
-    width: 121px;
-    height: 47px;
-    border-radius: 25px;
-    border: 1px solid #f1f3f5;
-    background-color: #ffffff;
+  width: 121px; /* 텍스트와 이미지 공간을 포함한 전체 너비 */
+  height: 47px; /* 텍스트와 이미지 공간을 포함한 전체 높이 */
+  border-radius: 25px;
+  border: 1px solid #f1f3f5;
+  background-color: #ffffff;
+  /* overflow: hidden;는 이 부모 요소에 이미지가 너무 커서 삐져나올 경우 필요합니다. */
+  /* 하지만 지금은 이미지가 작으므로 굳이 필요 없을 수 있습니다. */
   }
   
   .box .text-wrapper-9 {
     position: absolute;
-    top: 15px;
-    left: 48px;
-    font-family: "Inter-SemiBold", Helvetica;
-    font-size: 12px;
-    font-weight: 600;
-    line-height: normal;
-    letter-spacing: 0;
-    color: #000000;
+  top: 15px;
+  left: 48px; /* 이미지 옆에 위치하도록 조정 */
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0;
+  color: #000000;
   }
   
   .box .image {
-    position: absolute;
-    top: 3px;
-    left: 2px;
-    width: 40px;
-    height: 39px;
+    position: absolute; /* 부모인 .overlap-group에 대해 상대적으로 위치 */
+  top: 3px; /* 현재 위치 유지 */
+  left: 2px; /* 현재 위치 유지 */
+  width: 40px; /* 원래 이미지 크기 유지 (또는 둥근 박스 크기에 맞게 조절) */
+  height: 39px; /* 원래 이미지 크기 유지 (또는 둥근 박스 크기에 맞게 조절) */
+  border-radius: 50%; /* 완전한 원을 만들고 싶다면 50% */
+                     /* 또는 border-radius: 10px; 등 해당 둥근 박스에 맞는 값 */
+  object-fit: cover; /* 이미지가 잘리더라도 비율 유지하며 꽉 채움 */
+  overflow: hidden; /* 이미지 내용이 둥근 테두리를 벗어나지 않도록 함 (안전 장치) */
   }
   
   .box .overlap-wrapper {
@@ -291,31 +297,34 @@
   
   .box .overlap-2 {
     position: relative;
-    width: 115px;
-    height: 47px;
-    border-radius: 25px;
-    border: 1px solid #f1f3f5;
-    background-color: #ffffff;
+  width: 115px;
+  height: 47px;
+  border-radius: 25px;
+  border: 1px solid #f1f3f5;
+  background-color: #ffffff;
   }
   
   .box .text-wrapper-10 {
     position: absolute;
-    top: 15px;
-    left: 50px;
-    font-family: "Inter-SemiBold", Helvetica;
-    font-size: 12px;
-    font-weight: 600;
-    line-height: normal;
-    letter-spacing: 0;
-    color: #000000;
+  top: 15px;
+  left: 50px; /* 이미지 옆에 위치하도록 조정 */
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0;
+  color: #000000;
   }
   
   .box .img {
     position: absolute;
-    top: 3px;
-    left: 4px;
-    width: 40px;
-    height: 39px;
+  top: 3px;
+  left: 4px;
+  width: 40px; /* 동일하게 크기 조절 */
+  height: 39px;
+  border-radius: 50%; /* 또는 해당 둥근 박스에 맞는 값 */
+  object-fit: cover;
+  overflow: hidden;
   }
   
   .box .div-wrapper {
@@ -328,31 +337,34 @@
   
   .box .overlap-3 {
     position: relative;
-    width: 125px;
-    height: 47px;
-    border-radius: 25px;
-    border: 1px solid #f1f3f5;
-    background-color: #ffffff;
+  width: 125px;
+  height: 47px;
+  border-radius: 25px;
+  border: 1px solid #f1f3f5;
+  background-color: #ffffff;
   }
   
   .box .text-wrapper-11 {
     position: absolute;
-    top: 15px;
-    left: 47px;
-    font-family: "Inter-SemiBold", Helvetica;
-    font-size: 12px;
-    font-weight: 600;
-    line-height: normal;
-    letter-spacing: 0;
-    color: #000000;
+  top: 15px;
+  left: 47px; /* 이미지 옆에 위치하도록 조정 */
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0;
+  color: #000000;
   }
   
   .box .image-2 {
     position: absolute;
-    top: 3px;
-    left: 3px;
-    width: 40px;
-    height: 39px;
+  top: 3px;
+  left: 3px;
+  width: 40px; /* 동일하게 크기 조절 */
+  height: 39px;
+  border-radius: 50%; /* 또는 해당 둥근 박스에 맞는 값 */
+  object-fit: cover;
+  overflow: hidden;
   }
   
   .box .view-3 {

@@ -1,7 +1,7 @@
 import React from "react";
 
-import image from "../../assets/Top/image.svg";
-import image2 from "../../assets/Top/image-2.svg";
+import image from "../../assets/Top/최저가상점.png";
+import image2 from "../../assets/Top/가성비템.png";
 import image3 from "../../assets/Top/image-3.svg";
 import image4 from "../../assets/Top/image-4.svg";
 import image5 from "../../assets/Top/image-5.svg";
