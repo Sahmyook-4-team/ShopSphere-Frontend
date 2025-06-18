@@ -63,6 +63,13 @@
     height: 63px;
     border-radius: 10px;
     background-color: #d9d9d9;
+
+    /* ★★★ 여기에 반소매 이미지 관련 CSS 추가 ★★★ */
+  background-image: url('../assets/Top/반소매.png'); /* 실제 이미지 경로로 변경하세요! */
+  background-size: cover;    /* 이미지가 둥근 사각형에 꽉 차도록 (비율 유지, 잘릴 수 있음) */
+  /* background-size: contain; (이미지 전체가 보이도록, 빈 공간 생길 수 있음) */
+  background-position: center; /* 이미지를 중앙에 배치 */
+  background-repeat: no-repeat; /* 이미지 반복 방지 */
   }
   
   .box .div-3 {
