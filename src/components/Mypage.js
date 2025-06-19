@@ -7,6 +7,7 @@ import settings from "../assets/Mypage/settings.svg";
 import vector from "../assets/Mypage/vector.svg";
 import Header from "./Header";
 import axios from "axios";
+import defaultProfileImage from "../assets/Profile/image.svg"; // 기본 프로필 이미지 경로
 
 const Mypage = () => {
   const navigate = useNavigate();
@@ -53,7 +54,8 @@ const Mypage = () => {
               id: userResponse.data.id || "",
               phoneNumber: userResponse.data.phoneNumber || "",
               address: userResponse.data.address || "",
-              role: userResponse.data.role || "USER"
+              role: userResponse.data.role || "USER",
+              profileImageUrl: userResponse.data.profileImageUrl || null // ★ 핵심: 프로필 이미지 URL 추가
             });
             setIsLoggedIn(true);
           } else {
@@ -159,13 +161,27 @@ const Mypage = () => {
 
             {isLoggedIn ? (
               <div className="profile-section">
-                <div className="profile-info">
-                  <div className="profile-image" />
-                  <div className="text-wrapper">
-                    {userInfo?.name || "사용자"}
-                  </div>
+              <div className="profile-info">
+                {/* 프로필 이미지 렌더링 */}
+                {userInfo?.profileImageUrl ? ( // ★ 핵심: 상태에 저장된 URL이 있으면
+                  <img
+                    src={userInfo.profileImageUrl} // ★ 핵심: 해당 URL을 이미지 소스로 사용
+                    alt="프로필"
+                    className="profile-image"
+                    onError={(e) => { e.target.src = defaultProfileImage; }}
+                  />
+                ) : ( // URL이 없으면 (null 또는 빈 문자열)
+                  <img
+                    src={defaultProfileImage} // 기본 이미지 사용
+                    alt="기본 프로필"
+                    className="profile-image"
+                  />
+                )}
+                <div className="text-wrapper"> {/* 사용자 이름 */}
+                  {userInfo?.name || "사용자"}
                 </div>
               </div>
+            </div>
             ) : (
               <Link
                 className="text-wrapper-2"
