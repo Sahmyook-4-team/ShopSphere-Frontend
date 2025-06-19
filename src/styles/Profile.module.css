@@ -165,18 +165,28 @@
   }
   
   /* 오른쪽 화살표 아이콘 */
-  .chevronRight {
+  .chevronRight1 {
     height: 27px;
     left: 708px;
-    position: absolute;
-    top: 254px;
+    position: relative;
+    top: -30px;
+    left: 708px;
+    width: 24px;
+  }
+
+  .chevronRight2 {
+    height: 27px;
+    left: 708px;
+    position: relative;
+    top: 15px;
+    left: 620px;
     width: 24px;
   }
   
   .img {
     height: 27px;
     left: 708px;
-    position: absolute;
+    position: relative;
     top: 310px;
     width: 24px;
   }
@@ -187,7 +197,7 @@
   }
 
   .withdrawLink {
-    position: absolute;
+    position: relative;
     bottom: 20px;
     left: 20px;
     color: black;
@@ -196,5 +206,28 @@
     cursor: pointer;
   }
   
-  
+  /* 프로필 정보 섹션 (아바타 + 이름) */
+.profileHeader {
+  display: flex; /* 내부 아바타와 이름 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
+  position: absolute; /* .div 기준으로 위치 지정 */
+  left: 21px; /* 기존 .view3의 left 값 참고 */
+  top: 96px;  /* 기존 .view3의 top 값 참고 */
+  /* width: auto; */ /* 내용에 따라 너비 자동 조절 */
+  /* height: auto; */ /* 내용에 따라 높이 자동 조절, 또는 고정 높이 지정 가능 */
+  /* padding: 0; */ /* 필요에 따라 내부 여백 제거 또는 설정 */
+  /* background-color: transparent; */ /* 배경이 필요 없다면 투명 */
+  /* margin-bottom은 position: absolute 사용 시 다른 요소와의 관계에 따라 불필요할 수 있음 */
+}
+
+.profileAvatar {
+  width: 70px;  /* 기존 .view3의 width, height 참고 */
+  height: 68px; /* 기존 .view3의 width, height 참고 */
+  border-radius: 35px / 34px; /* 기존 .view3의 border-radius 참고 (타원형) */
+  /* 또는 원형을 원하면: border-radius: 50%; */
+  object-fit: cover;
+  margin-right: 15px; /* 이름과의 간격 (기존 left: 98px - left: 21px - width: 70px 과 유사하게) */
+  background-color: #d9d9d9; /* 기존 .view3의 배경색 (이미지 없을 때) */
+  /* border: 1px solid #dee2e6; */ /* 테두리 필요시 추가 */
+}
   
