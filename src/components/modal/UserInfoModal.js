@@ -35,10 +35,7 @@ const UserInfoModal = ({ userInfo, onUpdate, onClose }) => {
     try {
       const result = await onUpdate(formData);
       if (result.success) {
-        alert("회원정보가 성공적으로 수정되었습니다.");
         onClose();
-      } else {
-        setError(result.error || "정보 수정에 실패했습니다.");
       }
     } catch (err) {
       console.error("❌ 에러:", err);

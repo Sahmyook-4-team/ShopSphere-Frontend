@@ -66,7 +66,13 @@ export const Profile = () => {
           headers: { 'Content-Type': 'application/json' },
         }
       );
-      setUserInfo(prev => ({ ...prev, ...response.data }));
+      setUserInfo(prev => {
+        const updatedData = { ...response.data };
+        if (!updatedData.profileImageUrl) {
+          updatedData.profileImageUrl = prev.profileImageUrl;
+        }
+        return { ...prev, ...updatedData };
+      });
       setShowModal(false); // 성공 시 모달 닫기
       alert("회원 정보가 성공적으로 변경되었습니다.");
       return { success: true };
