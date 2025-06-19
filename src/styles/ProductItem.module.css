@@ -1,0 +1,202 @@
+/* ProductItem.module.css */
+.container {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  max-width: 600px; /* Adjust as needed */
+  margin: 20px auto;
+  padding: 15px;
+  background-color: #fff;
+  /* border: 1px solid #e0e0e0; /* Optional: if you want a border around the whole thing */
+}
+
+.mainTitle {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  display: block; /* To make it behave like a block-level element */
+}
+
+.productCard {
+  /* No explicit border on the card itself, structure comes from inner elements */
+}
+
+.topRow {
+  display: flex;
+  align-items: flex-start; /* Align items to the top */
+  margin-bottom: 15px;
+  position: relative; /* For absolute positioning of the close button */
+}
+
+.checkboxWrapper {
+  width: 24px;
+  height: 24px;
+  background-color: #333; /* Dark background for checkbox */
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  margin-top: 5px; /* Align better with image/text */
+  cursor: pointer;
+}
+
+.checkmark {
+  color: white;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.imageWrapper {
+  width: 100px; /* Adjust based on your image aspect ratio */
+  height: 100px;
+  margin-right: 15px;
+  flex-shrink: 0; /* Prevent image from shrinking */
+}
+
+.imageWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Or 'contain' depending on preference */
+  border: 1px solid #eee; /* Slight border for the image */
+}
+
+.detailsWrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.brandLabel,
+.nameLabel {
+  display: block; /* To take full width and stack */
+  color: #333;
+}
+
+.brandLabel {
+  font-size: 0.9em;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.nameLabel {
+  font-size: 0.95em;
+  line-height: 1.4;
+  margin-bottom: 8px;
+  /* Allow text to wrap for long names */
+  word-break: keep-all; /* Better for Korean */
+  overflow-wrap: break-word;
+}
+
+.discountTag {
+  background-color: #f0e6ff; /* Light purple */
+  color: #8a2be2; /* Purple text - this color might need adjustment */
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.75em;
+  font-weight: bold;
+  display: inline-block; /* So it only takes content width */
+  align-self: flex-start; /* Align tag to the start of the flex container */
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.5em; /* Make X larger */
+  color: #888;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 10px; /* Space from details */
+  align-self: flex-start; /* Align to the top of the flex container */
+  line-height: 1; /* Ensure it doesn't take too much vertical space */
+}
+
+.optionsDropdown {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.optionsLabel {
+  font-size: 0.9em;
+  color: #555;
+}
+
+.dropdownArrow {
+  color: #888;
+  font-size: 0.8em;
+}
+
+.controlsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quantityControl {
+  display: flex;
+  align-items: center;
+}
+
+.quantityButton {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #e0e0e0;
+  background-color: #f9f9f9;
+  color: #555;
+  font-size: 1.2em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantityButton:first-child {
+  border-radius: 50%; /* Make it circular */
+}
+.quantityButton:last-child {
+  border-radius: 50%; /* Make it circular */
+}
+.quantityButton.minus {
+  /* Specific styles for minus if needed */
+}
+.quantityButton.plus {
+ /* Specific styles for plus if needed */
+}
+
+
+.quantityDisplay {
+  padding: 0 15px;
+  font-size: 1em;
+  color: #333;
+  min-width: 20px; /* Ensure some space for the number */
+  text-align: center;
+}
+
+.priceInfo {
+  display: flex;
+  align-items: baseline; /* Align by baseline for currency symbols if different sizes */
+}
+
+.originalPriceLabel,
+.finalPriceLabel {
+  display: inline; /* To keep them on the same line */
+}
+
+.originalPriceLabel {
+  font-size: 0.9em;
+  color: #aaa;
+  text-decoration: line-through;
+  margin-right: 8px;
+}
+
+.finalPriceLabel {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #333;
+}

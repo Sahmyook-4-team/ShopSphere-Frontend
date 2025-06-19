@@ -1,0 +1,191 @@
+/* ShoppingCartPage.module.css */
+.pageContainer {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #f8f9fa; /* 페이지 전체 배경색 (상품 카드 사이 공간) */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* --- 헤더 섹션 --- */
+  .headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background-color: #fff;
+    border-bottom: 1px solid #e9ecef; /* 약간 연한 구분선 */
+  }
+  
+  .backButton {
+    background: none;
+    border: none;
+    font-size: 1.6em; /* 아이콘 크기 */
+    font-weight: bold;
+    color: #343a40; /* 아이콘 색상 */
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+  }
+  
+  .titleWrapper {
+    display: flex;
+    align-items: center;
+    gap: 6px; /* 제목과 배지 사이 간격 */
+    /* flex-grow: 1; /* 중앙 정렬을 위해 */
+    /* justify-content: center; /* 중앙 정렬 */
+    /* transform: translateX(-12px); /* 뒤로가기 버튼 공간만큼 보정하여 중앙 정렬 시도 */
+  }
+  
+  .pageTitle {
+    font-size: 1.15em; /* '장바구니' 글씨 크기 */
+    font-weight: bold;
+    color: #212529; /* 글씨 색상 */
+    margin: 0;
+  }
+  
+  .freeShippingBadge {
+    background-color: #6a5acd; /* '무료배송' 배지 배경색 (보라색 계열) */
+    color: white;
+    padding: 3px 10px;
+    border-radius: 12px; /* 타원형 모양 */
+    font-size: 0.7em;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1.2;
+  }
+  
+  .headerSpacer {
+    width: 24px; /* 뒤로가기 버튼과 비슷한 너비로 공간 확보 */
+    visibility: hidden; /* 공간만 차지하고 보이지 않도록 */
+  }
+  
+  
+  /* --- 전체선택 / 선택삭제 섹션 --- */
+  .selectionBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background-color: #fff;
+    border-bottom: 1px solid #f1f3f5; /* 상품 목록과 구분선 */
+    margin-bottom: 10px; /* 상품 목록과의 간격 */
+  }
+  
+  .selectAllWrapper {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .customCheckbox {
+    width: 22px; /* 체크박스 크기 */
+    height: 22px;
+    background-color: #fff;
+    border: 1.5px solid #adb5bd; /* 체크 안됐을 때 테두리 */
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+    transition: background-color 0.2s, border-color 0.2s;
+  }
+  
+  .customCheckbox.checked {
+    background-color: #343a40; /* 체크됐을 때 배경색 */
+    border-color: #343a40;
+  }
+  
+  .checkmark {
+    color: white;
+    font-size: 0.9em;
+    font-weight: bold;
+  }
+  
+  .selectAllLabel {
+    font-size: 0.9em;
+    color: #343a40;
+    user-select: none;
+  }
+  
+  .deleteSelectedButton {
+    background: none;
+    border: none;
+    color: #495057; /* '선택삭제' 글씨 색상 */
+    font-size: 0.9em;
+    font-weight: normal; /* 이미지상 두껍지 않음 */
+    cursor: pointer;
+    padding: 5px; /* 클릭 영역 확보 */
+  }
+  
+  /* --- 상품 목록이 들어갈 자리 (flex-grow로 푸터 밀어내기 위함) --- */
+  .productListArea {
+    flex-grow: 1; /* 이 영역이 남은 공간을 모두 차지하여 푸터가 아래에 붙도록 함 */
+  }
+  
+  
+  /* --- 하단 주문 버튼 섹션 --- */
+  .footerSection {
+    background-color: #fff;
+    padding: 10px 15px 15px 15px;
+    border-top: 1px solid #f1f3f5;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.06); /* 상단 그림자 효과 */
+    /* position: sticky; /* 실제 앱에서는 화면 하단에 고정될 수 있음 */
+    /* bottom: 0; */
+    /* width: 100%; */
+  }
+  
+  .maxDiscountTextContainer {
+    text-align: right;
+    margin-bottom: 8px;
+  }
+  
+  .maxDiscountText {
+    font-size: 0.75em;
+    color: #868e96; /* '최대 할인' 텍스트 색상 */
+  }
+  
+  .orderButton {
+    background-color: #212529; /* 주문 버튼 배경색 (매우 어두운 회색) */
+    color: #ffde59; /* 주문 버튼 텍스트 색상 (노란색 계열) */
+    font-size: 1.05em; /* 버튼 텍스트 크기 */
+    font-weight: bold;
+    padding: 13px 20px; /* 버튼 내부 여백 */
+    border: none;
+    border-radius: 8px; /* 버튼 모서리 둥글게 */
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .orderButton:hover {
+    background-color: #343a40; /* 호버 시 약간 밝게 */
+  }
+
+  .productListArea {
+    flex-grow: 1;
+    /* background-color: #f0f2f5; /* 상품 목록 영역 배경색, 상품 카드와 구분되도록 */
+    padding-top: 1px; /* 그룹 컨테이너의 상단 마진이 무시되는 것을 방지 */
+  }
+  
+  .productGroupContainer {
+    background-color: #fff; /* 각 상품 그룹의 배경색 */
+    margin-bottom: 8px; /* 상품 그룹 간의 간격 */
+    /* box-shadow: 0 1px 3px rgba(0,0,0,0.05); */ /* 그룹에 약간의 그림자 (선택사항) */
+  }
+  
+  .productGroupContainer:last-child {
+    margin-bottom: 0;
+  }
+  
+  .productGroupHeader {
+    font-size: 1em; /* '이브클로젯 배송상품' 글씨 크기 */
+    font-weight: bold;
+    color: #333;
+    padding: 15px 15px 10px 15px; /* 헤더 내부 여백 */
+    /* border-bottom: 1px solid #e9ecef; */ /* 그룹 헤더와 상품 목록 구분선 (선택사항) */
+    background-color: #fff; /* 그룹 헤더 배경도 흰색으로 통일 */
+  }
