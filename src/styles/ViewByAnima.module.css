@@ -74,20 +74,20 @@
   }
   
   .roundButton:hover {
-    width: 20px;
-  height: 20px;
-  background-color: #d9d9d9;
-  border-radius: 50%;
-  background-size: cover; /* Ensures the image covers the entire circle */
-  background-position: center; /* Centers the image within the circle */
-  background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-color: #f0f0f0; /* 버튼 배경색을 약간 변경 */
+    border-color: #bbb; /* 버튼 테두리 색상을 약간 변경 */
   }
+  .roundButton:hover .roundIcon {
+    transform: scale(1.1); /* 아이콘을 10% 확대 */
+    /* background-color: #c0c0c0; /* 아이콘 배경색도 변경하고 싶다면 */
+}
   
   .roundIcon {
     width: 20px;
     height: 20px;
     background-color: #d9d9d9;
     border-radius: 50%;
+    transition: transform 0.2s ease; /* 아이콘 확대에만 전환 효과 적용 */
   }
   .bagImage {
   background-image: url("../assets/Top/가방지갑.png");
