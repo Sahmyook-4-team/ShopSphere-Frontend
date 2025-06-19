@@ -85,27 +85,33 @@
   }
   
   .overlap-group-wrapper {
-    height: 447px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 375px;
+    height: 447px; /* 이미지 영역의 높이 */
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 375px; /* 이미지 영역의 너비 */
+  /* 여기에 z-index를 추가하여 전체 이미지 컨테이너가 다른 요소 위에 오도록 할 수 있습니다. */
+  /* z-index: 2; /* 필요에 따라 조정 */
   }
   
   .overlap-group {
-    background-color: #d9d9d9;
-    height: 447px;
-    position: relative;
-    width: 373px;
+    background-color: #d9d9d9; /* 회색 배경 유지 */
+  height: 100%; /* 부모 .overlap-group-wrapper의 높이를 꽉 채움 */
+  position: relative; /* 자식 요소 (이미지, 띠, 하트)의 absolute 기준 */
+  width: 100%; /* 부모 .overlap-group-wrapper의 너비를 꽉 채움 */
+  overflow: hidden; /* 이미지가 이 영역을 벗어나지 않도록 잘라냄 */
   }
   
   .div-wrapper {
     background-color: #000000;
-    height: 27px;
-    left: 3px;
-    position: absolute;
-    top: 417px;
-    width: 104px;
+  height: 27px;
+  left: 3px;
+  position: absolute;
+  top: 417px; /* 이 값은 이미지가 꽉 차면 이미지 위에 오지 않고 아래쪽에 붙을 수 있습니다. */
+             /* 만약 이미지 위에 띄우려면, 이미지의 top 값을 기준으로 조정해야 합니다. */
+             /* 현재 이미지가 꽉 차므로, 이미지가 꽉 찬 영역의 하단에 가깝게 위치합니다. */
+  width: 104px;
+  z-index: 2; /* 이미지 (z-index: 0)보다 위에 오도록 */
   }
   
   .text-wrapper-4 {
@@ -122,10 +128,11 @@
   
   .heart {
     height: 24px;
-    left: 340px;
-    position: absolute;
-    top: 7px;
-    width: 24px;
+  left: 340px;
+  position: absolute;
+  top: 7px;
+  width: 24px;
+  z-index: 2; /* 이미지 (z-index: 0)보다 위에 오도록 */
   }
   
   .view-3 {
@@ -145,7 +152,7 @@
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
-    top: 100px;
+    top: 100px; /* '관심 999+ 리뷰 1+' 텍스트의 위치 */
   }
   
   .text-wrapper-6 {
@@ -356,4 +363,23 @@
     position: absolute;
     top: 20px;
   }
+
+  .productImage {
+  position: absolute; /* 부모 (.overlap-group)를 기준으로 절대 위치 */
+  top: 0;
+  left: 0;
+  width: 100%; /* 부모의 너비를 꽉 채움 */
+  height: 100%; /* 부모의 높이를 꽉 채움 */
+  object-fit: cover; /* 이미지 비율 유지하며 영역 꽉 채우기 (일부 잘릴 수 있음) */
+  /* object-fit: contain; // 이미지가 잘리지 않고 모두 보이도록 (여백이 생길 수 있음) */
+  border-radius: 0; /* 부모 요소에 둥근 모서리가 있다면 이 부분은 0으로 유지 */
+  z-index: 0; /* '스타일리스트 추천' 띠나 하트보다 아래에 오도록 */
+}
+
+.original-price {
+  color: #999;
+  font-size: 0.8em;
+  margin-top: 5px;
+  text-decoration: line-through;
+}
   
