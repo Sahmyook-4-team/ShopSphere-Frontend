@@ -1,0 +1,85 @@
+.actionBarContainer {
+  /* position: fixed; */ /* 👈 [제거] 또는 주석 처리 */
+  /* bottom: 0; */       /* 👈 [제거] */
+  /* left: 1037px; */    /* 👈 [제거] */
+  /* right: 0; */       /* 👈 [제거] */
+  /* max-width: 480px; */ /* 👈 [제거 또는 rightPanel 너비에 맞게 100%로 변경] */
+  width: 100%; /* 부모(rightPanel)의 너비를 따르도록 */
+  /* margin: 0 auto; */   /* 👈 [제거 또는 조정] */
+  margin-top: auto; /* 👈 [추가] rightPanel 내 다른 요소들 아래로 밀어냄 (만약 이것이 마지막 요소라면) */
+
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+  padding: 10px 16px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05); /* 상단 그림자 */
+  height: 65px;
+  box-sizing: border-box;
+  position: relative;
+  top: 50px;
+}
+  
+  .wishlistButton {
+    display: flex;
+    flex-direction: column; /* 아이콘과 텍스트 수직 정렬 */
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-right: 16px; /* 오른쪽 버튼 그룹과의 간격 */
+    color: #555;
+    min-width: 40px; /* 최소 너비 */
+  }
+  
+  .wishlistIcon {
+    color: #777; /* 이미지에선 비활성화된 하트 색상 느낌 */
+    font-size: 22px; /* 아이콘 크기 */
+    /* 만약 채워진 하트를 사용하려면 color: #e83e8c; */
+  }
+  
+  .wishlistCount {
+    font-size: 11px;
+    margin-top: 2px;
+    color: #555;
+  }
+  
+  .actionButtonsGroup {
+    flex-grow: 1; /* 남은 공간 모두 차지 */
+    display: flex;
+    gap: 10px; /* 버튼 사이 간격 */
+  }
+  
+  .cartButton,
+  .buyButton {
+    flex-grow: 1; /* 버튼들이 공간을 균등하게 차지 */
+    padding: 12px 0; /* 버튼 높이감 */
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid; /* 테두리 스타일 일관성 */
+  }
+  
+  .cartButton {
+    background-color: #fff;
+    border-color: #ccc;
+    color: #333;
+  }
+  
+  .cartButton:hover {
+    background-color: #f8f8f8;
+  }
+  
+  .buyButton {
+    background-color: #000; /* 검은색 배경 */
+    border-color: #000;
+    color: #fff; /* 흰색 글씨 */
+  }
+  
+  .buyButton:hover {
+    background-color: #333; /* 호버 시 약간 밝게 */
+  }

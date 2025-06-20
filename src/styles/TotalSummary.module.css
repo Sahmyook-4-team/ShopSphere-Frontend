@@ -1,0 +1,28 @@
+/* src/styles/TotalSummary.module.css */
+.summaryContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px; /* 👈 여백 일관성 있게 조정 (예시) */
+  font-size: 14px;
+  color: #333;
+  background-color: #f9f9f9; /* 👈 다른 섹션과 구분되도록 약간의 배경색 추가 (선택적) */
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee; /* 👈 하단에도 구분선 추가 (선택적) */
+  /* margin-top: auto; */ /* 👈 만약 TotalSummary를 rightPanel 하단에 붙이고 싶다면 (ActionBar 바로 위) */
+  position: relative;
+  top: 30px;
+}
+
+.totalQuantity {
+  font-size: 15px;
+  color: #555;
+  /* position: relative; */ /* 👈 [제거] */
+  /* top: 65px; */         /* 👈 [제거] */
+}
+
+.totalPriceValue {
+  font-weight: bold;
+  font-size: 18px;
+  color: #000;
+}
