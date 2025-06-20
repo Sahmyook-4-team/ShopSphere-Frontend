@@ -1,0 +1,22 @@
+/* PromotionBanner.module.css */
+.bannerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e6f7ff; /* 연한 파란색 계열 배경 */
+    padding: 12px 16px;
+    margin: 16px 0; /* 위아래 여백 */
+    font-size: 14px;
+    color: #1890ff; /* 파란색 텍스트 */
+    cursor: pointer;
+    border-radius: 4px; /* 살짝 둥근 모서리 */
+  }
+  
+  .bannerContainer:hover {
+    background-color: #d9f0fa;
+  }
+  
+  .bannerContainer .arrowIcon {
+    color: #1890ff;
+    font-size: 16px;
+  }

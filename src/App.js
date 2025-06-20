@@ -18,6 +18,7 @@ import Profile from "./components/Profile";
 
 import  CartOption from "./components/CartOption";
 import SearchDialog from "./components/SearchDialog";
+import ProductPage from "./components/productright/ProductPage"; // ◀️ ProductPage 컴포넌트 import
 
 
 function App() {
@@ -45,6 +46,8 @@ function MainLayout() {
         <Route path="/signup" element={<Signup />} /> {/* ✅ 회원가입 라우팅 */}
         <Route path="/mypage" element={<Mypage />} /> {/* ✅ 마이페이지 라우팅 */}
         <Route path="/mypage/profile" element={<Profile />} /> {/* ✅ 프로필 라우팅 */}
+        {/* ✅ 상품 상세 페이지 라우트 추가 (동적 파라미터 productId 사용) */}
+        <Route path="/product/:productId" element={<ProductPage />} />      
       </Routes>
     </>
   );

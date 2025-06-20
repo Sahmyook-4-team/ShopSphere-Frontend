@@ -1,0 +1,47 @@
+/* src/styles/productleft/ProductImageGallery.module.css */
+.galleryContainer {
+  display: flex;
+  /* 썸네일+메인이미지 그룹과 설명 영역을 세로로 배치 */
+  flex-direction: column;
+  gap: 20px; /* 이미지 영역과 설명 영역 사이 간격 */
+  width: 100%;
+}
+
+.imageDisplayArea { /* 👈 [추가] 썸네일과 메인 이미지를 묶는 영역 */
+  display: flex;
+  flex-direction: row; /* 썸네일(왼쪽), 메인 이미지(오른쪽) 가로 배치 */
+  gap: 16px;
+  width: 100%;
+}
+
+/* ThumbnailList와 MainImageView 관련 스타일은 각자의 CSS 모듈 파일에 정의되어 있다고 가정 */
+/* 만약 이 파일에 있다면, 이전 답변의 스타일을 참고하여 여기에 배치 */
+
+.productDescriptionArea { /* 👈 [추가] 상품 설명 영역 스타일 */
+  margin-top: 20px; /* 메인 이미지와의 간격 (또는 galleryContainer의 gap으로 조절) */
+  padding: 15px;
+  background-color: #f9f9f9; /* 약간의 배경색 (선택적) */
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  /* width: 100%; */ /* galleryContainer가 column이므로 width는 자동으로 100% */
+  box-sizing: border-box;
+}
+
+.productDescriptionArea p {
+  margin: 0; /* 단락 기본 마진 제거 */
+  white-space: pre-wrap; /* \n (줄바꿈) 문자를 인식하도록 */
+}
+
+.noImagePlaceholder { /* 이미지가 없을 때의 플레이스홀더 스타일 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px; /* 적절한 높이 설정 */
+  background-color: #f0f0f0;
+  color: #aaa;
+  font-style: italic;
+  border-radius: 8px;
+  margin-bottom: 16px; /* 설명과의 간격 */
+}
