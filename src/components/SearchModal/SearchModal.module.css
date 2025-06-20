@@ -1,0 +1,58 @@
+/* src/components/SearchModal/SearchModal.module.css */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    z-index: 1000;
+  }
+  
+  .modalContainer {
+    background-color: #fff;
+    border-radius: 8px; /* 모서리 둥글게 */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px; /* 최대 너비 설정 */
+    /* height: 80vh;  이미지에서는 높이가 꽤 김 */
+    max-height: 85vh; /* 최대 높이 설정, 스크롤을 위해 */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* 내부 컨텐츠가 넘칠 때를 대비 + border-radius 적용 */
+  }
+  
+  .modalContent {
+    padding: 15px 20px;
+    overflow-y: auto; /* 내용이 많을 경우 스크롤 생성 */
+    flex-grow: 1; /* 남은 공간을 채우도록 */
+  }
+  
+  /* 스크롤바 스타일 (선택 사항) */
+  .modalContent::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .modalContent::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+  }
+  
+  .modalContent::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+  }
+  
+  /* 이미지 하단 푸터 정보 스타일 (필요시) */
+  /*
+  .footerInfo {
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #e0e0e0;
+    font-size: 12px;
+    color: #007bff;
+    text-align: center;
+  }
+  */

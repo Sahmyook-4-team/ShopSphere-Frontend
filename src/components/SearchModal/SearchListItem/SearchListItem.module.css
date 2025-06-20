@@ -1,0 +1,44 @@
+/* src/components/SearchModal/SearchListItem/SearchListItem.module.css */
+.item {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 14px;
+  }
+  
+  .rank {
+    color: #007bff; /* 파란색 계열 */
+    font-weight: bold;
+    width: 20px;
+    text-align: left;
+    margin-right: 8px;
+  }
+  
+  .term {
+    flex-grow: 1;
+    color: #333;
+  }
+  
+  .changeIcon {
+    font-size: 10px;
+    margin-left: 5px;
+    width: 12px; /* 아이콘 너비 고정 */
+    text-align: center;
+  }
+  
+  .up {
+    color: red;
+  }
+  
+  .down {
+    color: blue;
+  }
+  
+  .new {
+    color: orange;
+    font-weight: bold;
+  }
+  
+  .none {
+    color: #888; /* 회색 */
+  }
