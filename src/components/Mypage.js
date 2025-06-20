@@ -114,6 +114,7 @@ const Mypage = () => {
   // 여기서는 1:1 문의 내역만 처리하므로 간단하게 함수를 직접 사용해도 됩니다.
   const navigationMap = {
     "1:1 문의 내역": handleInquiryClick,
+    "취소/반품/교환 내역": () => navigate("/mypage/cancelreturn"),
     // 다른 항목들도 필요하면 여기에 추가할 수 있습니다.
     // "주문 내역": () => navigate("/mypage/orders"),
     // "나의 맞춤 정보": () => navigate("/mypage/custom-info"),
