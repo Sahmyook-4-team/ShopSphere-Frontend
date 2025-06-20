@@ -1,0 +1,123 @@
+/* OrderHistory.module.css */
+
+/*
+  Note: Global styles like 'body' should be in a global CSS file
+  (e.g., index.css or App.css) and not in a CSS module.
+  I'm removing the 'body' style from here.
+  Example for your global CSS:
+  body {
+    background-color: #f8f9fa;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+*/
+
+.orderHistoryContainer {
+    background-color: #f8f9fa;
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto; /* Centering the container if body doesn't handle flex centering */
+    padding: 20px 30px;
+    box-sizing: border-box;
+  }
+  
+  .pageTitle {
+    font-size: 20px;
+    font-weight: bold;
+    color: #212529;
+    margin-top: 0;
+    margin-bottom: 25px;
+  }
+  
+  .searchBar {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+  }
+  
+  .searchInput {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: #495057;
+  }
+  
+  .searchInput::placeholder {
+    color: #adb5bd;
+  }
+  
+  .searchIconSvg { /* Class for styling the SVG if needed via parent */
+    color: #868e96;
+    margin-left: 10px;
+  }
+  
+  .tabsNavigation {
+    display: flex;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 40px;
+  }
+  
+  .tabItem {
+    background-color: transparent;
+    border: none;
+    padding: 12px 0;
+    margin-right: 25px;
+    cursor: pointer;
+    font-size: 15px;
+    color: #495057;
+    position: relative;
+    font-weight: 500;
+  }
+  
+  .tabItem:last-child {
+    margin-right: 0;
+  }
+  
+  .tabItem.active { /* For combining with dynamic active class */
+    color: #212529;
+    font-weight: bold;
+  }
+  
+  .tabItem.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2.5px;
+    background-color: #212529;
+  }
+  
+  /* If you prefer to have a separate class for active state: */
+  .activeTab {
+    color: #212529 !important; /* Use !important if needed to override .tabItem color */
+    font-weight: bold !important;
+  }
+  
+  .activeTab::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2.5px;
+    background-color: #212529;
+  }
+  
+  
+  .historyContent {
+    text-align: center;
+    padding: 60px 0;
+  }
+  
+  .noHistoryMessage {
+    font-size: 16px;
+    color: #6c757d;
+    font-weight: 500;
+  }

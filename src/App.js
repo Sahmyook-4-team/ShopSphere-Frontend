@@ -19,6 +19,7 @@ import SearchDialog from "./components/SearchDialog";
 import ProductPage from "./components/productright/ProductPage"; // ◀️ ProductPage 컴포넌트 import
 import ShoppingCartPage from "./components/ShoppingCartPage";
 import ProductItem from "./components/ProductItem";
+import CancelReturn from "./components/CancelReturn";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         {/* ✅ 상품 상세 페이지 라우트 추가 (동적 파라미터 productId 사용) */}
         <Route path="/product/:productId" element={<ProductPage />} />      
         <Route path="/cart" element={<ShoppingCartPage />} />
+        <Route path="/mypage/cancelreturn" element={<CancelReturn />} />
       </Routes>
     </Router>
   );
