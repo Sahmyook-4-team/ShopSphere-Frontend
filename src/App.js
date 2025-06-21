@@ -3,8 +3,6 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Link,
-  useLocation,
 } from "react-router-dom";
 import Mypage from "./components/Mypage";
 import "./App.css";
@@ -18,8 +16,10 @@ import CartOption from "./components/CartOption";
 import SearchDialog from "./components/SearchDialog";
 import ProductPage from "./components/productright/ProductPage"; // ◀️ ProductPage 컴포넌트 import
 import ShoppingCartPage from "./components/ShoppingCartPage";
+import SearchResultsPage from './components/SearchResultsPage'; // 새로 만들 검색 결과 페이지
 import ProductItem from "./components/ProductItem";
 import CancelReturn from "./components/CancelReturn";
+
 
 function App() {
   return (
@@ -38,6 +38,8 @@ function App() {
         {/* ✅ 상품 상세 페이지 라우트 추가 (동적 파라미터 productId 사용) */}
         <Route path="/product/:productId" element={<ProductPage />} />      
         <Route path="/cart" element={<ShoppingCartPage />} />
+        <Route path="/search-results" element={<SearchResultsPage />} />
+        <Route path="/products/:productId" element={<ProductPage />} />
         <Route path="/mypage/cancelreturn" element={<CancelReturn />} />
       </Routes>
     </Router>

@@ -1,0 +1,69 @@
+/* src/components/SearchModal/RecentSearches/RecentSearches.module.css */
+.recentContainer {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee; /* 구분선 */
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .removeAllButton {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 13px;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .removeAllButton:hover {
+    text-decoration: underline;
+  }
+  
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .tag {
+    background-color: #f0f0f0;
+    padding: 6px 10px;
+    border-radius: 15px; /* 더 둥글게 */
+    font-size: 13px;
+    color: #555;
+    display: flex;
+    align-items: center;
+  }
+  
+  .removeTagButton {
+    background: none;
+    border: none;
+    color: #aaa;
+    margin-left: 6px;
+    cursor: pointer;
+    font-size: 16px; /* X 크기 키움 */
+    line-height: 1; /* X 정렬 */
+    padding: 0;
+  }
+  
+  .removeTagButton:hover {
+    color: #333;
+  }
+  
+  .noRecentSearches {
+    font-size: 14px;
+    color: #888;
+    padding: 10px 0;
+  }
