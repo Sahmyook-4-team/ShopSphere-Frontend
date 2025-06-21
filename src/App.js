@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
+  useParams,
 } from "react-router-dom";
 import Mypage from "./components/Mypage";
 import "./App.css";
@@ -19,7 +20,9 @@ import ShoppingCartPage from "./components/ShoppingCartPage";
 import SearchResultsPage from './components/SearchResultsPage'; // 새로 만들 검색 결과 페이지
 import ProductItem from "./components/ProductItem";
 import CancelReturn from "./components/CancelReturn";
-
+import MyOrderHistorySection from "./components/OrderHistory/MyOrderHistorySection";
+import ReviewWriteForm from "./components/ReviewWrite/ReviewWriteForm";
+import MyReviewsPage from "./components/MyReviews/MyReviewsPage";
 
 function App() {
   return (
@@ -41,9 +44,19 @@ function App() {
         <Route path="/search-results" element={<SearchResultsPage />} />
         <Route path="/products/:productId" element={<ProductPage />} />
         <Route path="/mypage/cancelreturn" element={<CancelReturn />} />
+        <Route path="/mypage/orders" element={<MyOrderHistorySection />} />
+        <Route path="/write-review/:productId" element={<ReviewWritePage />} />
+        <Route path="/mypage/my-reviews" element={<MyReviewsPage />} />
       </Routes>
     </Router>
   );
 }
+
+const ReviewWritePage = () => {
+  const { productId } = useParams(); // URL에서 productId를 가져옴
+  // 필요하다면 여기서 productId로 상품 정보를 미리 가져와서 ReviewWriteForm에 initialProductInfo로 전달할 수 있습니다.
+  // 또는 ReviewWriteForm 내부에서 직접 가져오도록 둡니다.
+  return <ReviewWriteForm productId={productId} />;
+};
 
 export default App;

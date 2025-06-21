@@ -1,0 +1,229 @@
+/* ReviewWriteForm.module.css */
+.reviewWriteContainer {
+    max-width: 700px; /* 이미지와 유사한 최대 너비 */
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .header h1 {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    flex-grow: 1; /* 제목 중앙 정렬 */
+    margin: 0;
+  }
+  
+  .backButton {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0 10px 0 0;
+    color: #333;
+  }
+  
+  .productInfoSection {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .productImage {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 15px;
+    border: 1px solid #eee;
+  }
+  
+  .productNameAndOption {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .productName {
+    font-size: 15px;
+    font-weight: bold;
+    color: #333;
+    margin: 0 0 4px 0;
+  }
+  
+  /* 옵션 정보는 현재 미구현
+  .productOption {
+    font-size: 13px;
+    color: #777;
+    margin: 0;
+  }
+  */
+  
+  .reviewForm {
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* 각 섹션 간 간격 */
+  }
+  
+  .sectionTitle {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  /* 별점 */
+  .ratingSection .stars {
+    display: flex;
+  }
+  
+  .ratingSection .star {
+    font-size: 30px;
+    color: #ddd; /* 기본 별 색상 */
+    cursor: pointer;
+    margin-right: 5px;
+    transition: color 0.2s;
+  }
+  
+  .ratingSection .star:hover,
+  .ratingSection .star.selected {
+    color: #fadb14; /* 선택/호버 시 별 색상 */
+  }
+  
+  /* 리뷰 내용 */
+  .commentSection {
+    /* 스타일 */
+  }
+  
+  .commentTextarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+    resize: vertical;
+    min-height: 120px;
+  }
+  
+  .commentLength {
+    text-align: right;
+    font-size: 12px;
+    color: #888;
+    margin-top: 5px;
+  }
+  
+  /* 사진 첨부 */
+  .photoAttachSection {
+    /* 스타일 */
+  }
+  
+  .photoAttachButton {
+    display: inline-flex; /* 아이콘과 텍스트 정렬 */
+    align-items: center;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    font-size: 14px;
+    color: #555;
+  }
+  .photoAttachButton:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .cameraIcon {
+    margin-right: 8px;
+    font-size: 18px;
+  }
+  
+  .photoInput {
+    display: none; /* 실제 input은 숨김 */
+  }
+  
+  .previewContainer {
+    margin-top: 15px;
+    position: relative;
+    display: inline-block; /* 이미지 크기에 맞게 */
+  }
+  
+  .previewImage {
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 4px;
+    border: 1px solid #eee;
+    object-fit: cover;
+  }
+  .removeImageButton {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: rgba(0,0,0,0.6);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 12px;
+      line-height: 20px;
+      text-align: center;
+      cursor: pointer;
+      padding: 0;
+  }
+  
+  .photoAttachGuide {
+    font-size: 12px;
+    color: #888;
+    margin-top: 10px;
+  }
+  
+  /* 메시지 */
+  .errorMessage {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+  }
+  .successMessage {
+      color: green;
+      font-size: 14px;
+      margin-top: 10px;
+      text-align: center;
+  }
+  
+  
+  /* 제출 버튼 */
+  .submitButton {
+    padding: 12px 20px;
+    background-color: #5cb85c; /* 예시 색상 */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .submitButton:hover {
+    background-color: #4cae4c;
+  }
+  
+  .submitButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
