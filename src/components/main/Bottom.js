@@ -11,13 +11,12 @@ export const Bottom = ({ productIdFromProps }) => {
   const navigate = useNavigate();
 
   const productIdToFetch = productIdFromProps || 1;
-  const API_BASE_URL = "http://localhost:8080"; // 이미지 URL 조합을 위해 추가
 
   useEffect(() => {
     const fetchProductData = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`${API_BASE_URL}/api/products/${productIdToFetch}`); // URL 조합 시 API_BASE_URL 사용
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/products/${productIdToFetch}`); // URL 조합 시 API_BASE_URL 사용
         setProduct(response.data);
       } catch (e) {
         setError(e);
@@ -64,6 +63,8 @@ export const Bottom = ({ productIdFromProps }) => {
       representativeImageUrl = product.images[0].imageUrl;
     }
   }
+
+  console.log("대표 이미지 URL:", representativeImageUrl);
   // --- 👆 대표 이미지 URL을 찾는 로직 추가 ---
 
   const originalPrice = product.price;
@@ -81,7 +82,7 @@ export const Bottom = ({ productIdFromProps }) => {
                   <img
                     className={styles.productImage}
                     alt={product.name}
-                    src={`${API_BASE_URL}${representativeImageUrl}`}
+                    src={`${process.env.REACT_APP_API_BASE_URL}${representativeImageUrl}`}
                   />
                 ) : (
                   // 이미지가 없을 경우 보여줄 플레이스홀더 또는 아무것도 표시 안 함
