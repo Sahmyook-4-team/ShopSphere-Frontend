@@ -91,6 +91,7 @@
   padding-top: 24px; /* 가격 필터와의 간격 */
   position: relative;
   top: -124px;
+  left: 45px;
 }
 
 /* 로딩, 에러, 상품 없음 메시지 스타일 */

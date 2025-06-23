@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios"; // axios import
+import axios from "axios";
 import styles from "../../styles/ViewByAnima.module.css";
 
-// 각 카테고리 버튼에 대한 기본 아이콘 매핑 (필요시 확장)
 const categoryIcons = {
   "가방 · 지갑": styles.bagImage,
   셔츠: styles.shirtImage,
@@ -11,8 +10,11 @@ const categoryIcons = {
   디지털: styles.digitalImage,
   패션소품: styles.fashionImage,
   언더웨어: styles.underwearImage,
-  // API에서 가져온 카테고리 이름과 매칭되는 아이콘 클래스를 추가해야 함
+  // "전체" 버튼에 대한 아이콘도 필요하다면 여기에 추가
+  "전체": styles.allImage, // 예시: '전체' 버튼 아이콘
 };
+
+const ITEMS_PER_ROW = 8; // 한 줄에 표시할 아이템 개수
 
 export const ViewByAnima = ({ onCategorySelect, selectedCategoryId }) => {
   const [categories, setCategories] = useState([]);
@@ -23,9 +25,13 @@ export const ViewByAnima = ({ onCategorySelect, selectedCategoryId }) => {
     const fetchCategories = async () => {
       try {
         setLoading(true);
-        // API_BASE_URL은 환경변수 등으로 관리하는 것이 좋습니다.
-        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/categories`); // 실제 API 엔드포인트로 변경
-        setCategories(response.data || []); // API 응답 구조에 따라 response.data.categories 등일 수 있음
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/categories`);
+        
+        // API 응답 데이터 앞에 "전체" 카테고리 객체를 추가
+        const allCategory = { id: null, name: "전체" }; // "전체" 카테고리의 id는 null로 설정
+        const fetchedCategories = response.data || [];
+        setCategories([allCategory, ...fetchedCategories]); // "전체"를 맨 앞에 추가
+
         setError(null);
       } catch (err) {
         setError("카테고리를 불러오는 데 실패했습니다.");
@@ -34,9 +40,8 @@ export const ViewByAnima = ({ onCategorySelect, selectedCategoryId }) => {
         setLoading(false);
       }
     };
-
     fetchCategories();
-  }, []); // 컴포넌트 마운트 시 한 번만 실행
+  }, []);
 
   if (loading) {
     return <div className={styles.loadingMessage}>카테고리 로딩 중...</div>;
@@ -46,39 +51,39 @@ export const ViewByAnima = ({ onCategorySelect, selectedCategoryId }) => {
     return <div className={styles.errorMessage}>{error}</div>;
   }
 
-  return (
-    <div className={styles.viewByAnima}>
-      {/* "전체" 카테고리 버튼 (선택 사항) */}
-      <div
-        className={`${styles.roundButton} ${
-          selectedCategoryId === null ? styles.selected : "" // '전체' 선택 시 스타일
-        }`}
-        onClick={() => onCategorySelect(null)} // null을 전체 카테고리로 가정
-      >
-        <div className={`${styles.roundIcon} ${styles.allImage}`} /> {/* 전체 아이콘 스타일 필요 */}
-        <span>전체</span>
-      </div>
+  // 카테고리("전체" 포함)를 ITEMS_PER_ROW 개수만큼 그룹화
+  const categoryRows = [];
+  if (categories.length > 0) { // categories 상태는 이제 "전체"를 포함함
+    for (let i = 0; i < categories.length; i += ITEMS_PER_ROW) {
+      categoryRows.push(categories.slice(i, i + ITEMS_PER_ROW));
+    }
+  }
 
-      {categories.length > 0 ? (
-        categories.map((category) => (
-          <div
-            key={category.id}
-            className={`${styles.roundButton} ${
-              selectedCategoryId === category.id ? styles.selected : "" // 선택된 버튼 스타일
-            }`}
-            onClick={() => onCategorySelect(category.id)}
-          >
-            {/* API에서 아이콘 정보를 주지 않는다면, category.name을 기반으로 아이콘 매핑 */}
-            <div
-              className={`${styles.roundIcon} ${
-                categoryIcons[category.name] || styles.defaultIcon // 매핑된 아이콘 또는 기본 아이콘
-              }`}
-            />
-            <span>{category.name}</span>
+  return (
+    <div className={styles.viewByAnimaContainer}>
+      {categoryRows.length > 0 ? (
+        categoryRows.map((row, rowIndex) => (
+          <div key={rowIndex} className={styles.viewByAnimaRow}>
+            {row.map((category) => (
+              <div
+                key={category.id === null ? 'all' : category.id} // "전체" 버튼의 key를 고유하게 설정
+                className={`${styles.roundButton} ${
+                  selectedCategoryId === category.id ? styles.selected : ""
+                }`}
+                onClick={() => onCategorySelect(category.id)} // "전체"의 id는 null
+              >
+                <div
+                  className={`${styles.roundIcon} ${
+                    categoryIcons[category.name] || styles.defaultIcon
+                  }`}
+                />
+                <span>{category.name}</span>
+              </div>
+            ))}
           </div>
         ))
       ) : (
-        !loading && <div>카테고리가 없습니다.</div>
+        !loading && <div className={styles.viewByAnimaRow}><div>카테고리가 없습니다.</div></div>
       )}
     </div>
   );

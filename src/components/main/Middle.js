@@ -108,7 +108,7 @@ export const Middle = () => {
 
         {/* 상품 목록 표시 - 최대 4개만 렌더링 */}
         <div className={styles.productGrid}>
-          {products.slice(0, 4).map((product) => ( // .slice(0, 4) 추가
+          {products.slice(0, 5).map((product) => ( // .slice(0, 4) 추가
             <ViewWrapperByAnima key={product.id} product={product} />
           ))}
         </div>
