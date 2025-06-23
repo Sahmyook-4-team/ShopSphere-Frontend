@@ -1,110 +1,108 @@
+/* Middle.module.css 또는 styles.module.css 등 */
+
 .element {
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-  }
-  
-  .element .div-3 {
-    background-color: #ffffff;
-    height: 584px;
-    position: relative;
-    width: 786px;
-  }
-  
-  .element .text-wrapper-10 {
-    color: #9bc44a;
-    font-family: "Inter-SemiBold", Helvetica;
-    font-size: 20px;
-    font-weight: 600;
-    position: absolute;
-    top: 100px;
-    left: 28px;
-    width: 77px;
-    letter-spacing: 0;
-    line-height: normal;
-  }
-  
-  .element .text-wrapper-11 {
-    color: #000000;
-    font-family: "Inter-SemiBold", Helvetica;
-    font-size: 20px;
-    font-weight: 600;
-    position: absolute;
-    top: 100px;
-    left: 108px;
-    width: 133px;
-    letter-spacing: 0;
-    line-height: normal;
-  }
-  
-  .element .text-wrapper-12 {
-    color: #000000;
-    font-family: "Inter-Regular", Helvetica;
-    font-size: 17px;
-    font-weight: 400;
-    position: absolute;
-    top: 148px;
-    left: 76px;
-    letter-spacing: 0;
-    line-height: normal;
-  }
-  
-  .element .text-wrapper-13 {
-    color: #000000;
-    font-family: "Inter-Regular", Helvetica;
-    font-size: 17px;
-    font-weight: 400;
-    position: absolute;
-    top: 148px;
-    left: 263px;
-    width: 70px;
-    letter-spacing: 0;
-    line-height: normal;
-  }
-  
-  .element .text-wrapper-14 {
-    color: #000000;
-    font-family: "Inter-Regular", Helvetica;
-    font-size: 17px;
-    font-weight: 400;
-    position: absolute;
-    top: 148px;
-    left: 438px;
-    width: 74px;
-    letter-spacing: 0;
-    line-height: normal;
-  }
-  
-  .element .text-wrapper-15 {
-    color: #000000;
-    font-family: "Inter-Regular", Helvetica;
-    font-size: 17px;
-    font-weight: 400;
-    position: absolute;
-    top: 148px;
-    left: 606px;
-    width: 91px;
-    letter-spacing: 0;
-    line-height: normal;
-  }
-  
-  .element .image {
-    position: absolute;
-    top: 190px;
-    left: -52px;
-    width: 889px;
-    height: 3px;
-  }
-  
-  .wrapperRow {
-    display: flex;
-    flex-direction: row;
-    gap: 24px; /* 컴포넌트 간 간격 */
-    justify-content: center; /* 중앙 정렬 (원하면 start, end 등으로 바꿔도 됨) */
-    /* flex-wrap: wrap;  /* 너무 좁을 경우 자동 줄바꿈 */ 
-    position: relative;
-    top: 25px;
-  }
-  
+  /* 전체 Middle 컴포넌트의 wrapper 스타일 (필요시 정의) */
+  max-width: 1200px; 
+  margin: 0 auto; 
+  padding: 20px;
+}
+
+.contentWrapper { /* 기존 div-3 에 해당 */
+  /* 필요한 스타일 정의 */
+}
+
+/* 가격대별 BEST 헤더 스타일 */
+.priceBestHeader {
+  display: flex;
+  justify-content: space-between; /* 양쪽으로 정렬 */
+  align-items: center; /* 수직 가운데 정렬 */
+  padding: 16px 0; /* 위아래 패딩 */
+  margin-top: 24px; /* 카테고리 필터와의 간격 */
+  border-bottom: 1px solid #f0f0f0; /* 하단 구분선 (선택적) */
+}
+
+.priceBestTitle {
+  font-size: 20px; /* 두 번째 이미지의 "가격대별 BEST" 텍스트 크기 */
+  font-weight: bold;
+  color: #000000;
+}
+
+.viewAllButton {
+  font-size: 14px;
+  color: #555; /* "전체보기 >" 텍스트 색상 */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.viewAllButton:hover {
+  text-decoration: underline;
+}
+
+/* 새로운 가격대 필터 탭 컨테이너 */
+.priceFilterTabsContainer {
+  display: flex;
+  /* justify-content: space-around; /* 탭들을 균등하게 배치 */
+  border-bottom: 1px solid #e0e0e0; /* 탭 전체 하단에 얇은 선 */
+  margin-top: 8px; /* 헤더와의 간격 */
+  position: relative; /* 선택된 탭의 하단 바를 위한 기준 */
+}
+
+.priceFilterTab {
+  padding: 12px 16px; /* 탭 내부 패딩 (두 번째 이미지와 유사하게) */
+  font-size: 15px;    /* 탭 텍스트 크기 */
+  color: #666;         /* 기본 탭 텍스트 색상 */
+  cursor: pointer;
+  text-align: center;
+  position: relative; /* 하단 바를 위한 기준 */
+  flex-grow: 1; /* 탭들이 공간을 균등하게 차지하도록 (선택적) */
+  /* min-width: 100px; /* 최소 너비 (선택적) */
+  white-space: nowrap; /* 글자가 줄바꿈되지 않도록 */
+}
+
+.priceFilterTab:hover {
+  color: #000; /* 호버 시 텍스트 색상 변경 */
+}
+
+.selectedPriceTab {
+  color: #000; /* 선택된 탭 텍스트 색상 (더 진하게) */
+  font-weight: bold; /* 선택된 탭 텍스트 굵게 */
+}
+
+/* 선택된 탭 아래 강조선 (가상 요소 사용) */
+.selectedPriceTab::after {
+  content: "";
+  position: absolute;
+  bottom: -1px; /* 탭 컨테이너의 border-bottom 위에 오도록 */
+  left: 0;
+  width: 100%;
+  height: 2px; /* 강조선 두께 */
+  background-color: #000000; /* 강조선 색상 */
+}
+
+
+/* 상품 그리드 (기존 wrapperRow 대체) */
+.productGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* 상품 카드 사이 간격 (ViewWrapperByAnima.module.css 의 gap과 유사) */
+  justify-content: flex-start; /* 상품들을 왼쪽부터 정렬 */
+  padding-top: 24px; /* 가격 필터와의 간격 */
+  position: relative;
+  top: -124px;
+}
+
+/* 로딩, 에러, 상품 없음 메시지 스타일 */
+.loadingMessage,
+.errorMessage,
+.noProductsMessage {
+  padding: 40px 20px; /* 더 많은 여백 */
+  text-align: center;
+  width: 100%;
+  font-size: 16px;
+  color: #555;
+}
+
+/* ViewByAnima (카테고리 필터) 스타일은 기존 ViewByAnima.module.css 사용 */
+/* ViewWrapperByAnima (상품 카드) 스타일은 기존 ViewWrapperByAnima.module.css 사용 */

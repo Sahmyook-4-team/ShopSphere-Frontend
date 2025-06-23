@@ -64,7 +64,7 @@ export const Bottom = ({ productIdFromProps }) => {
     }
   }
 
-  console.log("대표 이미지 URL:", representativeImageUrl);
+  //console.log("대표 이미지 URL:", representativeImageUrl);
   // --- 👆 대표 이미지 URL을 찾는 로직 추가 ---
 
   const originalPrice = product.price;

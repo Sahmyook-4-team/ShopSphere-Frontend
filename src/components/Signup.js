@@ -39,7 +39,7 @@ export const Signup = () => {
           'Content-Type': 'application/json'
         }
       });
-      console.log(response); // 또는
+      console.log(response); // 또는  
       console.log(response.data);
       alert("회원가입 성공");
       // 회원가입 성공 후 로그인 페이지로 이동
