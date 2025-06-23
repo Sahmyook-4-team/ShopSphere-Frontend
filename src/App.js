@@ -28,12 +28,8 @@ function App() {
   return (
     <Router>
       <Routes>
-<<<<<<< HEAD
-         <Route path="/oauth/kakao/callback" element={<KakaoCallback />} />
-=======
         <Route path="/" element={<Main />} />
         <Route path="/kakao-callback" element={<KakaoCallback />} />
->>>>>>> e37637740c8ca2b7527615dd19d153f082353996
         <Route path="/cartoption" element={<CartOption />} />
         <Route path="/searchdialog" element={<SearchDialog />} />
         <Route path="/mypage/inquiries" element={<InquiryHistory />} />
