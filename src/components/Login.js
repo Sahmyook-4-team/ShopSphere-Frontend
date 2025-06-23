@@ -16,7 +16,7 @@ const KAKAO_JAVASCRIPT_KEY_HARDCODED = "a2b2dd3527355a719a1c8b5e4a7959bc"; // <-
 const KAKAO_REDIRECT_URI_HARDCODED = "http://localhost:3000/oauth/kakao/callback"; // <---- 여기를 3000번 포트로 변경!!!
 
 // 백엔드 API URL (일반 로그인용. 카카오 로그인 콜백은 프론트엔드에서 처리)
-const SPRING_BOOT_API_URL = "http://localhost:8080";
+// const SPRING_BOOT_API_URL = "http://localhost:8080";
 
 
 const Login = () => {
@@ -31,7 +31,7 @@ const Login = () => {
     try {
         // 1. 일반 로그인 요청 (이전에 수정했듯이, 백엔드 경로가 '/api/users/login'인지 다시 한번 확인!)
         const response = await axios.post(
-            `${SPRING_BOOT_API_URL}/api/users/login`, // 💡 이 경로가 맞는지 다시 확인하세요!
+            `${process.env.REACT_APP_API_BASE_URL}/api/users/login`, // 💡 이 경로가 맞는지 다시 확인하세요!
             { id, password },
             {
                 withCredentials: true,
