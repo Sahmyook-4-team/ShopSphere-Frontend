@@ -15,10 +15,10 @@ export const Main = () => {
                 <Top />
                 <Middle />
                 <div className={styles.wrapperRow}>
-                    <Bottom />
-                    <Bottom />
-                    <Bottom />
-                    <Bottom />
+                    <Bottom productIdFromProps={1} />
+                    <Bottom productIdFromProps={2} />
+                    <Bottom productIdFromProps={3} />
+                    <Bottom productIdFromProps={1} />
                 </div>
             </div>{/* position: relative */}
             <ChatBot />

@@ -1,0 +1,109 @@
+/* src/pages/SearchResultsPage.module.css */
+.pageContainer {
+    padding: 20px;
+    max-width: 1300px; /* 좀 더 넓게 */
+    margin: 0 auto;
+    background-color: #fff;
+  }
+  
+  .categoryNav {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .currentCategoryTitle {
+    font-size: 24px; /* 더 크게 */
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .filterSortBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding: 15px 0; /* 상단 패딩 제거, 하단 패딩 유지 */
+    background-color: #fff; /* 배경색 흰색으로 */
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .viewTypeSection, .filterControls, .sortSection {
+    display: flex;
+    align-items: center;
+  }
+  
+  .viewTypeButton {
+    background: none;
+    border: none;
+    padding: 8px 12px;
+    margin-right: 8px;
+    font-size: 15px;
+    color: #767676;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+  }
+  .viewTypeButton.active {
+    color: #000;
+    font-weight: bold;
+    border-bottom-color: #000;
+  }
+  
+  .filterChip {
+    background-color: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    border-radius: 15px;
+    padding: 6px 12px;
+    margin-right: 8px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .filterChip:hover {
+    border-color: #bbb;
+  }
+  
+  .filterDropdown {
+    background: none;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 6px 10px;
+    margin-right: 8px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .arrowDown {
+    margin-left: 4px;
+  }
+  
+  .totalCount {
+    font-size: 14px;
+    color: #333;
+    margin-right: 10px;
+  }
+  
+  .sortSelect {
+    padding: 7px 10px;
+    font-size: 13px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background-color: white;
+  }
+  
+  .productListGrid {
+    display: grid;
+    /* 4열 기준으로, 반응형으로 자동 조절 */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 30px 20px; /* 세로 간격, 가로 간격 */
+  }
+  
+  .loadingMessage, .errorMessage, .noResultsMessage {
+    text-align: center;
+    padding: 60px 20px;
+    font-size: 1.1em;
+    color: #555;
+  }
+  .noResultsMessage p {
+    font-size: 0.9em;
+    color: #777;
+    margin-top: 10px;
+  }
