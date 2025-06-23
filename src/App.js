@@ -36,7 +36,7 @@ function MainLayout() {
   return (
     <>
       <Routes>
-        <Route path="/kakao-callback" element={<KakaoCallback />} />
+         <Route path="/oauth/kakao/callback" element={<KakaoCallback />} />
         <Route path="/cartoption" element={<CartOption />} />
         <Route path="/searchdialog" element={<SearchDialog />} />
         <Route path="/mypage/inquiries" element={<InquiryHistory />} />
