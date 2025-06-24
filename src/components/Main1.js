@@ -21,7 +21,7 @@ export const Main = () => {
     }, []);
 
     const handleGoToSellerPage = () => {
-        navigate("/seller-page");
+        navigate("/seller");
     };
 
     // 판매자 페이지 버튼 스타일 (챗봇 버튼 위에 위치하도록)
