@@ -3,6 +3,7 @@
     flex-wrap: wrap;
     gap: 16px;
     padding: 24px 0;
+    height: 20px;
   }
   
   .element {
@@ -58,5 +59,19 @@
   .textWrapper9 {
     color: #000;
     margin-right: 8px;
+  }
+
+  .productImage {
+    width: 100%; /* 부모 요소(view2)의 크기에 맞춤 */
+    height: 150px; /* 예시 높이, view2와 동일하게 또는 비율 유지 */
+    object-fit: cover; /* 이미지가 잘리지 않고 채워지도록 */
+    background-color: #f0f0f0; /* 이미지가 없을 때 배경색 */
+  }
+
+  .productLinkWrapper {
+    text-decoration: none; /* Link의 기본 밑줄 제거 */
+    color: inherit; /* Link의 기본 파란색 대신 부모 요소의 색상 상속 */
+    display: block; /* 또는 inline-block, 레이아웃에 따라 조정 */
+    /* 필요하다면 추가적인 wrapper 스타일 */
   }
   
