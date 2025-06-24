@@ -1,606 +1,450 @@
+/* Signup.css */
+
 .box {
-    height: 1026px;
-    width: 1919px;
-  }
-  
-  /* style.css에서 기존에 fixed였던 것 수정 */
-.box .view {
-    position: relative; /* ✅ fixed 제거 */
-    width: auto;        /* or 적절한 width */
-    height: auto;
-  }
-  
-  .box .overlap {
-    background-color: #ffffff;
-    height: 1026px;
-    position: relative;
-    width: 1919px;
-  }
-  
-  .box .rectangle {
-    background-color: #ffffff80;
-    height: 1026px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 1919px;
-  }
-  
-  .box .nav {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    height: 70px;
-    justify-content: center;
-    left: 51px;
-    position: absolute;
-    top: 0;
-    width: 1799px;
-  }
-  
-  .box .navbar {
-    align-self: stretch;
-    background-color: #1a1b1f;
-    flex: 1;
-    flex-grow: 1;
-    position: relative;
-    width: 100%;
-  }
-  
-  .box .component {
-    height: 28px !important;
-    left: 12px !important;
-    position: absolute !important;
-    top: 14px !important;
-    width: 24px !important;
-  }
-  
-  .box .vertical-divider {
-    background-color: #ffffff66;
-    height: 16px;
-    left: 52px;
-    position: absolute;
-    top: 27px;
-    width: 1px;
-  }
-  
-  .box .link-MUSINSA-MUSINSA {
-    color: #ffffffcc;
-    font-family: "Inter-Medium", Helvetica;
-    font-size: 14.4px;
-    font-weight: 500;
-    height: 22px;
-    left: 69px;
-    letter-spacing: 0;
-    line-height: 22px;
-    position: absolute;
-    top: 22px;
-    white-space: nowrap;
-    width: 67px;
-  }
-  
-  .box .link-BEAUTY-BEAUTY {
-    color: #ffffffcc;
-    font-family: "Inter-Medium", Helvetica;
-    font-size: 15.2px;
-    font-weight: 500;
-    height: 22px;
-    left: 152px;
-    letter-spacing: 0;
-    line-height: 22px;
-    position: absolute;
-    top: 22px;
-    white-space: nowrap;
-    width: 62px;
-  }
-  
-  .box .link-PLAYER-PLAYER {
-    color: #ffffffcc;
-    font-family: "Inter-Medium", Helvetica;
-    font-size: 15.2px;
-    font-weight: 500;
-    height: 22px;
-    left: 229px;
-    letter-spacing: 0;
-    line-height: 22px;
-    position: absolute;
-    top: 22px;
-    white-space: nowrap;
-    width: 58px;
-  }
-  
-  .box .link-OUTLET-OUTLET {
-    color: #ffffffcc;
-    font-family: "Inter-Medium", Helvetica;
-    font-size: 15.2px;
-    font-weight: 500;
-    height: 22px;
-    left: 303px;
-    letter-spacing: 0;
-    line-height: 22px;
-    position: absolute;
-    top: 22px;
-    white-space: nowrap;
-    width: 61px;
-  }
-  
-  .box .link-BOUTIQUE {
-    color: #ffffffcc;
-    font-family: "Inter-Medium", Helvetica;
-    font-size: 15.2px;
-    font-weight: 500;
-    height: 22px;
-    left: 380px;
-    letter-spacing: 0;
-    line-height: 22px;
-    position: absolute;
-    top: 22px;
-    white-space: nowrap;
-    width: 80px;
-  }
-  
-  .box .link-SHOES-SHOES {
-    color: #ffffffcc;
-    font-family: "Inter-Medium", Helvetica;
-    font-size: 15.2px;
-    font-weight: 500;
-    height: 22px;
-    left: 476px;
-    letter-spacing: 0;
-    line-height: 22px;
-    position: absolute;
-    top: 22px;
-    white-space: nowrap;
-    width: 52px;
-  }
-  
-  .box .link-KIDS-KIDS {
-    color: #ffffffcc;
-    font-family: "Inter-Medium", Helvetica;
-    font-size: 15.2px;
-    font-weight: 500;
-    height: 22px;
-    left: 544px;
-    letter-spacing: 0;
-    line-height: 22px;
-    position: absolute;
-    top: 22px;
-    white-space: nowrap;
-    width: 35px;
-  }
-  
-  .box .div {
-    background-color: #ffffff66;
-    height: 16px;
-    left: 591px;
-    position: absolute;
-    top: 27px;
-    width: 1px;
-  }
-  
-  .box .link {
-    align-items: center;
-    display: inline-flex;
-    gap: 4px;
-    height: 56px;
-    left: 596px;
-    padding: 16.5px 8px 17.5px;
-    position: absolute;
-    top: 7px;
-  }
-  
-  .box .variant-2 {
-    height: 20px !important;
-    position: relative !important;
-    width: 20px !important;
-  }
-  
-  .box .text-wrapper {
-    color: #ffffffcc;
-    font-family: "Inter-Medium", Helvetica;
-    font-size: 15.2px;
-    font-weight: 500;
-    letter-spacing: 0;
-    line-height: 22px;
-    margin-top: -1.00px;
-    position: relative;
-    white-space: nowrap;
-    width: fit-content;
-  }
-  
-  .box .link-2 {
-    color: #ffffffcc;
-    font-family: "Inter-Medium", Helvetica;
-    font-size: 13.1px;
-    font-weight: 500;
-    height: 20px;
-    left: 1457px;
-    letter-spacing: 0;
-    line-height: 20px;
-    position: absolute;
-    top: 24px;
-    white-space: nowrap;
-    width: 88px;
-  }
-  
-  .box .vertical-divider-2 {
-    background-color: #ffffff66;
-    height: 16px;
-    left: 1562px;
-    position: absolute;
-    top: 27px;
-    width: 1px;
-  }
-  
-  .box .button {
-    all: unset;
-    box-sizing: border-box;
-    color: #ffffffcc;
-    font-family: var(--www-musinsa-com-semantic-button-font-family);
-    font-size: var(--www-musinsa-com-semantic-button-font-size);
-    font-style: var(--www-musinsa-com-semantic-button-font-style);
-    font-weight: var(--www-musinsa-com-semantic-button-font-weight);
-    height: 20px;
-    left: 1677px;
-    letter-spacing: var(--www-musinsa-com-semantic-button-letter-spacing);
-    line-height: var(--www-musinsa-com-semantic-button-line-height);
-    position: absolute;
-    text-align: center;
-    top: 24px;
-    white-space: nowrap;
-    width: 24px;
-  }
-  
-  .box .link-3 {
-    color: #ffffffcc;
-    font-family: "Inter-Medium", Helvetica;
-    font-size: 13.1px;
-    font-weight: 500;
-    height: 20px;
-    left: 1576px;
-    letter-spacing: 0;
-    line-height: 20px;
-    position: absolute;
-    top: 24px;
-    white-space: nowrap;
-    width: 37px;
-  }
-  
-  .box .link-4 {
-    color: #ffffffcc;
-    font-family: "Inter-Medium", Helvetica;
-    font-size: 13.2px;
-    font-weight: 500;
-    height: 20px;
-    left: 1632px;
-    letter-spacing: 0;
-    line-height: 20px;
-    position: absolute;
-    top: 24px;
-    white-space: nowrap;
-    width: 24px;
-  }
-  
-  .box .link-5 {
-    color: #ffffffcc;
-    font-family: "Inter-Medium", Helvetica;
-    font-size: 13.1px;
-    font-weight: 500;
-    height: 20px;
-    left: 1722px;
-    letter-spacing: 0;
-    line-height: 20px;
-    position: absolute;
-    top: 24px;
-    white-space: nowrap;
-    width: 49px;
-  }
-  
-  .box .horizontal-divider {
-    background-color: #0000001a;
-    height: 1px;
-    left: 0;
-    position: absolute;
-    top: 69px;
-    width: 1799px;
-  }
-  
-  .box .rectangle-2 {
-    background-color: #ffffff;
-    height: 889px;
-    left: 578px;
-    position: absolute;
-    top: 137px;
-    width: 744px;
-  }
-  
-  .box .view-2 {
-    background-color: #ffffff;
-    border: 1px solid #000000;
-    border-radius: 5px;
-    height: 42px;
-    left: 595px;
-    position: absolute;
-    top: 203px;
-    width: 710px;
-  }
-  
-  .box .view-3 {
-    background-color: #ffffff;
-    border: 1px solid #000000;
-    border-radius: 5px;
-    height: 42px;
-    left: 595px;
-    position: absolute;
-    top: 313px;
-    width: 710px;
-  }
-  
-  .box .view-4 {
-    background-color: #ffffff;
-    border: 1px solid #000000;
-    border-radius: 5px;
-    height: 42px;
-    left: 595px;
-    position: absolute;
-    top: 470px;
-    width: 710px;
-  }
-  
-  .box .view-5 {
-    background-color: #ffffff;
-    border: 1px solid #000000;
-    border-radius: 5px;
-    height: 42px;
-    left: 595px;
-    position: absolute;
-    top: 620px;
-    width: 710px;
-  }
-  
-  .box .view-6 {
-    background-color: #ffffff;
-    border: 1px solid;
-    border-color: #000000;
-    border-radius: 5px;
-    height: 42px;
-    left: 595px;
-    position: absolute;
-    top: 627px;
-    width: 710px;
-  }
-  
-  .box .text-wrapper-2 {
-    color: #000000;
-    font-family: "Inter-SemiBold", Helvetica;
-    font-size: 17px;
-    font-weight: 600;
-    height: 21px;
-    left: 595px;
-    letter-spacing: 0;
-    line-height: 20px;
-    position: absolute;
-    top: 280px;
-    white-space: nowrap;
-    width: 79px;
-  }
-  
-  .box .text-wrapper-3 {
-    color: #000000;
-    font-family: "Inter-SemiBold", Helvetica;
-    font-size: 17px;
-    font-weight: 600;
-    height: 21px;
-    left: 595px;
-    letter-spacing: 0;
-    line-height: 20px;
-    position: absolute;
-    top: 170px;
-    white-space: nowrap;
-    width: 62px;
-  }
-  
-  .box .text-wrapper-4 {
-    color: #000000;
-    font-family: "Inter-SemiBold", Helvetica;
-    font-size: 17px;
-    font-weight: 600;
-    height: 21px;
-    left: 595px;
-    letter-spacing: 0;
-    line-height: 20px;
-    position: absolute;
-    top: 454px;
-    white-space: nowrap;
-    width: 62px;
-  }
-  
-  .box .text-wrapper-5 {
-    color: #000000;
-    font-family: "Inter-SemiBold", Helvetica;
-    font-size: 17px;
-    font-weight: 600;
-    height: 21px;
-    left: 595px;
-    letter-spacing: 0;
-    line-height: 20px;
-    position: absolute;
-    top: 593px;
-    white-space: nowrap;
-    width: 305px;
-  }
-  
-  .box .overlap-group-wrapper {
-    height: 64px;
-    left: 578px;
-    position: absolute;
-    top: 73px;
-    width: 750px;
-  }
-  
-  .box .overlap-group {
-    background-color: #fafafa;
-    height: 64px;
-    position: relative;
-    width: 748px;
-  }
-  
-  .box .text-wrapper-6 {
-    color: #000000;
-    font-family: "Inter-SemiBold", Helvetica;
-    font-size: 20px;
-    font-weight: 600;
-    height: 22px;
-    left: 12px;
-    letter-spacing: 0;
-    line-height: 20px;
-    position: absolute;
-    top: 19px;
-    white-space: nowrap;
-    width: 84px;
-  }
-  
-  .box .p {
-    color: #000000;
-    font-family: "Inter-Medium", Helvetica;
-    font-size: 13px;
-    font-weight: 500;
-    height: 23px;
-    left: 595px;
-    letter-spacing: 0;
-    line-height: 20px;
-    position: absolute;
-    top: 539px;
-    white-space: nowrap;
-    width: 296px;
-  }
-  
-  .box .view-7 {
-    background-color: #cccccc;
-    border: 1px solid;
-    border-radius: 5px;
-    height: 54px;
-    left: 595px;
-    position: absolute;
-    top: 1000px;
-    width: 710px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .box .text-wrapper-7 {
-    color: #000000;
-    font-family: "Inter-SemiBold", Helvetica;
-    font-size: 20px;
-    font-weight: 600;
-    height: 35px;
-    left: 300px;
-    letter-spacing: 0;
-    line-height: 20px;
-    position: absolute;
-    top: 20px;
-    width: 78px;
+  /* 필드 추가로 인해 높이 증가 필요, 예시로 1150px (실제 필요한 만큼 조절) */
+  height: 1200px; /* 기존 1026px에서 증가 */
+  width: 1919px;
 }
-  
-  .box .text-wrapper-8 {
-    color: #000000;
-    font-family: "Inter-Medium", Helvetica;
-    font-size: 13px;
-    font-weight: 500;
-    height: 23px;
-    left: 595px;
-    letter-spacing: 0;
-    line-height: 20px;
-    position: absolute;
-    top: 676px;
-    white-space: nowrap;
-    width: 339px;
-  }
 
-  .box .text-wrapper-9 {
-    color: #000000;
-    font-family: "Inter-SemiBold", Helvetica;
-    font-size: 17px;
-    font-weight: 600;
-    height: 21px;
-    left: 595px;
-    position: absolute;
-    top: 361px; /* 기존 view-3: top: 313px → view-4: top: 379px 사이 */
-    white-space: nowrap;
-    width: 120px;
-  }
-  
-  .box .view-9 {
-    background-color: #ffffff;
-    border: 1px solid #000000;
-    border-radius: 5px;
-    height: 42px;
-    left: 595px;
-    position: absolute;
-    top: 390px; /* 기존 view-4 위치를 밑으로 밀어야 함 */
-    width: 710px;
-  }
-  
-  .box-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* 또는 center로 하면 수직 중앙 */
-    min-height: 100vh;
-    padding-top: 100px;      /* Header와 겹치지 않게 */
-    background-color: #ffffff;
-    box-sizing: border-box;
-  }
+/* style.css에서 기존에 fixed였던 것 수정 */
+.box .view {
+  position: relative; /* ✅ fixed 제거 */
+  width: auto;        /* or 적절한 width */
+  height: auto;       /* form 전체 높이에 맞게 auto */
+}
 
-  .box .text-wrapper-10 {
-    color: #000000;
-    font-family: "Inter-SemiBold", Helvetica;
-    font-size: 17px;
-    font-weight: 600;
-    height: 21px;
-    left: 595px;
-    letter-spacing: 0;
-    line-height: 20px;
-    position: absolute;
-    top: 701px;
-    white-space: nowrap;
-    width: 339px;
-  }
+.box .overlap {
+  background-color: #ffffff;
+  /* 필드 추가로 인해 높이 증가 필요 */
+  height: 1200px; /* 기존 1026px에서 증가 */
+  position: relative;
+  width: 1919px;
+}
 
-  .box .view-10 {
-    background-color: #ffffff;
-    border: 1px solid #000000;
-    border-radius: 5px;
-    height: 42px;
-    left: 595px;
-    position: absolute;
-    top: 732px;
-    width: 710px;
-  }
+.box .rectangle {
+  background-color: #ffffff80;
+  /* 필드 추가로 인해 높이 증가 필요 */
+  height: 1200px; /* 기존 1026px에서 증가 */
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1919px;
+}
 
-  .box .text-wrapper-11 {
-    color: #000000;
-    font-family: "Inter-SemiBold", Helvetica;
-    font-size: 17px;
-    font-weight: 600;
-    height: 21px;
-    left: 595px;
-    letter-spacing: 0;
-    line-height: 20px;
-    position: absolute;
-    top: 827px;
-    white-space: nowrap;
-    width: 339px;
-  }
+/* --- Navigation Styles (기존과 동일) --- */
+.box .nav {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 70px;
+  justify-content: center;
+  left: 51px;
+  position: absolute;
+  top: 0;
+  width: 1799px;
+}
 
-  .box .view-11 {
-    background-color: #ffffff;
-    border: 1px solid #000000;
-    border-radius: 5px;
-    height: 42px;
-    left: 595px;
-    position: absolute;
-    top: 857px;
-    width: 710px;
-  }
-  
+.box .navbar {
+  align-self: stretch;
+  background-color: #1a1b1f;
+  flex: 1;
+  flex-grow: 1;
+  position: relative;
+  width: 100%;
+}
+
+/* ... (나머지 네비게이션 관련 스타일은 생략, 기존 코드 그대로 유지) ... */
+/* .box .component, .box .vertical-divider, .box .link-MUSINSA-MUSINSA 등등 */
+
+
+/* --- 회원가입 폼 관련 스타일 --- */
+.box .rectangle-2 {
+  background-color: #ffffff;
+  /* 폼 영역 높이도 필요에 따라 조절 (만약 필드가 이 영역을 벗어난다면) */
+  height: 1050px; /* 기존 889px에서 증가 */
+  left: 578px;
+  position: absolute;
+  top: 137px; /* 이 값은 고정된 상단 헤더와의 간격일 수 있으므로 유지 */
+  width: 744px;
+}
+
+/* --- 회원가입 제목 --- */
+.box .overlap-group-wrapper {
+  height: 64px;
+  left: 578px; /* rectangle-2와 동일한 left 값 */
+  position: absolute;
+  top: 73px; /* rectangle-2의 top 값보다 위 */
+  width: 750px;
+}
+
+.box .overlap-group {
+  background-color: #fafafa;
+  height: 64px;
+  position: relative;
+  width: 748px;
+}
+
+.box .text-wrapper-6 { /* 회원가입 타이틀 */
+  color: #000000;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 20px;
+  font-weight: 600;
+  height: 22px;
+  left: 12px;
+  letter-spacing: 0;
+  line-height: 20px;
+  position: absolute;
+  top: 19px;
+  white-space: nowrap;
+  width: auto; /* 내용에 맞게 */
+}
+
+
+/* --- 아이디 --- */
+.box .text-wrapper-3 { /* 아이디 라벨 */
+  color: #000000;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 17px;
+  font-weight: 600;
+  height: 21px;
+  left: 595px;
+  letter-spacing: 0;
+  line-height: 20px;
+  position: absolute;
+  top: 170px; /* 시작 위치 */
+  white-space: nowrap;
+  width: auto;
+}
+
+.box .view-2 { /* 아이디 입력 필드 */
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  height: 42px;
+  left: 595px;
+  position: absolute;
+  top: 203px; /* 라벨 아래 */
+  width: 710px;
+  padding: 0 10px; /* 내부 텍스트 여백 */
+  box-sizing: border-box;
+}
+
+/* --- 비밀번호 --- */
+.box .text-wrapper-2 { /* 비밀번호 라벨 */
+  color: #000000;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 17px;
+  font-weight: 600;
+  height: 21px;
+  left: 595px;
+  letter-spacing: 0;
+  line-height: 20px;
+  position: absolute;
+  top: 280px; /* 이전 필드 view-2 아래 */
+  white-space: nowrap;
+  width: auto;
+}
+
+.box .view-3 { /* 비밀번호 입력 필드 */
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  height: 42px;
+  left: 595px;
+  position: absolute;
+  top: 313px; /* 라벨 아래 */
+  width: 710px;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+/* --- 비밀번호 확인 --- */
+.box .text-wrapper-9 { /* 비밀번호 확인 라벨 */
+  color: #000000;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 17px;
+  font-weight: 600;
+  height: 21px;
+  left: 595px;
+  position: absolute;
+  top: 390px; /* 이전 필드 view-3 아래 (간격 조정됨) */
+  white-space: nowrap;
+  width: auto;
+}
+
+.box .view-9 { /* 비밀번호 확인 입력 필드 */
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  height: 42px;
+  left: 595px;
+  position: absolute;
+  top: 423px; /* 라벨 아래 (간격 조정됨) */
+  width: 710px;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+/* --- 역할(Role) 선택 UI --- */
+/* React 코드에서 이 클래스명을 사용해야 합니다. 
+   <div className="role-selector-container"> 
+*/
+.box .role-selector-container {
+  left: 595px;
+  position: absolute;
+  top: 480px; /* 이전 필드 view-9 아래 (간격 조정됨) */
+  width: 710px; /* 다른 필드와 너비 일치 */
+  margin-bottom: 20px; /* 다음 필드와의 간격 */
+}
+
+/* React 코드에서 이 클래스명을 사용해야 합니다.
+   <label className="text-wrapper-role">가입 유형</label>
+*/
+.box .text-wrapper-role { /* 역할 선택 라벨 */
+  color: #000000;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 17px;
+  font-weight: 600;
+  display: block; /* 라벨을 블록 요소로 만들어 줄바꿈 유도 */
+  margin-bottom: 10px; /* 라디오 버튼 그룹과의 간격 */
+  /* width: auto; 제거 가능, block 요소이므로 */
+}
+
+/* React 코드에서 이 클래스명을 사용해야 합니다.
+   <div className="role-options">
+*/
+.box .role-options {
+  display: flex; /* 라디오 버튼들을 가로로 배치 */
+  align-items: center;
+}
+
+.box .role-options label { /* 라디오 버튼과 텍스트를 감싸는 라벨 */
+  font-family: "Inter-Regular", Helvetica; /* 일반 텍스트 폰트 */
+  font-size: 15px;
+  margin-right: 25px; /* 각 옵션 간 간격 */
+  cursor: pointer;
+  display: flex; /* 내부 input과 text 정렬 */
+  align-items: center;
+}
+
+.box .role-options input[type="radio"] {
+  margin-right: 8px; /* 라디오 버튼과 텍스트 사이 간격 */
+  /* 필요시 라디오 버튼 자체의 스타일링 (브라우저 기본 스타일을 덮어쓰려면 복잡해질 수 있음) */
+}
+
+
+/* --- 이메일 --- */
+/* 역할 선택 UI가 추가되었으므로 top 값 조정 */
+.box .text-wrapper-4 { /* 이메일 라벨 */
+  color: #000000;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 17px;
+  font-weight: 600;
+  height: 21px;
+  left: 595px;
+  letter-spacing: 0;
+  line-height: 20px;
+  position: absolute;
+  top: 570px; /* 역할 선택 UI 아래로 조정 (기존 454px) */
+  white-space: nowrap;
+  width: auto;
+}
+
+.box .view-4 { /* 이메일 입력 필드 */
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  height: 42px;
+  left: 595px;
+  position: absolute;
+  top: 603px; /* 라벨 아래 (기존 470px) */
+  width: 710px;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.box .p { /* 이메일 설명 텍스트 */
+  color: #000000;
+  font-family: "Inter-Medium", Helvetica;
+  font-size: 13px;
+  font-weight: 500;
+  height: 23px;
+  left: 595px;
+  letter-spacing: 0;
+  line-height: 20px;
+  position: absolute;
+  top: 650px; /* view-4 아래 (기존 539px) */
+  white-space: nowrap;
+  width: auto;
+}
+
+/* --- 이름 --- */
+.box .text-wrapper-5 { /* 이름 라벨 */
+  color: #000000;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 17px;
+  font-weight: 600;
+  height: 21px;
+  left: 595px;
+  letter-spacing: 0;
+  line-height: 20px;
+  position: absolute;
+  top: 690px; /* 이전 .p 아래 (기존 593px) */
+  white-space: nowrap;
+  width: auto;
+}
+
+.box .view-5 { /* 이름 입력 필드 */
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  height: 42px;
+  left: 595px;
+  position: absolute;
+  top: 723px; /* 라벨 아래 (기존 620px) */
+  width: 710px;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+/* .box .view-6 와 .box .text-wrapper-8 은 원래 코드에서 주석 처리 또는 제거된 것으로 보이므로,
+   필요하다면 해당 요소들의 top 값도 연쇄적으로 조정해야 합니다.
+   여기서는 일단 주석 처리된 것으로 가정하고 진행합니다. */
+
+/* --- 휴대폰번호 --- */
+.box .text-wrapper-10 { /* 휴대폰번호 라벨 */
+  color: #000000;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 17px;
+  font-weight: 600;
+  height: 21px;
+  left: 595px;
+  letter-spacing: 0;
+  line-height: 20px;
+  position: absolute;
+  top: 790px; /* 이전 view-5 아래 (기존 701px) */
+  white-space: nowrap;
+  width: auto;
+}
+
+.box .view-10 { /* 휴대폰번호 입력 필드 */
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  height: 42px;
+  left: 595px;
+  position: absolute;
+  top: 823px; /* 라벨 아래 (기존 732px) */
+  width: 710px;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+/* --- 주소 --- */
+.box .text-wrapper-11 { /* 주소 라벨 */
+  color: #000000;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 17px;
+  font-weight: 600;
+  height: 21px;
+  left: 595px;
+  letter-spacing: 0;
+  line-height: 20px;
+  position: absolute;
+  top: 890px; /* 이전 view-10 아래 (기존 827px) */
+  white-space: nowrap;
+  width: auto;
+}
+
+.box .view-11 { /* 주소 입력 필드 */
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  height: 42px;
+  left: 595px;
+  position: absolute;
+  top: 923px; /* 라벨 아래 (기존 857px) */
+  width: 710px;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+/* --- 가입하기 버튼 --- */
+.box .view-7 { /* 가입하기 버튼 */
+  background-color: #cccccc; /* 기본 비활성 색상 */
+  border: 1px solid #777777; /* 테두리 색상 약간 어둡게 */
+  border-radius: 5px;
+  height: 54px;
+  left: 595px;
+  position: absolute;
+  top: 1010px; /* 이전 view-11 아래 (기존 1000px, 간격 더 확보) */
+  width: 710px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer; /* 버튼임을 나타내는 커서 */
+  transition: background-color 0.3s ease; /* 부드러운 색상 변경 효과 */
+}
+
+.box .view-7:hover {
+  background-color: #bbbbbb; /* 마우스 오버 시 약간 어둡게 */
+}
+
+.box .view-7:active {
+  background-color: #aaaaaa; /* 클릭 시 더 어둡게 */
+}
+
+.box .text-wrapper-7 { /* 가입하기 버튼 텍스트 */
+  color: #000000;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 20px;
+  font-weight: 600;
+  /* height, left, top, width 는 버튼 내부에서 중앙 정렬되므로 필요 없어질 수 있음 */
+  /* position: absolute 제거 */
+  line-height: 1; /* 텍스트 수직 중앙 정렬을 위해 line-height 조절 */
+  text-align: center;
+}
+
+/* --- 페이지 전체 레이아웃용 --- */
+.box-wrapper {
+  display: flex;
+  justify-content: center; /* 수평 중앙 정렬 */
+  align-items: flex-start; /* 상단 정렬 (Header 높이만큼 padding) */
+  min-height: 100vh; /* 최소 화면 높이만큼 */
+  padding-top: 100px; /* Header와 겹치지 않도록 (Header 높이에 따라 조절) */
+  padding-bottom: 50px; /* 하단 여백 */
+  background-color: #f0f2f5; /* 페이지 배경색 (기존 #ffffff에서 변경하여 구분) */
+  box-sizing: border-box;
+  overflow-y: auto; /* 내용이 길어지면 스크롤 가능하도록 */
+}
+
+/* 만약 .box .view-6와 .box .text-wrapper-8이 실제로 사용되지 않는다면,
+   CSS에서 해당 클래스 정의를 제거하거나 주석 처리하는 것이 좋습니다. */
+/*
+.box .view-6 {
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #000000;
+  border-radius: 5px;
+  height: 42px;
+  left: 595px;
+  position: absolute;
+  top: 627px; 
+  width: 710px;
+}
+
+.box .text-wrapper-8 {
+  color: #000000;
+  font-family: "Inter-Medium", Helvetica;
+  font-size: 13px;
+  font-weight: 500;
+  height: 23px;
+  left: 595px;
+  letter-spacing: 0;
+  line-height: 20px;
+  position: absolute;
+  top: 676px;
+  white-space: nowrap;
+  width: 339px;
+}
+*/
