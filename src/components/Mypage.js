@@ -188,7 +188,7 @@ const Mypage = () => {
                     {/* 프로필 이미지 표시 (없으면 기본 이미지) */}
                     {userInfo?.profileImageUrl ? (
                       <img
-                        src={userInfo.profileImageUrl}
+                        src={`${process.env.REACT_APP_API_BASE_URL}${userInfo.profileImageUrl}`}
                         alt="프로필"
                         className="profile-image"
                         onError={(e) => { e.target.src = defaultProfileImage; }}

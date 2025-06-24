@@ -23,7 +23,8 @@ import CancelReturn from "./components/CancelReturn";
 import MyOrderHistorySection from "./components/OrderHistory/MyOrderHistorySection";
 import ReviewWriteForm from "./components/ReviewWrite/ReviewWriteForm";
 import MyReviewsPage from "./components/MyReviews/MyReviewsPage";
-import SellerPage from './components/SellerPage'; // 판매자 페이지 컴포넌트
+import SellerPage from './components/seller/SellerPage'; // 판매자 페이지 컴포넌트
+import ProductRegistrationForm from './components/seller/ProductRegistrationForm'; 
 
 function App() {
   return (
@@ -48,7 +49,8 @@ function App() {
         <Route path="/mypage/orders" element={<MyOrderHistorySection />} />
         <Route path="/write-review/:productId" element={<ReviewWritePage />} />
         <Route path="/mypage/my-reviews" element={<MyReviewsPage />} />
-        <Route path="/seller-page" element={<SellerPage />} /> {/* 판매자 페이지 라우트 */}
+        <Route path="/seller" element={<SellerPage />} />
+        <Route path="/seller/product/new" element={<ProductRegistrationForm />} /> 
       </Routes>
     </Router>
   );

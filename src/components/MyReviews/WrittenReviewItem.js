@@ -110,7 +110,7 @@ const WrittenReviewItem = ({ review, onDeleteSuccess }) => {
           </div>
           <p className={styles.reviewText}>{comment}</p>
           {reviewImageUrl && (
-            <img src={reviewImageUrl} alt="리뷰 이미지" className={styles.reviewImage} />
+            <img src={`${process.env.REACT_APP_API_BASE_URL}${reviewImageUrl}`} alt="리뷰 이미지" className={styles.reviewImage} />
           )}
         </div>
         <div className={styles.pointNotice}>

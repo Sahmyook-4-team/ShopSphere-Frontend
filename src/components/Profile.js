@@ -36,7 +36,7 @@ export const Profile = () => {
     const fetchUserData = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get("http://localhost:8080/api/users/me", {
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/users/me`, {
           withCredentials: true,
           headers: { 'Content-Type': 'application/json' },
         });
@@ -59,7 +59,7 @@ export const Profile = () => {
     setIsLoading(true);
     try {
       const response = await axios.patch(
-        `http://localhost:8080/api/users/update`,
+        `${process.env.REACT_APP_API_BASE_URL}/api/users/update`,
         updatedInfo,
         {
           withCredentials: true,
@@ -92,7 +92,7 @@ export const Profile = () => {
     setIsLoading(true);
     try {
       await axios.patch(
-        `http://localhost:8080/api/users/password`,
+        `${process.env.REACT_APP_API_BASE_URL}/api/users/password`,
         { currentPassword, newPassword },
         {
           withCredentials: true,
@@ -118,7 +118,7 @@ export const Profile = () => {
     if (!userInfo || !userInfo.id) return { success: false, error: "사용자 정보가 없습니다." };
     setIsLoading(true);
     try {
-      await axios.delete(`http://localhost:8080/api/users/delete`, { // userId를 URL에 포함하지 않음 (세션 기반)
+      await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/users/delete`, { // userId를 URL에 포함하지 않음 (세션 기반)
         withCredentials: true,
         headers: { 'Content-Type': 'application/json' },
       });
@@ -161,7 +161,7 @@ export const Profile = () => {
       console.log("백엔드로 전송할 FormData 파일:", formData.get("profileImageFile"));
       setIsLoading(true); // 업로드 시작 시 로딩 상태 true
       const response = await axios.patch(
-        `http://localhost:8080/api/users/profile-image`,
+        `${process.env.REACT_APP_API_BASE_URL}/api/users/profile-image`,
         formData,
         {
           withCredentials: true,
@@ -207,7 +207,7 @@ export const Profile = () => {
               <div className={`${styles.profileAvatar} ${styles.avatarPlaceholder}`} />
             ) : userInfo?.profileImageUrl ? (
               <img
-                src={userInfo.profileImageUrl}
+                src={`${process.env.REACT_APP_API_BASE_URL}${userInfo.profileImageUrl}`}
                 alt="프로필"
                 className={styles.profileAvatar}
                 onError={(e) => { e.target.src = defaultProfileImage; }}
