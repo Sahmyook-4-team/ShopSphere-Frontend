@@ -51,6 +51,10 @@ const Login = () => {
 
             localStorage.setItem('userId', response.data.id);
             localStorage.setItem('userName', response.data.name); // 백엔드 응답에 'name' 필드가 있는지 확인
+            if (response.data.role) {
+              localStorage.setItem('userRole', response.data.role); // 'userRole' 키로 저장
+              console.log("✅ 사용자 역할 저장됨:", response.data.role);
+          }
 
             alert("로그인 성공");
             setMessage("로그인 성공!");
@@ -137,8 +141,8 @@ const Login = () => {
 
                 {/* 자동 로그인 */}
                 <div className="label">
-                  <input type="checkbox" id="auto-login" />
-                  <label htmlFor="auto-login" className="text-wrapper-4">자동 로그인</label>
+                  <input type="checkbox" id="seller-login" />
+                  <label htmlFor="auto-login" className="text-wrapper-4">판매자 로그인</label>
                 </div>
 
                 {/* 아이디/비번 찾기 */}

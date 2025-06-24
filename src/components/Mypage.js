@@ -93,6 +93,7 @@ const Mypage = () => {
       setUserInfo({ name: "Guest" }); // 사용자 정보 초기화
       localStorage.removeItem('userId'); // 일반 로그인 시 저장했던 정보도 삭제 (선택적)
       localStorage.removeItem('userName'); // 일반 로그인 시 저장했던 정보도 삭제 (선택적)
+      localStorage.removeItem('userRole'); // 역할 정보도 삭제
       navigate("/login");
     } catch (error) {
       console.error("로그아웃 중 오류:", error);
