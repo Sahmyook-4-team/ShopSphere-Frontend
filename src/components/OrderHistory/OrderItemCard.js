@@ -40,7 +40,7 @@ const OrderItemCard = ({ item, orderStatus }) => {
 
   return (
     <div className={styles.card}>
-      <img src={representativeImage} alt={displayName} className={styles.productImage} />
+      <img src={`${process.env.REACT_APP_API_BASE_URL}${representativeImage}`} alt={displayName} className={styles.productImage} />
       <div className={styles.productDetails}>
         <div className={styles.status}>{displayStatusText}</div>
         <div className={styles.name}>{displayName}</div>

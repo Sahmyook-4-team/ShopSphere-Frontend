@@ -6,6 +6,8 @@ import { FaEllipsisV, FaTrashAlt } from 'react-icons/fa'; // 아이콘 사용 �
 
 // 가정: 부모 컴포넌트로부터 onDeleteSuccess 콜백 함수를 props로 받음
 const WrittenReviewItem = ({ review, onDeleteSuccess }) => { 
+  console.log(review);
+  console.log(review.product.images);
   const [showOptionsMenu, setShowOptionsMenu] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -80,7 +82,7 @@ const WrittenReviewItem = ({ review, onDeleteSuccess }) => {
     <>
       <div className={styles.itemContainer}>
         <div className={styles.productSection}>
-          <img src={representativeProductImage} alt={product.name} className={styles.productImage} />
+          <img src={`${process.env.REACT_APP_API_BASE_URL}${representativeProductImage}`} alt={product.name} className={styles.productImage} />
           <div className={styles.productInfo}>
             <p className={styles.productName}>{product.name}</p>
           </div>
