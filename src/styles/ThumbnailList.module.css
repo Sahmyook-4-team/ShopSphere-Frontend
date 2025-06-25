@@ -1,13 +1,15 @@
 /* src/styles/productleft/ThumbnailList.module.css */
 .thumbnailList {
   display: flex;
-  flex-direction: column; /* 썸네일 아이템들을 세로로 나열 */
-  gap: 10px; /* 썸네일 아이템 사이 간격 */
-  /* height: 480px; */ /* 메인 이미지 높이에 맞추거나, 스크롤되도록 max-height 사용 */
-  max-height: 500px; /* 메인 이미지 최대 높이와 비슷하게 설정 (조정 가능) */
-  overflow-y: auto; /* 세로 스크롤 활성화 (썸네일 많을 경우) */
-  padding-right: 8px; /* 스크롤바와 내용물 사이 여백 */
-  flex-shrink: 0; /* 썸네일 리스트 너비가 줄어들지 않도록 */
+  flex-direction: column;
+  gap: 10px;
+  /* height: 480px; */
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 8px;
+  flex-shrink: 0;
+  position: relative;
+  top: 51px;
 }
 
 .thumbnailItem {

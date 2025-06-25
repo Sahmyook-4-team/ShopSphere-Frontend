@@ -27,6 +27,8 @@
   object-fit: contain;
   display: block;
   border-radius: 6px;
+  position: relative;
+  top: 43px;
 }
 
 .navigationButton { /* 👈 [추가] 이전/다음 버튼 공통 스타일 */

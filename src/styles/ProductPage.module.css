@@ -11,30 +11,37 @@
 }
 
 .leftPanel {
-  flex-grow: 5.5; /* 👈 예시 비율 (55%에 해당하도록) */
-  flex-shrink: 1; /* 공간 부족 시 줄어들 수 있도록 */
-  flex-basis: 0;  /* 👈 초기 크기 0 */
+  flex-grow: 5.5;
+  flex-shrink: 1;
+  flex-basis: 0;
   display: flex;
-  justify-content: center;
-  min-width: 0; /* 👈 중요: 내용에 의해 불필요하게 늘어나는 것 방지 */
-  /* border: 1px dashed red; */ /* 디버깅용 */  
-  transform: scale(1.2);
-  position: relative;
-  top: 100px;
+  flex-direction: column; /* 세로 방향으로 자식 요소 배치 */
+  justify-content: flex-start; /* 자식 요소들을 위에서부터 배치 */
+  align-items: stretch; /* 자식 요소들이 가로로 꽉 차도록 (기본값) 또는 center로 변경 가능 */
+  min-width: 0;
+  
+  /* transform 및 position 관련 스타일은 레이아웃 문제 해결 전까지 주석 처리 */
+  /* transform: scale(1.2); */
+  /* position: relative; */
+  /* top: 100px; */
 
-  flex-direction: column; /* 👈 [추가] ProductImageGallery가 세로로 꽉 차도록 */
-  /* 뷰포트 높이 기준으로 스크롤 설정 (예시) */
-  height: calc(100vh - 40px - 70px); /* 👈 [추가] (100vh - 상단여백 - 헤더높이 등) */
-  /* 또는 고정 높이: height: 600px; */
-  overflow-y: auto; /* 👈 [추가] 내용이 넘치면 세로 스크롤 생성 */
-  padding-right: 8px; /* 👈 스크롤바 공간 (선택적) */
+  /* height 또는 max-height 설정 */
+  /* 옵션 A: 내용에 따라 높이 유동적, 넘치면 스크롤 (단, rightPanel과 높이 불일치 가능) */
+  /* 이 경우 height, max-height 모두 주석 처리하고, overflow-y: auto만 남겨도 됩니다.
+     하지만 부모인 productPageContainer가 align-items: flex-start로 되어 있어 괜찮을 수 있습니다. */
+
+  /* 옵션 B: 최대 높이 제한, 넘치면 스크롤 (leftPanel과 rightPanel 높이 비슷하게 유지 시도) */
+  max-height: calc(100vh - 40px - 70px); /* 헤더 등 제외한 뷰포트 높이 */
+  overflow-y: auto;
+  
+  padding-right: 8px; /* 스크롤바 공간 */
 }
 
 .rightPanel {
   flex-grow: 4.5; /* 👈 예시 비율 (45%에 해당하도록, 합쳐서 10이 되도록) */
   flex-shrink: 1; /* 공간 부족 시 줄어들 수 있도록 */
   flex-basis: 0;  /* 👈 초기 크기 0 */
-  display: flex;
+  display: fixed;
   flex-direction: column;
   min-width: 0; /* 👈 중요: 내용에 의해 불필요하게 늘어나는 것 방지 */
   position: relative;
@@ -75,4 +82,72 @@
     flex: none;
     width: 100%;
   }
+}
+
+/* ProductPage.module.css 에 추가 */
+.productReviewsSection {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  width: 60%;
+  position: relative;
+  top: -215px;
+  left: 43px;
+}
+
+.productReviewsSection h2 {
+  font-size: 1.4em;
+  margin-bottom: 20px;
+}
+
+.reviewList {
+  list-style: none;
+  padding: 0;
+}
+
+.reviewItem {
+  border-bottom: 1px solid #f0f0f0;
+  padding: 20px 0;
+}
+.reviewItem:last-child {
+  border-bottom: none;
+}
+
+.reviewAuthorInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.reviewAuthorName {
+  font-weight: bold;
+  font-size: 0.95em;
+}
+
+.reviewDate {
+  font-size: 0.85em;
+  color: #777;
+}
+
+.reviewRating {
+  margin-bottom: 10px;
+  color: #f8c102; /* 별 색상 */
+  font-size: 1.1em;
+}
+
+.reviewImage {
+  max-width: 150px; /* 리뷰 이미지 크기 제한 */
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  display: block; /* 이미지가 block 요소가 되도록 */
+}
+
+.reviewComment {
+  font-size: 0.9em;
+  line-height: 1.6;
+  color: #333;
+  white-space: pre-wrap; /* 줄바꿈 및 공백 유지 */
 }
