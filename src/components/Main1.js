@@ -56,7 +56,7 @@ export const Main = () => {
                     <Bottom productIdFromProps={1} />
                     <Bottom productIdFromProps={2} />
                     <Bottom productIdFromProps={3} />
-                    <Bottom productIdFromProps={1} />
+                    <Bottom productIdFromProps={4} />
                 </div>
             </div>
 
