@@ -5,6 +5,7 @@ import Header from '../Header';
 import axios from 'axios';
 import styles from './SellerPage.module.css'; // 기존 CSS Module
 import ProductEditModal from './ProductEditModal'; // 수정 모달 import
+import SalesStatistics from './SalesStatistics'; // 판매 통계 컴포넌트 import
 
 const SellerPage = () => {
     const navigate = useNavigate();
@@ -27,7 +28,7 @@ const SellerPage = () => {
         const fetchMyProducts = async () => {
             setIsLoading(true);
             try {
-                const response = await axios.get(`${API_BASE_URL}/api/products/seller/me`, { withCredentials: true });
+                const response = await axios.get(`${API_BASE_URL}/api/seller/products`, { withCredentials: true });
                 setMyProducts(response.data || []);
             } catch (error) {
                 console.error("내가 등록한 상품 목록을 불러오는 데 실패했습니다:", error.response ? error.response.data : error.message);
@@ -161,27 +162,8 @@ const SellerPage = () => {
                     </div>
                 </section>
 
-                {/* 판매 통계 섹션 (기존과 동일) */}
-                {/* ... */}
-                <section className={styles.section}>
-                    <h2 className={styles.sectionTitle}>판매 통계</h2>
-                    <div className={styles.contentArea}>
-                        <p>년도별/월별/주별 판매량 데이터 및 차트가 여기에 표시됩니다.</p>
-                        <div className={styles.statsOptions}>
-                            <select className={styles.selectBox}>
-                                <option value="yearly">년도별</option>
-                                <option value="monthly">월별</option>
-                                <option value="weekly">주별</option>
-                            </select>
-                            <button className={`${styles.actionButton} ${styles.marginLeft10px}`}>
-                                조회하기
-                            </button>
-                        </div>
-                        <div className={styles.chartPlaceholder}>
-                            판매량 차트 영역
-                        </div>
-                    </div>
-                </section>
+                {/* 판매 통계 섹션 */}
+                <SalesStatistics />
 
             </div>
 
