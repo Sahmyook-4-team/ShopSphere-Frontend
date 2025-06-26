@@ -49,7 +49,7 @@ const ProductItem = ({
             {isChecked && <span className={styles.checkmark}>✓</span>}
           </div>
           <div className={styles.imageWrapper}>
-            <img src={productImage} alt={name} />
+            <img src={process.env.REACT_APP_API_BASE_URL + productImage} alt={name} />
           </div>
           <div className={styles.detailsWrapper}>
             <label className={styles.brandLabel}>{brand}</label>

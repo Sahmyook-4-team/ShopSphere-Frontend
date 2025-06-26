@@ -8,7 +8,6 @@ import ProductEditModal from './ProductEditModal'; // 수정 모달 import
 
 const SellerPage = () => {
     const navigate = useNavigate();
-    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080/api';
 
     const [myProducts, setMyProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -27,7 +26,7 @@ const SellerPage = () => {
         const fetchMyProducts = async () => {
             setIsLoading(true);
             try {
-                const response = await axios.get(`${API_BASE_URL}/api/products/seller/me`, { withCredentials: true });
+                const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/products/seller/me`, { withCredentials: true });
                 setMyProducts(response.data || []);
             } catch (error) {
                 console.error("내가 등록한 상품 목록을 불러오는 데 실패했습니다:", error.response ? error.response.data : error.message);
@@ -44,7 +43,7 @@ const SellerPage = () => {
         };
 
         fetchMyProducts();
-    }, [navigate, API_BASE_URL]);
+    }, [navigate, process.env.REACT_APP_API_BASE_URL]);
 
 
     const handleRegisterProduct = () => {
@@ -54,7 +53,7 @@ const SellerPage = () => {
     const handleDeleteProduct = async (productId, productName) => {
         if (window.confirm(`상품 '${productName}'을(를) 정말 삭제하시겠습니까?`)) {
             try {
-                await axios.delete(`${API_BASE_URL}/api/products/${productId}`, { withCredentials: true });
+                await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/products/${productId}`, { withCredentials: true });
                 alert(`상품 '${productName}'이(가) 성공적으로 삭제되었습니다.`);
                 setMyProducts(prevProducts => prevProducts.filter(product => product.id !== productId));
             } catch (error) {
