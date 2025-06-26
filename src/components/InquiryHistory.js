@@ -9,14 +9,12 @@ const InquiryHistory = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const API_BASE_URL = "http://localhost:8080/api"; // 백엔드 API 기본 URL
-
   // 문의 내역을 불러오는 함수
   const fetchInquiries = async () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`${API_BASE_URL}/inquiries/my-inquiries`, {
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/inquiries/my-inquiries`, {
         // !!! 세션 기반 인증을 위해 이 옵션을 추가합니다. !!!
         withCredentials: true, // 요청 시 쿠키 (세션 ID 포함)를 함께 전송
         params: {
