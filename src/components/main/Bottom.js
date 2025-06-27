@@ -89,7 +89,7 @@ export const Bottom = ({ productIdFromProps }) => {
                 )}
                 {/* --- 👆 이미지 렌더링 부분 수정 --- */}
                 <div className={styles["div-wrapper"]}>
-                  <div className={styles["text-wrapper-4"]}>쇼핑몰 추천 5</div>
+                  <div className={styles["text-wrapper-4"]}>쇼핑몰 추천</div>
                 </div>
                 <img className={styles.heart} alt="Heart" src={heart} />
               </div>
