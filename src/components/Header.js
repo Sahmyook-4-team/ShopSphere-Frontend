@@ -28,14 +28,7 @@ export const Header = () => {
           <button className="menu-button">☰</button>
           {/* 이게 주석이라고?ㅋㅋㅋ */}
           <div className="nav-links">
-            <a href="/">MUSINSA</a>
-            <a href="/">BEAUTY</a>
-            <a href="/">PLAYER</a>
-            <a href="/">OUTLET</a>
-            <a href="/">BOUTIQUE</a>
-            <a href="/">SHOES</a>
-            <a href="/">KIDS</a>
-            <a href="/">ISI SNAP</a>
+            <a href="/">ShopSphere</a>
           </div>
         </div>
         

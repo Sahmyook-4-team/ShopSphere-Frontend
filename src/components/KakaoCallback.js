@@ -5,7 +5,6 @@ const KakaoCallback = () => {
     const navigate = useNavigate();
     // 환경 변수 REACT_APP_API_BASE_URL이 설정되어 있지 않다면 기본값으로 'http://localhost:8080' 사용
     // 다른 컴포넌트들(Mypage, Bottom 등)과의 일관성을 위해 REACT_APP_API_BASE_URL 사용을 권장합니다.
-    const SPRING_BOOT_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';
 
     useEffect(() => {
         const url = new URL(window.location.href);
@@ -26,14 +25,14 @@ const KakaoCallback = () => {
         }
 
         console.log("카카오 인가 코드:", code);
-        console.log("백엔드 API 기본 URL:", SPRING_BOOT_API_BASE_URL); // 디버깅을 위해 추가
+        console.log("백엔드 API 기본 URL:", process.env.REACT_APP_API_BASE_URL); // 디버깅을 위해 추가
 
         // 3. 백엔드 API 호출
         // 백엔드가 @RequestParam String code를 받으므로 쿼리 파라미터로 POST 요청
         // 백엔드 컨트롤러의 실제 매핑 경로에 따라 URL을 정확히 확인해야 합니다.
         // 예를 들어, AuthController가 @RequestMapping("/api/auth")라면 아래 경로가 맞습니다.
         // 하지만 UserController(@RequestMapping("/api/users")) 안에 있다면 '/api/users/oauth/kakao/callback'이 되어야 합니다.
-        fetch(`${SPRING_BOOT_API_BASE_URL}/api/auth/oauth/kakao/callback?code=${code}`, {
+        fetch(`${process.env.REACT_APP_API_BASE_URL}/api/auth/oauth/kakao/callback?code=${code}`, {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -73,7 +72,7 @@ const KakaoCallback = () => {
             // 6. 오류 발생 시 로그인 페이지로 리다이렉트
             navigate(`/login?error=${encodeURIComponent(error.message || 'unknown_error')}`, { replace: true });
         });
-    }, [navigate, SPRING_BOOT_API_BASE_URL]); // 의존성 배열에 navigate와 SPRING_BOOT_API_BASE_URL 추가
+    }, [navigate, process.env.REACT_APP_API_BASE_URL]); // 의존성 배열에 navigate와 SPRING_BOOT_API_BASE_URL 추가
 
     return (
         <div>
