@@ -18,6 +18,8 @@ export const Header = () => {
     setIsSearchModalOpen(false); // 모달을 닫도록 상태를 변경합니다.
   };
 
+
+  
   return (
     // 6. Header 컴포넌트와 SearchModal을 함께 반환하기 위해 Fragment(<></>)로 감싸줍니다.
     <>
