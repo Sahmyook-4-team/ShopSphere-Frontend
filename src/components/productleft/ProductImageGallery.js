@@ -8,7 +8,6 @@ import styles from '../../styles/ProductImageGallery.module.css'; // 경로 다�
 const ProductImageGallery = ({ imagesData = [], productName, productDescription }) => {
   const [selectedImageUrl, setSelectedImageUrl] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
-  const API_BASE_URL = "http://localhost:8080";
 
   // ... (useEffect, findIndexByUrl, handleSelectImage, handlePrevImage, handleNextImage 로직은 동일) ...
   useEffect(() => {
@@ -21,7 +20,7 @@ const ProductImageGallery = ({ imagesData = [], productName, productDescription 
       setCurrentIndex(initialImageIndex);
       // sortedImages[initialImageIndex] 가 undefined가 아닐 때만 imageUrl에 접근
       if (sortedImages[initialImageIndex]) {
-        setSelectedImageUrl(API_BASE_URL + sortedImages[initialImageIndex].imageUrl);
+        setSelectedImageUrl(process.env.REACT_APP_API_BASE_URL + sortedImages[initialImageIndex].imageUrl);
       } else {
         setSelectedImageUrl(''); // 예외 처리: 이미지가 있지만 인덱스가 유효하지 않은 경우
       }
@@ -34,8 +33,8 @@ const ProductImageGallery = ({ imagesData = [], productName, productDescription 
   const findIndexByUrl = useCallback((url) => {
     if (!imagesData || imagesData.length === 0) return -1;
     const sortedImages = [...imagesData].sort((a,b) => (a.displayOrder || 0) - (b.displayOrder || 0));
-    return sortedImages.findIndex(img => (API_BASE_URL + img.imageUrl) === url);
-  }, [imagesData, API_BASE_URL]);
+    return sortedImages.findIndex(img => (process.env.REACT_APP_API_BASE_URL + img.imageUrl) === url);
+  }, [imagesData, process.env.REACT_APP_API_BASE_URL]);
 
   const handleSelectImage = useCallback((imageUrl) => {
     setSelectedImageUrl(imageUrl);
@@ -50,16 +49,16 @@ const ProductImageGallery = ({ imagesData = [], productName, productDescription 
     const sortedImages = [...imagesData].sort((a,b) => (a.displayOrder || 0) - (b.displayOrder || 0));
     const newIndex = (currentIndex - 1 + sortedImages.length) % sortedImages.length;
     setCurrentIndex(newIndex);
-    setSelectedImageUrl(API_BASE_URL + sortedImages[newIndex].imageUrl);
-  }, [currentIndex, imagesData, API_BASE_URL]);
+    setSelectedImageUrl(process.env.REACT_APP_API_BASE_URL + sortedImages[newIndex].imageUrl);
+  }, [currentIndex, imagesData, process.env.REACT_APP_API_BASE_URL]);
 
   const handleNextImage = useCallback(() => {
     if (!imagesData || imagesData.length === 0) return;
     const sortedImages = [...imagesData].sort((a,b) => (a.displayOrder || 0) - (b.displayOrder || 0));
     const newIndex = (currentIndex + 1) % sortedImages.length;
     setCurrentIndex(newIndex);
-    setSelectedImageUrl(API_BASE_URL + sortedImages[newIndex].imageUrl);
-  }, [currentIndex, imagesData, API_BASE_URL]);
+    setSelectedImageUrl(process.env.REACT_APP_API_BASE_URL + sortedImages[newIndex].imageUrl);
+  }, [currentIndex, imagesData, process.env.REACT_APP_API_BASE_URL]);
 
 
   if (!imagesData || imagesData.length === 0) {

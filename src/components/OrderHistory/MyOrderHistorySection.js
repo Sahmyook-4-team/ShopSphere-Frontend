@@ -14,7 +14,7 @@
         const fetchUserOrders = async () => {
           try {
             setLoading(true);
-            const response = await axios.get(`http://localhost:8080/api/orders`);
+            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/orders`);
             setOrders(response.data || []); 
             setLoading(false); // API 호출 완료 후 loading false로 설정
           } catch (err) {

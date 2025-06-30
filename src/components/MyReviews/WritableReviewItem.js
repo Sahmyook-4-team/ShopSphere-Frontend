@@ -10,6 +10,7 @@ const getRepresentativeImageUrl = (images) => {
 
 const WritableReviewItem = ({ orderItem, orderDate }) => {
   const navigate = useNavigate();
+  console.log(orderItem);
 
   if (!orderItem || !orderItem.product) {
     return null;
@@ -38,7 +39,7 @@ const WritableReviewItem = ({ orderItem, orderDate }) => {
     <div className={styles.itemContainer}>
       <p className={styles.orderDate}>주문일 {formatDate(orderDate)}</p>
       <div className={styles.content}>
-        <img src={representativeImage} alt={displayName} className={styles.productImage} />
+        <img src={`${process.env.REACT_APP_API_BASE_URL}${representativeImage}`} alt={displayName} className={styles.productImage} />
         <div className={styles.productInfo}>
           <p className={styles.brandName}>{product.seller?.name || '브랜드 정보 없음'}</p> {/* ProductDTO.Response에 seller 정보가 있다고 가정 */}
           <p className={styles.productName}>{displayName}</p>

@@ -59,7 +59,7 @@ const ProductItem = ({
           </div>
 
           <div className={styles.imageWrapper}>
-            <img src={productImage} alt={name} />
+            <img src={process.env.REACT_APP_API_BASE_URL + productImage} alt={name} />
           </div>
           <div className={styles.detailsWrapper}>
             <span className={styles.brandLabel}>

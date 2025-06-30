@@ -86,7 +86,6 @@ const SearchResultsPage = () => {
         </div>
         <div className={styles.filterControls}>
           {/* 이미지의 필터 버튼들 (무진장, 무배당일, 성별, 컬러 등) */}
-          <button className={styles.filterChip}>무진장</button>
           <button className={styles.filterChip}>무료배송</button>
           <button className={styles.filterDropdown}>남 <span className={styles.arrowDown}>▼</span></button>
           <button className={styles.filterDropdown}>컬러 <span className={styles.arrowDown}>▼</span></button>
@@ -95,7 +94,7 @@ const SearchResultsPage = () => {
         <div className={styles.sortSection}>
           <span className={styles.totalCount}>{totalCount.toLocaleString()}개</span>
           <select value={sortOption} onChange={handleSortChange} className={styles.sortSelect}>
-            <option value="musinsa_recommend">무신사 추천순</option>
+            <option value="musinsa_recommend">쇼핑몰 추천순</option>
             <option value="sales_volume_desc">판매량 많은 순</option> {/* 백엔드 정렬 값과 일치해야 함 */}
             <option value="created_at_desc">최신 등록순</option>
             <option value="price_asc">낮은 가격순</option>

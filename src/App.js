@@ -23,13 +23,15 @@ import CancelReturn from "./components/CancelReturn";
 import MyOrderHistorySection from "./components/OrderHistory/MyOrderHistorySection";
 import ReviewWriteForm from "./components/ReviewWrite/ReviewWriteForm";
 import MyReviewsPage from "./components/MyReviews/MyReviewsPage";
+import SellerPage from './components/seller/SellerPage'; // 판매자 페이지 컴포넌트
+import ProductRegistrationForm from './components/seller/ProductRegistrationForm'; 
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/kakao-callback" element={<KakaoCallback />} />
+        <Route path="/oauth/kakao/callback" element={<KakaoCallback />} /> 
         <Route path="/cartoption" element={<CartOption />} />
         <Route path="/searchdialog" element={<SearchDialog />} />
         <Route path="/mypage/inquiries" element={<InquiryHistory />} />
@@ -47,6 +49,8 @@ function App() {
         <Route path="/mypage/orders" element={<MyOrderHistorySection />} />
         <Route path="/write-review/:productId" element={<ReviewWritePage />} />
         <Route path="/mypage/my-reviews" element={<MyReviewsPage />} />
+        <Route path="/seller" element={<SellerPage />} />
+        <Route path="/seller/product/new" element={<ProductRegistrationForm />} /> 
       </Routes>
     </Router>
   );

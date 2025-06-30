@@ -214,7 +214,7 @@ const ReviewWriteForm = ({ productId, initialProductInfo }) => {
 
       {productInfo && (
         <div className={styles.productInfoSection}>
-          <img src={getProductImageUrl()} alt={productInfo.name || '상품 이미지'} className={styles.productImage} />
+          <img src={`${process.env.REACT_APP_API_BASE_URL}${getProductImageUrl()}`} alt={productInfo.name || '상품 이미지'} className={styles.productImage} />
           <div className={styles.productNameAndOption}>
             <p className={styles.productName}>{productInfo.name || '상품명 없음'}</p>
             {/* <p className={styles.productOption}>아이보리 / FREE</p> */}
