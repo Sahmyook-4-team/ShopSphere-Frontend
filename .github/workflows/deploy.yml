@@ -1,0 +1,46 @@
+name: Deploy Frontend to EC2
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Frontend Repo
+        uses: actions/checkout@v3
+
+      - name: SSH into EC2 and Build Frontend
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          script: |
+            cd ~/ShopSphere-Frontend
+            git pull
+
+            # 기존 build 삭제
+            rm -rf build
+
+            # 새로 빌드
+            npm install
+            npm run build
+
+            # 백엔드 static 폴더에 복사
+            rm -rf ~/ShopSphere-Backend/src/main/resources/static/*
+            cp -r build/* ~/ShopSphere-Backend/src/main/resources/static/
+
+            # 백엔드 Docker 이미지 다시 빌드하고 재시작
+            cd ~/ShopSphere-Backend
+            sudo chmod 777 gradlew
+            ./gradlew bootJar -x test
+            sudo docker stop $(sudo docker ps -q)
+            sudo docker rm $(sudo docker ps -aq)
+            sudo docker build --no-cache -t shopsphere-backend .
+            sudo docker run -d -p 8080:8080 shopsphere-backend

@@ -1,55 +1,24 @@
 // src/components/ShoppingCartPage/ShoppingCartPage.js (또는 실제 경로)
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/ShoppingCartPage.module.css'; // 실제 ShoppingCartPage.module.css 경로
-import ProductItem from './ProductItem';   // 실제 ProductItem 경로
+import ProductItem from './ProductItem';   // 실제 ProductItem 
+import { useNavigate } from 'react-router-dom'; //뒤로가기버튼
+import axios from 'axios';  //axios
+import { addToCart } from '../lib/cartUtils';
+import Header from './Header'; // 경로가 다를 경우 수정
+
+
 
 const ShoppingCartPage = () => {
-  const [isAllSelected, setIsAllSelected] = useState(true);
-  // 상품 데이터를 그룹화하여 관리
-  const [productGroups, setProductGroups] = useState([
-    {
-      id: "group1",
-      groupName: "이브클로젯 배송상품",
-      items: [
-        {
-          id: "item1_1",
-          brand: "이브클로젯",
-          name: "[1+1세일] [당일 출고/M-4XL] 빅사이즈 면 밴딩 빅사이즈 일자 치노 슬랙스 팬츠 6081",
-          options: "블랙 / 블랙 / M",
-          originalPrice: "68,800",
-          finalPrice: "46,800",
-          productImage: "https://user-images.githubusercontent.com/12693899/231149998-091a100f-8c7c-4861-ac0b-0447190d0b0a.png",
-          quantity: 1,
-          isChecked: true,
-          discountText: "더담고할인",
-        },
-      ]
-    },
-    {
-      id: "group2",
-      groupName: "오비비스토어 배송상품",
-      items: [
-        {
-          id: "item2_1",
-          brand: "오비비스토어",
-          name: "[1+1/오늘출발] 사이드 스냅 버뮤다 하프 팬츠 반바지 (4color)",
-          options: "그레이_M (28-30) / 선택안함 (1장만구매)",
-          originalPrice: "45,800",
-          finalPrice: "25,800",
-          productImage: "https://via.placeholder.com/100x100.png?text=Product2", // 실제 이미지로 교체 필요
-          quantity: 1,
-          isChecked: true,
-          discountText: "더담고할인",
-        },
-        // 오비비스토어 다른 상품이 있다면 여기에 추가
-      ]
-    }
-  ]);
+const navigate = useNavigate(); //뒤로가기버튼
+const [isAllSelected, setIsAllSelected] = useState(true);
+// 상품 데이터를 그룹화하여 관리
+const [productGroups, setProductGroups] = useState([]);
 
-  // 전체 상품 수 및 선택된 상품 수 계산
-  const getAllItems = () => productGroups.flatMap(group => group.items);
-  const totalCount = getAllItems().length;
-  const selectedCount = getAllItems().filter(item => item.isChecked).length;
+// 전체 상품 수 및 선택된 상품 수 계산
+const getAllItems = () => productGroups.flatMap(group => group.items);
+const totalCount = getAllItems().length;
+const selectedCount = getAllItems().filter(item => item.isChecked).length;
 
   // 전체 선택/해제 상태 업데이트 로직
   useEffect(() => {
@@ -60,6 +29,36 @@ const ShoppingCartPage = () => {
     }
   }, [selectedCount, totalCount]);
 
+  
+  
+  const handleDeleteSelected = async () => {
+    const selectedIds = getAllItems()
+      .filter(item => item.isChecked)
+      .map(item => item.id); // 장바구니 항목 ID만 추출
+  
+    try {
+      // 백엔드에 동시에 삭제 요청
+      await Promise.all(
+        selectedIds.map(id =>
+          axios.delete(`http://localhost:8080/api/cart/items/${id}`, { withCredentials: true })
+        )
+      );
+  
+      // 프론트 상태에서도 제거
+      setProductGroups(prevGroups =>
+        prevGroups
+          .map(group => ({
+            ...group,
+            items: group.items.filter(item => !item.isChecked)
+          }))
+          .filter(group => group.items.length > 0)
+      );
+    } catch (err) {
+      alert("선택한 상품 삭제 중 오류가 발생했습니다.");
+      console.error(err);
+    }
+  };
+  
   const handleSelectAllToggle = () => {
     const newSelectAllState = !isAllSelected;
     setIsAllSelected(newSelectAllState);
@@ -76,11 +75,11 @@ const ShoppingCartPage = () => {
       prevGroups.map(group =>
         group.id === groupId
           ? {
-              ...group,
-              items: group.items.map(item =>
-                item.id === itemId ? { ...item, isChecked: !item.isChecked } : item
-              )
-            }
+            ...group,
+            items: group.items.map(item =>
+              item.id === itemId ? { ...item, isChecked: !item.isChecked } : item
+            )
+          }
           : group
       )
     );
@@ -91,25 +90,42 @@ const ShoppingCartPage = () => {
       prevGroups.map(group =>
         group.id === groupId
           ? {
-              ...group,
-              items: group.items.map(item =>
-                item.id === itemId ? { ...item, quantity: Math.max(1, newQuantity) } : item
-              )
-            }
+            ...group,
+            items: group.items.map(item =>
+              item.id === itemId ? { ...item, quantity: Math.max(1, newQuantity) } : item
+            )
+          }
           : group
       )
     );
   };
 
-  const handleRemoveProduct = (groupId, itemId) => {
-    setProductGroups(prevGroups =>
-      prevGroups.map(group =>
-        group.id === groupId
-          ? { ...group, items: group.items.filter(item => item.id !== itemId) }
-          : group
-      ).filter(group => group.items.length > 0) // 아이템이 없는 그룹은 제거 (선택사항)
-    );
+  const handleRemoveProduct = async (groupId, itemId) => {
+    try {
+      // ✅ 먼저 DB에서 삭제
+      await axios.delete(`http://localhost:8080/api/cart/items/${itemId}`, {
+        withCredentials: true
+      });
+  
+      // ✅ 프론트 상태에서도 제거
+      setProductGroups(prevGroups =>
+        prevGroups
+          .map(group =>
+            group.id === groupId
+              ? {
+                  ...group,
+                  items: group.items.filter(item => item.id !== itemId)
+                }
+              : group
+          )
+          .filter(group => group.items.length > 0)
+      );
+    } catch (err) {
+      alert("상품 삭제 중 오류가 발생했습니다.");
+      console.error(err);
+    }
   };
+  
 
   // 총 주문 금액 계산
   const totalOrderAmount = getAllItems()
@@ -120,11 +136,68 @@ const ShoppingCartPage = () => {
     }, 0)
     .toLocaleString();
 
+  
+  const fetchCartItems = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/api/cart', { withCredentials: true });
+      const cartItems = response.data.items;
+  
+      const formattedItems = cartItems.map(item => {
+        const mainImage = item.product.images?.find(img => img.displayOrder === 0)?.imageUrl;
+      
+        return {
+          id: item.id,
+          product: item.product,
+          brand: item.product.brand,
+          name: item.product.name,
+          options: item.option ? item.option.size : '옵션 없음',
+          originalPrice: (item.product.price + (item.option?.additionalPrice || 0)).toLocaleString(),
+          finalPrice: item.totalPrice.toLocaleString(),
+          productImage: mainImage
+            ? `http://localhost:8080${mainImage}`
+            : "https://via.placeholder.com/100x100.png?text=No+Image",
+          quantity: item.quantity,
+          isChecked: true,
+          discountText: '장바구니 할인',
+          productId: item.product.id
+        };
+      });
+      
+      console.log("백엔드 응답 cartItems:", cartItems);
+      console.log("렌더링용 formattedItems:", formattedItems);
+
+
+      setProductGroups([
+        {
+          id: 'group1',
+          groupName: '내 장바구니',
+          items: formattedItems
+        }
+      ]);
+    } catch (error) {
+      console.error('장바구니 불러오기 실패:', error);
+      alert('장바구니 정보를 불러오지 못했습니다.');
+    }
+  };
+  
+
+  useEffect(() => {
+    fetchCartItems(); // ✅ 아까 만든 함수 호출!
+  }, []);
+  
+  
+
   return (
+    <>
+    <Header />
     <div className={styles.pageContainer}>
       <header className={styles.headerContainer}>
-        <button className={styles.backButton} aria-label="뒤로 가기">
-          ← {/* 화살표를 이모티콘으로 변경 */}
+        <button
+          className={styles.backButton}
+          aria-label="홈으로 이동"
+          onClick={() => navigate('/')} // ← 홈으로 이동하는 동작
+        >
+          ←
         </button>
         <div className={styles.titleWrapper}>
           <h1 className={styles.pageTitle}>장바구니</h1>
@@ -132,7 +205,6 @@ const ShoppingCartPage = () => {
         </div>
         <div className={styles.headerSpacer}></div>
       </header>
-
       <div className={styles.selectionBar}>
         <div className={styles.selectAllWrapper} onClick={handleSelectAllToggle}>
           <div
@@ -147,7 +219,12 @@ const ShoppingCartPage = () => {
             전체선택 ({selectedCount}/{totalCount})
           </label>
         </div>
-        <button className={styles.deleteSelectedButton}>선택삭제</button> {/* TODO: 선택삭제 기능 구현 */}
+        <button
+          className={styles.deleteSelectedButton}
+          onClick={handleDeleteSelected} // ✅ 함수 연결!
+        >
+          선택삭제
+        </button>
       </div>
 
       <main className={styles.productListArea}>
@@ -156,21 +233,17 @@ const ShoppingCartPage = () => {
             <h2 className={styles.productGroupHeader}>{group.groupName}</h2>
             {group.items.map(item => (
               <ProductItem
-                key={item.id}
-                productImage={item.productImage}
-                brand={item.brand}
-                name={item.name}
-                discountText={item.discountText}
-                options={item.options}
-                initialQuantity={item.quantity}
-                originalPrice={item.originalPrice}
-                finalPrice={item.finalPrice}
-                currency="원"
-                isChecked={item.isChecked}
-                onQuantityChange={(newQuantity) => handleProductQuantityChange(group.id, item.id, newQuantity)}
-                onCheckToggle={() => handleProductCheckToggle(group.id, item.id)}
-                onRemove={() => handleRemoveProduct(group.id, item.id)}
-              />
+              product={item.product}
+              productImage={item.productImage}
+              originalPrice={item.originalPrice}   
+              finalPrice={item.finalPrice} 
+              initialQuantity={item.quantity}
+              isChecked={item.isChecked}
+              onQuantityChange={(newQuantity) => handleProductQuantityChange(group.id, item.id, newQuantity)}
+              onCheckToggle={() => handleProductCheckToggle(group.id, item.id)}
+              onRemove={() => handleRemoveProduct(group.id, item.id)}
+            />
+            
             ))}
           </div>
         ))}
@@ -192,6 +265,7 @@ const ShoppingCartPage = () => {
         </footer>
       )}
     </div>
+    </>
   );
 };
 

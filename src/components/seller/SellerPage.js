@@ -9,7 +9,6 @@ import SalesStatistics from './SalesStatistics'; // 판매 통계 컴포넌트 i
 
 const SellerPage = () => {
     const navigate = useNavigate();
-    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080/api';
 
     const [myProducts, setMyProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -45,7 +44,7 @@ const SellerPage = () => {
         };
 
         fetchMyProducts();
-    }, [navigate, API_BASE_URL]);
+    }, [navigate, process.env.REACT_APP_API_BASE_URL]);
 
 
     const handleRegisterProduct = () => {
@@ -55,7 +54,7 @@ const SellerPage = () => {
     const handleDeleteProduct = async (productId, productName) => {
         if (window.confirm(`상품 '${productName}'을(를) 정말 삭제하시겠습니까?`)) {
             try {
-                await axios.delete(`${API_BASE_URL}/api/products/${productId}`, { withCredentials: true });
+                await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/products/${productId}`, { withCredentials: true });
                 alert(`상품 '${productName}'이(가) 성공적으로 삭제되었습니다.`);
                 setMyProducts(prevProducts => prevProducts.filter(product => product.id !== productId));
             } catch (error) {
