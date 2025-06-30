@@ -27,7 +27,7 @@ const SellerPage = () => {
         const fetchMyProducts = async () => {
             setIsLoading(true);
             try {
-                const response = await axios.get(`${API_BASE_URL}/api/seller/products`, { withCredentials: true });
+                const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/seller/products`, { withCredentials: true });
                 setMyProducts(response.data || []);
             } catch (error) {
                 console.error("내가 등록한 상품 목록을 불러오는 데 실패했습니다:", error.response ? error.response.data : error.message);
