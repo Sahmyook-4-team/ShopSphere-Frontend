@@ -24,7 +24,34 @@ function ProductPage() {
 
   const [quantity, setQuantity] = useState(1); // 기본 수량 1
   const [totalPrice, setTotalPrice] = useState(0); // 초기 총 가격
-
+  const handleAddToCart = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/api/cart/items', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          // 필요 시 인증 토큰이나 쿠키 포함 설정
+        },
+        credentials: 'include', // 세션 쿠키가 필요한 경우
+        body: JSON.stringify({
+          productId: productData.id,
+          quantity: quantity,
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('장바구니 추가 실패');
+      }
+  
+      alert('장바구니에 상품이 추가되었습니다!');
+      // (선택) 자동으로 장바구니 페이지로 이동
+      // navigate('/cart'); ← 필요하면 위에 useNavigate import
+    } catch (error) {
+      console.error(error);
+      alert('장바구니 추가 중 오류가 발생했습니다.');
+    }
+  };
+  
   // 상품 상세 정보 API 호출
   useEffect(() => {
     const fetchProductDetails = async () => {
@@ -157,6 +184,7 @@ function ProductPage() {
           // 예: onAddToCart={() => console.log('장바구니 담기 클릭')}
           //     onBuyNow={() => console.log('바로 구매 클릭')}
           productId={productData.id} // 장바구니/구매 시 상품 ID 필요
+          onAddToCart={handleAddToCart}
         />
       </div>
     </div>
