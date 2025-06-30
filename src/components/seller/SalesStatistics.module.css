@@ -198,6 +198,168 @@
     border: 1px solid #E2E8F0;
     border-radius: 6px;
     font-size: 0.9em;
+}
+
+/* Chart Container Styles */
+.chartContainer {
+    margin-top: 20px;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.chartWrapper {
+    margin-bottom: 30px;
+}
+
+.chartWrapper h3 {
+    color: #2D3748;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.chart {
+    position: relative;
+    height: 400px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Summary Section */
+.summarySection {
+    background: #F7FAFC;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.summarySection h3 {
+    color: #2D3748;
+    margin-bottom: 20px;
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.summaryGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.summaryItem {
+    background: white;
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.summaryLabel {
+    color: #718096;
+    font-size: 0.9em;
+    margin-bottom: 8px;
+}
+
+.summaryValue {
+    color: #2D3748;
+    font-size: 1.4em;
+    font-weight: 600;
+}
+
+/* Top Products Section */
+.topProducts {
+    margin-top: 30px;
+}
+
+.topProducts h3 {
+    color: #2D3748;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.productList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.productItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.productItem:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.productName {
+    color: #2D3748;
+    font-weight: 500;
+    font-size: 1em;
+    margin: 0;
+    min-height: auto;
+    -webkit-line-clamp: 1;
+}
+
+.productAmount {
+    color: #2D3748;
+    font-weight: 600;
+    font-size: 1.05em;
+}
+
+/* No Data Message */
+.noData {
+    text-align: center;
+    padding: 40px 20px;
+    color: #718096;
+    font-size: 1.1em;
+    background: #F7FAFC;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .summaryGrid {
+        grid-template-columns: 1fr;
+    }
+    
+    .chart {
+        height: 300px;
+    }
+    
+    .statsOptions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .selectBox {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    
+    .dateRangeContainer {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    
+    .actionButton {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+.react-datepicker__input-container input {
     color: #4A5568;
     width: 120px;
     text-align: center;
@@ -287,11 +449,8 @@
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-.react-datepicker__header {
-    background-color: #f7fafc;
-    border-bottom: 1px solid #e2e8f0;
-    padding-top: 8px;
-    border-top-left-radius: 6px;
+/* Removing duplicate .react-datepicker__header styles */
+.react-datepicker__header {    
     border-top-right-radius: 6px;
 }
 
