@@ -25,11 +25,14 @@ import ReviewWriteForm from "./components/ReviewWrite/ReviewWriteForm";
 import MyReviewsPage from "./components/MyReviews/MyReviewsPage";
 import SellerPage from './components/seller/SellerPage'; // 판매자 페이지 컴포넌트
 import ProductRegistrationForm from './components/seller/ProductRegistrationForm'; 
-
+import PaymentSuccessPage from './components/PaymentSuccessPage'; // 생성할 컴포넌트
+import PaymentFailPage from './components/PaymentFailPage'; 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/payment/success" element={<PaymentSuccessPage />} />
+        <Route path="/payment/fail" element={<PaymentFailPage />} />
         <Route path="/" element={<Main />} />
         <Route path="/oauth/kakao/callback" element={<KakaoCallback />} /> 
         <Route path="/cartoption" element={<CartOption />} />
