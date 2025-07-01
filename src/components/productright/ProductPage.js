@@ -112,7 +112,7 @@ function ProductPage() {
 
   // 로딩 중 UI
   if (loading) {
-    return <div className={styles.productPageContainer}><p className={styles.loadingMessage}>Loading product information...</p></div>;
+    return <div className={styles.productPageContainer}><p className={styles.loadingMessage}>상품 정보 로딩중...</p></div>;
   }
 
   // 에러 발생 시 UI
