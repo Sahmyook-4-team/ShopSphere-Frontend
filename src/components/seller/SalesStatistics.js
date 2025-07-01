@@ -23,7 +23,7 @@ const SalesStatistics = () => {
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [selectedProduct, setSelectedProduct] = useState('all');
     const [selectedTimeRange, setSelectedTimeRange] = useState('daily');
-    const [selectedMetric, setSelectedMetric] = useState('sales');
+    const [selectedMetric, setSelectedMetric] = useState('revenue');
     const [startDate, setStartDate] = useState(new Date(new Date().setDate(new Date().getDate() - 365))); // 기본값: 365일 전
     const [endDate, setEndDate] = useState(new Date()); // 기본값: 오늘
     const [isLoading, setIsLoading] = useState(false);

@@ -16,6 +16,25 @@ const SellerPage = () => {
     const [showEditModal, setShowEditModal] = useState(false);  // 모달 표시 여부 상태
     const [viewMode, setViewMode] = useState('grid'); // 'grid' 또는 'list'
 
+    const fetchMyProducts = async () => {
+        setIsLoading(true);
+        try {
+            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/seller/products`, { withCredentials: true });
+            setMyProducts(response.data || []);
+        } catch (error) {
+            console.error("내가 등록한 상품 목록을 불러오는 데 실패했습니다:", error.response ? error.response.data : error.message);
+            if (error.response && error.response.status === 401) {
+                alert("로그인이 필요합니다.");
+                navigate('/login');
+            } else {
+                alert("상품 목록을 불러올 수 없습니다.");
+            }
+            setMyProducts([]);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+    
     useEffect(() => {
         // ... (기존 판매자 역할 확인 및 상품 목록 로드 로직 동일) ...
         const userRole = localStorage.getItem('userRole');
@@ -24,25 +43,6 @@ const SellerPage = () => {
             navigate('/');
             return;
         }
-
-        const fetchMyProducts = async () => {
-            setIsLoading(true);
-            try {
-                const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/seller/products`, { withCredentials: true });
-                setMyProducts(response.data || []);
-            } catch (error) {
-                console.error("내가 등록한 상품 목록을 불러오는 데 실패했습니다:", error.response ? error.response.data : error.message);
-                if (error.response && error.response.status === 401) {
-                    alert("로그인이 필요합니다.");
-                    navigate('/login');
-                } else {
-                    alert("상품 목록을 불러올 수 없습니다.");
-                }
-                setMyProducts([]);
-            } finally {
-                setIsLoading(false);
-            }
-        };
 
         fetchMyProducts();
     }, [navigate, process.env.REACT_APP_API_BASE_URL]);
@@ -73,6 +73,7 @@ const SellerPage = () => {
     // 모달에서 저장 완료 시 호출될 함수
     const handleSaveEdit = (updatedProduct) => {
         // 상품 목록에서 수정된 상품 정보 업데이트
+        fetchMyProducts();
         setMyProducts(prevProducts =>
             prevProducts.map(p => (p.id === updatedProduct.id ? updatedProduct : p))
         );
