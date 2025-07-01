@@ -22,9 +22,9 @@ const SalesStatistics = () => {
     const [products, setProducts] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [selectedProduct, setSelectedProduct] = useState('all');
-    const [selectedTimeRange, setSelectedTimeRange] = useState('yearly');
+    const [selectedTimeRange, setSelectedTimeRange] = useState('daily');
     const [selectedMetric, setSelectedMetric] = useState('sales');
-    const [startDate, setStartDate] = useState(new Date(new Date().setDate(new Date().getDate() - 30))); // 기본값: 30일 전
+    const [startDate, setStartDate] = useState(new Date(new Date().setDate(new Date().getDate() - 365))); // 기본값: 365일 전
     const [endDate, setEndDate] = useState(new Date()); // 기본값: 오늘
     const [isLoading, setIsLoading] = useState(false);
     const [salesData, setSalesData] = useState(null);
@@ -132,10 +132,10 @@ const SalesStatistics = () => {
                         />
                     </div>
                     <select className={styles.selectBox} onChange={(e) => setSelectedTimeRange(e.target.value)}>
-                        <option value="yearly">년도별</option>
-                        <option value="monthly">월별</option>
-                        <option value="weekly">주별</option>
                         <option value="daily">일별</option>
+                        <option value="weekly">주별</option>
+                        <option value="monthly">월별</option>
+                        <option value="yearly">년도별</option>
                     </select>
                     <select className={styles.selectBox} onChange={(e) => {
                         const newCategory = e.target.value;
