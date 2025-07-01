@@ -12,7 +12,6 @@ const ProductRegistrationForm = () => {
     const [productName, setProductName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
-    const [stockQuantity, setStockQuantity] = useState('');
     const [selectedCategoryId, setSelectedCategoryId] = useState('');
     const [categories, setCategories] = useState([]);
     const [imageFiles, setImageFiles] = useState([]); // 업로드할 이미지 파일들 (File 객체)
@@ -22,6 +21,9 @@ const ProductRegistrationForm = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
     const [formError, setFormError] = useState(''); // 폼 관련 에러 메시지
+    const [options, setOptions] = useState([
+        { size: '', stockQuantity: 0, additionalPrice: 0 }
+    ]); // 상품 옵션 상태
 
     // 카테고리 목록 로드
     useEffect(() => {
@@ -151,6 +153,28 @@ const ProductRegistrationForm = () => {
         }
     };
 
+    // 옵션 추가 핸들러
+    const addOption = () => {
+        setOptions([...options, { size: '', stockQuantity: 0, additionalPrice: 0 }]);
+    };
+
+    // 옵션 제거 핸들러
+    const removeOption = (index) => {
+        const newOptions = [...options];
+        newOptions.splice(index, 1);
+        setOptions(newOptions);
+    };
+
+    // 옵션 변경 핸들러
+    const handleOptionChange = (index, field, value) => {
+        const newOptions = [...options];
+        newOptions[index] = {
+            ...newOptions[index],
+            [field]: field === 'size' ? value : parseInt(value, 10) || 0
+        };
+        setOptions(newOptions);
+    };
+
     // 상품 등록 폼 제출 핸들러
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -164,32 +188,43 @@ const ProductRegistrationForm = () => {
             setFormError("카테고리를 선택해주세요.");
             return;
         }
-        if (!productName.trim() || !description.trim() || !price || !stockQuantity) {
-            setFormError("모든 필수 항목(상품명, 설명, 가격, 재고)을 입력해주세요.");
+        if (!productName.trim() || !description.trim() || !price) {
+            setFormError("모든 필수 항목(상품명, 설명, 가격)을 입력해주세요.");
             return;
         }
         if (isNaN(parseFloat(price)) || parseFloat(price) < 0) {
             setFormError("가격은 0 이상의 숫자여야 합니다.");
             return;
         }
-        if (isNaN(parseInt(stockQuantity, 10)) || parseInt(stockQuantity, 10) < 0) {
-            setFormError("재고 수량은 0 이상의 정수여야 합니다.");
+
+        // 옵션 유효성 검사
+        const hasEmptyOption = options.some(option => !option.size.trim());
+        if (hasEmptyOption) {
+            setFormError("모든 옵션의 사이즈를 입력해주세요.");
             return;
         }
 
+        const hasDuplicateSizes = new Set(options.map(opt => opt.size)).size !== options.length;
+        if (hasDuplicateSizes) {
+            setFormError("중복된 사이즈가 있습니다. 각 옵션의 사이즈는 고유해야 합니다.");
+            return;
+        }
 
         setIsSubmitting(true);
 
         const productData = {
             name: productName,
             description: description,
-            price: parseFloat(price), // 문자열을 숫자로 변환
-            stockQuantity: parseInt(stockQuantity, 10), // 문자열을 숫자로 변환
+            price: parseFloat(price),
+            stockQuantity: options.reduce((sum, opt) => sum + (parseInt(opt.stockQuantity, 10) || 0), 0), // 모든 옵션의 재고 합계
             categoryId: parseInt(selectedCategoryId, 10),
-            // 백엔드가 상품 이미지 URL들을 어떻게 받는지에 따라 수정
-            // 예: 대표이미지 URL과 추가 이미지 URL 배열로 받는 경우
-            imageUrl: imageUrls[0], // 첫 번째 이미지를 대표 이미지로
-            additionalImageUrls: imageUrls.slice(1), // 나머지 이미지를 추가 이미지로
+            imageUrl: imageUrls[0],
+            additionalImageUrls: imageUrls.slice(1),
+            options: options.map(opt => ({
+                size: opt.size,
+                stockQuantity: parseInt(opt.stockQuantity, 10) || 0,
+                additionalPrice: parseInt(opt.additionalPrice, 10) || 0
+            }))
         };
 
         try {
@@ -203,7 +238,7 @@ const ProductRegistrationForm = () => {
             setIsSubmitting(false);
         }
     };
-    
+
     // 이미지 제거 핸들러 (로컬 미리보기에서 특정 이미지 제거)
     const handleRemovePreviewImage = (indexToRemove) => {
         // previewImageUrls에서 해당 인덱스 이미지 제거
@@ -211,7 +246,6 @@ const ProductRegistrationForm = () => {
         // imageFiles에서도 해당 인덱스 파일 제거
         setImageFiles(prev => prev.filter((_, index) => index !== indexToRemove));
     };
-
 
     return (
         <>
@@ -221,8 +255,8 @@ const ProductRegistrationForm = () => {
                 {formError && <p className={styles.errorMessage}>{formError}</p>}
                 <form onSubmit={handleSubmit} className={styles.form}>
                     {/* ... (상품명, 설명, 가격, 재고, 카테고리 입력 필드는 동일) ... */}
-                     {/* 상품명 */}
-                     <div className={styles.formGroup}>
+                    {/* 상품명 */}
+                    <div className={styles.formGroup}>
                         <label htmlFor="productName" className={styles.label}>상품명 <span className={styles.required}>*</span></label>
                         <input
                             type="text"
@@ -262,18 +296,89 @@ const ProductRegistrationForm = () => {
                         />
                     </div>
 
-                    {/* 재고 수량 */}
+                    {/* 상품 옵션 */}
                     <div className={styles.formGroup}>
-                        <label htmlFor="stockQuantity" className={styles.label}>재고 수량 <span className={styles.required}>*</span></label>
-                        <input
-                            type="number"
-                            id="stockQuantity"
-                            value={stockQuantity}
-                            onChange={(e) => setStockQuantity(e.target.value)}
-                            className={styles.input}
-                            min="0"
-                            required
-                        />
+                        <div className={styles.optionHeader}>
+                            <span className={styles.optionTitle}>상품 옵션 <span className={styles.required}>*</span></span>
+                            <button 
+                                type="button" 
+                                onClick={addOption}
+                                className={styles.addOptionButton}
+                            >
+                                <span>+</span> 옵션 추가
+                            </button>
+                        </div>
+                        
+                        <div className={styles.optionsContainer}>
+                            {options.length === 0 ? (
+                                <p style={{ color: '#666', fontSize: '0.9em', textAlign: 'center', padding: '15px' }}>
+                                    옵션을 추가해주세요.
+                                </p>
+                            ) : (
+                                options.map((option, index) => (
+                                    <div key={index} className={styles.optionRow}>
+                                        <div className={styles.optionInputContainer}>
+                                            <label className={styles.optionLabel}>
+                                                사이즈 <span className={styles.requiredField}></span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                placeholder="예: S, M, L"
+                                                value={option.size}
+                                                onChange={(e) => handleOptionChange(index, 'size', e.target.value)}
+                                                className={styles.optionInput}
+                                                required
+                                            />
+                                        </div>
+                                        
+                                        <div className={styles.optionInputContainer}>
+                                            <label className={styles.optionLabel}>
+                                                재고 <span className={styles.requiredField}></span>
+                                            </label>
+                                            <input
+                                                type="number"
+                                                value={option.stockQuantity}
+                                                onChange={(e) => handleOptionChange(index, 'stockQuantity', e.target.value)}
+                                                min="0"
+                                                className={styles.optionInput}
+                                                required
+                                            />
+                                        </div>
+                                        
+                                        <div className={styles.optionInputContainer}>
+                                            <label className={styles.optionLabel}>
+                                                추가 가격 (원)
+                                            </label>
+                                            <input
+                                                type="number"
+                                                value={option.additionalPrice}
+                                                onChange={(e) => handleOptionChange(index, 'additionalPrice', e.target.value)}
+                                                min="0"
+                                                className={styles.optionInput}
+                                            />
+                                        </div>
+                                        
+                                        {options.length > 1 && (
+                                            <button 
+                                                type="button" 
+                                                onClick={() => removeOption(index)}
+                                                className={styles.removeOptionButton}
+                                                title="옵션 삭제"
+                                                aria-label="옵션 삭제"
+                                            >
+                                                ×
+                                            </button>
+                                        )}
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                        
+                        {options.length > 0 && (
+                            <div style={{ marginTop: '10px', fontSize: '0.85em', color: '#666' }}>
+                                총 재고 수량: {options.reduce((sum, opt) => sum + (parseInt(opt.stockQuantity, 10) || 0), 0)}개
+                            </div>
+                        )}
                     </div>
 
                     {/* 카테고리 선택 */}

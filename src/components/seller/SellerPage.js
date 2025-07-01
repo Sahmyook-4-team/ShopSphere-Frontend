@@ -14,7 +14,27 @@ const SellerPage = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [editingProduct, setEditingProduct] = useState(null); // 현재 수정 중인 상품 데이터
     const [showEditModal, setShowEditModal] = useState(false);  // 모달 표시 여부 상태
+    const [viewMode, setViewMode] = useState('grid'); // 'grid' 또는 'list'
 
+    const fetchMyProducts = async () => {
+        setIsLoading(true);
+        try {
+            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/seller/products`, { withCredentials: true });
+            setMyProducts(response.data || []);
+        } catch (error) {
+            console.error("내가 등록한 상품 목록을 불러오는 데 실패했습니다:", error.response ? error.response.data : error.message);
+            if (error.response && error.response.status === 401) {
+                alert("로그인이 필요합니다.");
+                navigate('/login');
+            } else {
+                alert("상품 목록을 불러올 수 없습니다.");
+            }
+            setMyProducts([]);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+    
     useEffect(() => {
         // ... (기존 판매자 역할 확인 및 상품 목록 로드 로직 동일) ...
         const userRole = localStorage.getItem('userRole');
@@ -24,28 +44,8 @@ const SellerPage = () => {
             return;
         }
 
-        const fetchMyProducts = async () => {
-            setIsLoading(true);
-            try {
-                const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/seller/products`, { withCredentials: true });
-                setMyProducts(response.data || []);
-            } catch (error) {
-                console.error("내가 등록한 상품 목록을 불러오는 데 실패했습니다:", error.response ? error.response.data : error.message);
-                if (error.response && error.response.status === 401) {
-                    alert("로그인이 필요합니다.");
-                    navigate('/login');
-                } else {
-                    alert("상품 목록을 불러올 수 없습니다.");
-                }
-                setMyProducts([]);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
         fetchMyProducts();
     }, [navigate, process.env.REACT_APP_API_BASE_URL]);
-
 
     const handleRegisterProduct = () => {
         navigate('/seller/product/new');
@@ -73,6 +73,7 @@ const SellerPage = () => {
     // 모달에서 저장 완료 시 호출될 함수
     const handleSaveEdit = (updatedProduct) => {
         // 상품 목록에서 수정된 상품 정보 업데이트
+        fetchMyProducts();
         setMyProducts(prevProducts =>
             prevProducts.map(p => (p.id === updatedProduct.id ? updatedProduct : p))
         );
@@ -85,7 +86,6 @@ const SellerPage = () => {
         setShowEditModal(false);
         setEditingProduct(null);
     };
-
 
     const getRepresentativeImageUrl = (product) => {
         // ... (기존 로직 동일)
@@ -108,7 +108,6 @@ const SellerPage = () => {
         return `${price.toLocaleString()}원`;
     };
 
-
     return (
         <>
             <Header />
@@ -121,36 +120,49 @@ const SellerPage = () => {
                         <button onClick={handleRegisterProduct} className={styles.actionButton}>
                             새 상품 등록하기
                         </button>
+                        <button 
+                            onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')} 
+                            className={`${styles.viewToggleButton} ${viewMode === 'list' ? styles.activeView : ''}`}
+                            title={viewMode === 'grid' ? '리스트 보기로 전환' : '그리드 보기로 전환'}
+                        >
+                            {viewMode === 'grid' ? '☰ 리스트 보기' : '☷ 그리드 보기'}
+                        </button>
                     </div>
                     <div className={styles.contentArea}>
                         {isLoading ? (
                             <p className={styles.loadingText}>상품 목록을 불러오는 중...</p>
                         ) : myProducts.length > 0 ? (
-                            <ul className={styles.productList}>
+                            <ul className={`${styles.productList} ${viewMode === 'list' ? styles.listView : ''}`}>
                                 {myProducts.map((product) => (
-                                    <li key={product.id} className={styles.productItem}>
-                                        <img
-                                            src={`${process.env.REACT_APP_API_BASE_URL}${getRepresentativeImageUrl(product)}`}
-                                            alt={product.name}
-                                            className={styles.productImage}
-                                            onError={(e) => { e.target.onerror = null; e.target.src = '/placeholder-image.png'; }}
-                                        />
-                                        <h3 className={styles.productName} title={product.name}>{product.name}</h3>
-                                        <p className={styles.productPrice}>{formatPrice(product.price)}</p>
-                                        <p className={styles.productIdText}>ID: {product.id}</p>
-                                        <div className={styles.productActions}> {/* 버튼 그룹핑 */}
-                                            <button
-                                                onClick={() => handleEditProduct(product)} // 수정 버튼 핸들러 연결
-                                                className={`${styles.actionButton} ${styles.editButton}`} // 수정 버튼 스타일 추가
-                                            >
-                                                수정
-                                            </button>
-                                            <button
-                                                onClick={() => handleDeleteProduct(product.id, product.name)}
-                                                className={styles.deleteButton}
-                                            >
-                                                삭제
-                                            </button>
+                                    <li key={product.id} className={`${styles.productItem} ${viewMode === 'list' ? styles.listItem : ''}`}>
+                                        {viewMode === 'grid' && (
+                                            <img
+                                                src={`${process.env.REACT_APP_API_BASE_URL}${getRepresentativeImageUrl(product)}`}
+                                                alt={product.name}
+                                                className={styles.productImage}
+                                                onError={(e) => { e.target.onerror = null; e.target.src = '/placeholder-image.png'; }}
+                                            />
+                                        )}
+                                        <div className={styles.productInfo}>
+                                            <h3 className={styles.productName} title={product.name}>{product.name}</h3>
+                                            <div className={styles.productDetails}>
+                                                <p className={styles.productPrice}>{formatPrice(product.price)}</p>
+                                                <p className={styles.productIdText}>ID: {product.id}</p>
+                                            </div>
+                                            <div className={styles.productActions}>
+                                                <button
+                                                    onClick={() => handleEditProduct(product)}
+                                                    className={`${styles.actionButton} ${styles.editButton}`}
+                                                >
+                                                    수정
+                                                </button>
+                                                <button
+                                                    onClick={() => handleDeleteProduct(product.id, product.name)}
+                                                    className={styles.deleteButton}
+                                                >
+                                                    삭제
+                                                </button>
+                                            </div>
                                         </div>
                                     </li>
                                 ))}
