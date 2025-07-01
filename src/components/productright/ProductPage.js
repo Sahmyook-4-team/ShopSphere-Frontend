@@ -112,17 +112,17 @@ function ProductPage() {
 
   // 로딩 중 UI
   if (loading) {
-    return <div className={styles.productPageContainer}><p className={styles.loadingMessage}>상품 정보 로딩중...</p></div>;
+    return <div className={styles.productPageContainer}><p className={styles.loadingMessage}>상품 로딩중...</p></div>;
   }
 
   // 에러 발생 시 UI
   if (error) {
-    return <div className={styles.productPageContainer}><p className={styles.errorMessage}>Error: {error.message}</p></div>;
+    return <div className={styles.productPageContainer}><p className={styles.errorMessage}>에러러: {error.message}</p></div>;
   }
 
   // 상품 데이터가 없을 경우 (로딩 완료 후에도 productData가 null인 경우)
   if (!productData) {
-    return <div className={styles.productPageContainer}><p className={styles.infoMessage}>Product information not found.</p></div>;
+    return <div className={styles.productPageContainer}><p className={styles.infoMessage}>상품 정보가 없습니다.</p></div>;
   }
 
   // productData가 성공적으로 로드된 후의 렌더링
