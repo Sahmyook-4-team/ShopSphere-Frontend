@@ -1,6 +1,6 @@
-// src/components/ProductPage.js
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import styles from '../../styles/ProductPage.module.css'; // ProductPage 전용 CSS Module
 
 // 하위 컴포넌트 import
@@ -39,28 +39,25 @@ function ProductPage() {
   // 장바구니 추가 함수
   const handleAddToCart = async () => {
     try {
-      // It's generally better to use process.env.REACT_APP_API_BASE_URL for consistency
-      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/cart/items`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({
+      await axios.post(
+        `${process.env.REACT_APP_API_BASE_URL}/api/cart/items`,
+        {
           productId: productData.id,
           quantity: quantity,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to add item to cart. Please try again.');
-      }
+        },
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
       alert('Item added to cart successfully!');
       // navigate('/cart'); // Uncomment if you have react-router-dom's navigate
     } catch (cartError) {
       console.error("Error adding to cart:", cartError);
-      alert(`Error adding to cart: ${cartError.message}`);
+      alert(`Error adding to cart: ${cartError.response?.data?.message || cartError.message}`);
     }
   };
 
@@ -74,16 +71,11 @@ function ProductPage() {
         setLoading(true);
         setError(null);
 
-        const productResponse = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/products/${productId}`);
-        if (!productResponse.ok) {
-          const errorData = await productResponse.json().catch(() => ({ message: `HTTP error! Status: ${productResponse.status}` }));
-          throw new Error(errorData.message || `HTTP error! Status: ${productResponse.status}`);
-        }
-        const productDataResult = await productResponse.json();
-        setProductData(productDataResult);
+        const productResponse = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/products/${productId}`);
+        setProductData(productResponse.data);
 
         // Set initial total price based on fetched product price
-        setTotalPrice(productDataResult.price * quantity);
+        setTotalPrice(productResponse.data.price * quantity);
 
       } catch (productFetchError) {
         setError(productFetchError);
@@ -97,13 +89,8 @@ function ProductPage() {
         setReviewsLoading(true);
         setReviewsError(null);
 
-        const reviewResponse = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/reviews/product/${productId}`);
-        if (!reviewResponse.ok) {
-          const errorData = await reviewResponse.json().catch(() => ({ message: `Failed to fetch reviews. (Status: ${reviewResponse.status})` }));
-          throw new Error(errorData.message || `Failed to fetch reviews. (Status: ${reviewResponse.status})`);
-        }
-        const reviewData = await reviewResponse.json();
-        setReviews(reviewData);
+        const reviewResponse = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/reviews/product/${productId}`);
+        setReviews(reviewResponse.data);
       } catch (reviewFetchError) {
         setReviewsError(reviewFetchError);
         console.error("Error fetching product reviews:", reviewFetchError);
@@ -168,7 +155,7 @@ function ProductPage() {
           />
 
           <PromotionBanner
-            text="Get 20% off your first purchase with an instant coupon!"
+            text="첫 구매시 20% 할인 쿠폰 즉시 지급!"
             ArrowRightIcon={FaChevronRight}
           />
 
@@ -205,11 +192,11 @@ function ProductPage() {
 
       {/* Product Reviews Section */}
       <div className={styles.productReviewsSection}>
-        <h2>Product Reviews ({reviews.length > 0 ? reviews.length : '0'})</h2>
-        {reviewsLoading && <p>Loading reviews...</p>}
-        {reviewsError && <p className={styles.errorMessage}>Error loading reviews: {reviewsError.message}</p>}
+        <h2>상품 리뷰 ({reviews.length > 0 ? reviews.length : '0'})</h2>
+        {reviewsLoading && <p>리뷰 로딩중...</p>}
+        {reviewsError && <p className={styles.errorMessage}>리뷰 로딩 실패: {reviewsError.message}</p>}
         {!reviewsLoading && !reviewsError && reviews.length === 0 && (
-          <p>No reviews written yet.</p>
+          <p>아직 리뷰가 작성되지 않았습니다.</p>
         )}
         {!reviewsLoading && !reviewsError && reviews.length > 0 && (
           <ul className={styles.reviewList}>
