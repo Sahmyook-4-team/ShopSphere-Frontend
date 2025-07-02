@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { loadTossPayments } from '@tosspayments/payment-sdk';
-import axios from 'axios'; // ❗️ axios import 추가
+import axios from 'axios';
 import styles from '../../styles/ProductPage.module.css';
 
 // 하위 컴포넌트 import
@@ -29,7 +29,14 @@ function ProductPage() {
   const [reviewsLoading, setReviewsLoading] = useState(true);
   const [reviewsError, setReviewsError] = useState(null);
 
-  const handleQuantityChange = useCallback((newQuantity) => {
+  const handleQuantityChange = useCallback((firstArg, secondArg) => {
+    const isEvent = firstArg && typeof firstArg === 'object' && 'preventDefault' in firstArg;
+    const newQuantity = isEvent ? secondArg : firstArg;
+    
+    if (isEvent) {
+      firstArg.preventDefault();
+    }
+    
     if (newQuantity >= 1) {
       setQuantity(newQuantity);
     }
@@ -56,7 +63,6 @@ function ProductPage() {
     }
 
     try {
-      // ❗️ 개선됨: fetch 대신 axios로 통일하여 일관성 유지
       const response = await axios.post(
         `${process.env.REACT_APP_API_BASE_URL}/api/orders`,
         {
@@ -69,7 +75,7 @@ function ProductPage() {
         { withCredentials: true }
       );
 
-      const createdOrder = response.data; // .json() 과정이 필요 없음
+      const createdOrder = response.data;
 
       const tossPayments = await loadTossPayments(process.env.REACT_APP_TOSS_CLIENT_KEY);
       
@@ -93,22 +99,29 @@ function ProductPage() {
     }
   };
 
+  // ✅ 수정된 부분 1: 데이터 로딩을 위한 useEffect
+  // 이 useEffect는 페이지가 처음 로드되거나 productId가 변경될 때 "단 한 번만" 실행됩니다.
+  // 의존성 배열에서 quantity를 제거하여, 수량이 바뀔 때마다 불필요하게 API를 호출하는 문제를 해결했습니다.
   useEffect(() => {
     const fetchProductAndReviews = async () => {
       if (!productId) return;
+
+      // 상품 데이터 로딩
       try {
         setLoading(true);
         setError(null);
         
         const productResponse = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/products/${productId}`);
         setProductData(productResponse.data);
-        setTotalPrice(productResponse.data.price * quantity);
+        // ❌ 여기서 setTotalPrice를 호출하지 않습니다. 가격 계산은 아래의 다른 useEffect가 전담합니다.
       } catch (productFetchError) {
         setError(productFetchError);
         console.error("Error fetching product details:", productFetchError);
       } finally {
         setLoading(false);
       }
+
+      // 리뷰 데이터 로딩
       try {
         setReviewsLoading(true);
         setReviewsError(null);
@@ -122,17 +135,20 @@ function ProductPage() {
       }
     };
     fetchProductAndReviews();
-  }, [productId, quantity]);
+  }, [productId]); // ✅ 의존성 배열에 'productId'만 남겨두어 핵심 문제를 해결합니다.
 
+  // ✅ 수정된 부분 2: 총 가격 계산을 위한 useEffect
+  // 이 useEffect는 '수량(quantity)'이나 '상품 데이터(productData)'가 변경될 때만 실행됩니다.
+  // 역할이 명확히 분리되어 효율적으로 동작합니다. (이 코드는 원래도 잘 작성되어 있었습니다.)
   useEffect(() => {
     if (productData && productData.price) {
       setTotalPrice(productData.price * quantity);
     }
-  }, [quantity, productData]);
+  }, [quantity, productData]); // ✅ 수량이나 상품 정보가 바뀔 때만 총 가격을 다시 계산합니다.
 
-  if (loading) return <div className={styles.productPageContainer}><p className={styles.loadingMessage}>Loading product information...</p></div>;
-  if (error) return <div className={styles.productPageContainer}><p className={styles.errorMessage}>Error: {error.message}</p></div>;
-  if (!productData) return <div className={styles.productPageContainer}><p className={styles.infoMessage}>Product information not found.</p></div>;
+  if (loading) return <div className={styles.productPageContainer}><p className={styles.loadingMessage}>상품 정보 로딩중...</p></div>;
+  if (error) return <div className={styles.productPageContainer}><p className={styles.errorMessage}>상품 정보 로딩 실패: {error.message}</p></div>;
+  if (!productData) return <div className={styles.productPageContainer}><p className={styles.infoMessage}>상품 정보를 찾을 수 없습니다.</p></div>;
 
   return (
     <>
