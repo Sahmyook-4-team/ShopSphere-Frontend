@@ -4,12 +4,14 @@ import styles from '../../styles/OptionsSelector.module.css';
 // import { FaPlus, FaMinus } from 'react-icons/fa';
 
 function OptionsSelector({ optionName, price, quantity, onQuantityChange }) {
-  const decreaseQuantity = () => {
-    onQuantityChange(quantity - 1);
+  const decreaseQuantity = (e) => {
+    e?.preventDefault();
+    onQuantityChange(e, quantity - 1);
   };
 
-  const increaseQuantity = () => {
-    onQuantityChange(quantity + 1);
+  const increaseQuantity = (e) => {
+    e?.preventDefault();
+    onQuantityChange(e, quantity + 1);
   };
 
   return (
@@ -19,15 +21,17 @@ function OptionsSelector({ optionName, price, quantity, onQuantityChange }) {
         <div className={styles.quantityControl}>
           <button
             className={`${styles.quantityButton} ${styles.decreaseButton}`}
-            onClick={decreaseQuantity}
+            onClick={(e) => decreaseQuantity(e)}
             disabled={quantity <= 1} // 1개 미만으로 줄일 수 없도록
+            type="button"
           >
             {/* <FaMinus /> */} -
           </button>
           <span className={styles.quantityDisplay}>{quantity}</span>
           <button
             className={`${styles.quantityButton} ${styles.increaseButton}`}
-            onClick={increaseQuantity}
+            onClick={(e) => increaseQuantity(e)}
+            type="button"
           >
             {/* <FaPlus /> */} +
           </button>
