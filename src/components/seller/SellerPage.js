@@ -3,17 +3,22 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../Header';
 import axios from 'axios';
-import styles from './SellerPage.module.css'; // 기존 CSS Module
-import ProductEditModal from './ProductEditModal'; // 수정 모달 import
-import SalesStatistics from './SalesStatistics'; // 판매 통계 컴포넌트 import
+import styles from './SellerPage.module.css';
+import ProductEditModal from './ProductEditModal';
+import SalesStatistics from './SalesStatistics';
+import SellerInquiryHistory from './SellerInquiryHistory';
 
 const SellerPage = () => {
     const navigate = useNavigate();
 
+    // 탭 상태 관리
+    const [activeTab, setActiveTab] = useState('products');
+    
+    // 상품 관리 상태
     const [myProducts, setMyProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [editingProduct, setEditingProduct] = useState(null); // 현재 수정 중인 상품 데이터
-    const [showEditModal, setShowEditModal] = useState(false);  // 모달 표시 여부 상태
+    const [editingProduct, setEditingProduct] = useState(null);
+    const [showEditModal, setShowEditModal] = useState(false);
     const [viewMode, setViewMode] = useState('grid'); // 'grid' 또는 'list'
 
     const fetchMyProducts = async () => {
@@ -36,7 +41,6 @@ const SellerPage = () => {
     };
     
     useEffect(() => {
-        // ... (기존 판매자 역할 확인 및 상품 목록 로드 로직 동일) ...
         const userRole = localStorage.getItem('userRole');
         if (userRole !== 'SELLER') {
             alert('판매자만 접근할 수 있는 페이지입니다.');
@@ -64,31 +68,26 @@ const SellerPage = () => {
         }
     };
 
-    // 수정 버튼 클릭 핸들러
     const handleEditProduct = (product) => {
-        setEditingProduct(product); // 수정할 상품 정보 설정
-        setShowEditModal(true);     // 모달 표시
+        setEditingProduct(product); 
+        setShowEditModal(true);     
     };
 
-    // 모달에서 저장 완료 시 호출될 함수
     const handleSaveEdit = (updatedProduct) => {
-        // 상품 목록에서 수정된 상품 정보 업데이트
         fetchMyProducts();
         setMyProducts(prevProducts =>
             prevProducts.map(p => (p.id === updatedProduct.id ? updatedProduct : p))
         );
-        setShowEditModal(false); // 모달 닫기
-        setEditingProduct(null); // 수정 중인 상품 정보 초기화
+        setShowEditModal(false); 
+        setEditingProduct(null); 
     };
 
-    // 모달 닫기 함수
     const handleCloseModal = () => {
         setShowEditModal(false);
         setEditingProduct(null);
     };
 
     const getRepresentativeImageUrl = (product) => {
-        // ... (기존 로직 동일)
         if (product.representativeImageUrl) {
             return product.representativeImageUrl;
         }
@@ -103,9 +102,79 @@ const SellerPage = () => {
     };
 
     const formatPrice = (price) => {
-        // ... (기존 로직 동일)
         if (price === null || price === undefined) return '가격 정보 없음';
         return `${price.toLocaleString()}원`;
+    };
+
+    const renderTabContent = () => {
+        switch (activeTab) {
+            case 'products':
+                return (
+                    <>
+                        <div className={styles.buttonGroup}>
+                            <button onClick={handleRegisterProduct} className={styles.actionButton}>
+                                새 상품 등록하기
+                            </button>
+                            <button 
+                                onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')} 
+                                className={`${styles.viewToggleButton} ${viewMode === 'list' ? styles.activeView : ''}`}
+                                title={viewMode === 'grid' ? '리스트 보기로 전환' : '그리드 보기로 전환'}
+                            >
+                                {viewMode === 'grid' ? '☰ 리스트 보기' : '☷ 그리드 보기'}
+                            </button>
+                        </div>
+                        <div className={styles.contentArea}>
+                            {isLoading ? (
+                                <p className={styles.loadingText}>상품 목록을 불러오는 중...</p>
+                            ) : myProducts.length > 0 ? (
+                                <ul className={`${styles.productList} ${viewMode === 'list' ? styles.listView : ''}`}>
+                                    {myProducts.map((product) => (
+                                        <li key={product.id} className={`${styles.productItem} ${viewMode === 'list' ? styles.listItem : ''}`}>
+                                            {viewMode === 'grid' && (
+                                                <img
+                                                    src={`${process.env.REACT_APP_API_BASE_URL}${getRepresentativeImageUrl(product)}`}
+                                                    alt={product.name}
+                                                    className={styles.productImage}
+                                                    onError={(e) => { e.target.onerror = null; e.target.src = '/placeholder-image.png'; }}
+                                                />
+                                            )}
+                                            <div className={styles.productInfo}>
+                                                <h3 className={styles.productName} title={product.name}>{product.name}</h3>
+                                                <div className={styles.productDetails}>
+                                                    <p className={styles.productPrice}>{formatPrice(product.price)}</p>
+                                                    <p className={styles.productIdText}>ID: {product.id}</p>
+                                                </div>
+                                                <div className={styles.productActions}>
+                                                    <button
+                                                        onClick={() => handleEditProduct(product)}
+                                                        className={`${styles.actionButton} ${styles.editButton}`}
+                                                    >
+                                                        수정
+                                                    </button>
+                                                    <button
+                                                        onClick={() => handleDeleteProduct(product.id, product.name)}
+                                                        className={styles.deleteButton}
+                                                    >
+                                                        삭제
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <p className={styles.noProductsText}>등록된 상품이 없습니다.</p>
+                            )}
+                        </div>
+                    </>
+                );
+            case 'statistics':
+                return <SalesStatistics />;
+            case 'inquiries':
+                return <SellerInquiryHistory />;
+            default:
+                return null;
+        }
     };
 
     return (
@@ -113,69 +182,32 @@ const SellerPage = () => {
             <Header />
             <div className={styles.container}>
                 <h1 className={styles.pageTitle}>판매자 센터</h1>
+                
+                {/* 탭 네비게이션 */}
+                <div className={styles.tabContainer}>
+                    <button 
+                        className={`${styles.tabButton} ${activeTab === 'products' ? styles.activeTab : ''}`}
+                        onClick={() => setActiveTab('products')}
+                    >
+                        상품 관리
+                    </button>
+                    <button 
+                        className={`${styles.tabButton} ${activeTab === 'statistics' ? styles.activeTab : ''}`}
+                        onClick={() => setActiveTab('statistics')}
+                    >
+                        판매 통계
+                    </button>
+                    <button 
+                        className={`${styles.tabButton} ${activeTab === 'inquiries' ? styles.activeTab : ''}`}
+                        onClick={() => setActiveTab('inquiries')}
+                    >
+                        1:1 문의내역
+                    </button>
+                </div>
 
                 <section className={styles.section}>
-                    <h2 className={styles.sectionTitle}>상품 관리</h2>
-                    <div className={styles.buttonGroup}>
-                        <button onClick={handleRegisterProduct} className={styles.actionButton}>
-                            새 상품 등록하기
-                        </button>
-                        <button 
-                            onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')} 
-                            className={`${styles.viewToggleButton} ${viewMode === 'list' ? styles.activeView : ''}`}
-                            title={viewMode === 'grid' ? '리스트 보기로 전환' : '그리드 보기로 전환'}
-                        >
-                            {viewMode === 'grid' ? '☰ 리스트 보기' : '☷ 그리드 보기'}
-                        </button>
-                    </div>
-                    <div className={styles.contentArea}>
-                        {isLoading ? (
-                            <p className={styles.loadingText}>상품 목록을 불러오는 중...</p>
-                        ) : myProducts.length > 0 ? (
-                            <ul className={`${styles.productList} ${viewMode === 'list' ? styles.listView : ''}`}>
-                                {myProducts.map((product) => (
-                                    <li key={product.id} className={`${styles.productItem} ${viewMode === 'list' ? styles.listItem : ''}`}>
-                                        {viewMode === 'grid' && (
-                                            <img
-                                                src={`${process.env.REACT_APP_API_BASE_URL}${getRepresentativeImageUrl(product)}`}
-                                                alt={product.name}
-                                                className={styles.productImage}
-                                                onError={(e) => { e.target.onerror = null; e.target.src = '/placeholder-image.png'; }}
-                                            />
-                                        )}
-                                        <div className={styles.productInfo}>
-                                            <h3 className={styles.productName} title={product.name}>{product.name}</h3>
-                                            <div className={styles.productDetails}>
-                                                <p className={styles.productPrice}>{formatPrice(product.price)}</p>
-                                                <p className={styles.productIdText}>ID: {product.id}</p>
-                                            </div>
-                                            <div className={styles.productActions}>
-                                                <button
-                                                    onClick={() => handleEditProduct(product)}
-                                                    className={`${styles.actionButton} ${styles.editButton}`}
-                                                >
-                                                    수정
-                                                </button>
-                                                <button
-                                                    onClick={() => handleDeleteProduct(product.id, product.name)}
-                                                    className={styles.deleteButton}
-                                                >
-                                                    삭제
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </li>
-                                ))}
-                            </ul>
-                        ) : (
-                            <p className={styles.noProductsText}>등록된 상품이 없습니다.</p>
-                        )}
-                    </div>
+                    {renderTabContent()}
                 </section>
-
-                {/* 판매 통계 섹션 */}
-                <SalesStatistics />
-
             </div>
 
             {/* 상품 수정 모달 (조건부 렌더링) */}
