@@ -23,31 +23,41 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
           script: |
+            # 프론트엔드 코드 업데이트 및 빌드
             cd ~/ShopSphere-Frontend
             git pull
-
-            # 기존 build 삭제
             rm -rf build
-
-            # 새로 빌드
             npm install
             npm run build
 
-            # 백엔드 static 폴더에 복사
+            # 빌드된 파일을 백엔드 static 폴더로 복사
             rm -rf ~/ShopSphere-Backend/src/main/resources/static/*
             cp -r build/* ~/ShopSphere-Backend/src/main/resources/static/
 
-            # 백엔드 Docker 이미지 다시 빌드하고 재시작
+            # 백엔드 재시작 로직
             cd ~/ShopSphere-Backend
             sudo chmod 777 gradlew
             ./gradlew bootJar -x test
 
-            # 안전하게 현재 컨테이너 있을 때만 stop / rm
-            RUNNING_CONTAINERS=$(sudo docker ps -q)
-            if [ -n "$RUNNING_CONTAINERS" ]; then
-              sudo docker stop $RUNNING_CONTAINERS
-              sudo docker rm $RUNNING_CONTAINERS
+            # 제어할 컨테이너에 고유한 이름을 지정합니다.
+            CONTAINER_NAME="shopsphere-backend-app"
+
+            # 이름으로 해당 컨테이너가 실행 중인지 확인하고, 있다면 중지시킵니다.
+            if [ "$(sudo docker ps -q -f name=^/${CONTAINER_NAME}$)" ]; then
+                echo "Stopping container: ${CONTAINER_NAME}"
+                sudo docker stop ${CONTAINER_NAME}
             fi
 
+            # 중지된 컨테이너를 포함하여 이름으로 컨테이너가 존재하는지 확인하고, 있다면 삭제합니다.
+            if [ "$(sudo docker ps -aq -f name=^/${CONTAINER_NAME}$)" ]; then
+                echo "Removing container: ${CONTAINER_NAME}"
+                sudo docker rm ${CONTAINER_NAME}
+            fi
+
+            # 새로운 Docker 이미지를 빌드합니다.
+            echo "Building new docker image: shopsphere-backend"
             sudo docker build --no-cache -t shopsphere-backend .
-            sudo docker run -d -p 8080:8080 shopsphere-backend
+
+            # 새로운 컨테이너를 지정된 이름으로 실행합니다.
+            echo "Running new container: ${CONTAINER_NAME}"
+            sudo docker run -d -p 8080:8080 --name ${CONTAINER_NAME} shopsphere-backend
