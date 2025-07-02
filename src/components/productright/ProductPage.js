@@ -31,7 +31,7 @@ function ProductPage() {
     const [reviews, setReviews] = useState([]);
     const [selectedOptions, setSelectedOptions] = useState([]);
 
-    // --- 데이터 로딩 ---
+    // --- 데이터 로딩 useEffect ---
     useEffect(() => {
         const fetchProductAndReviews = async () => {
             if (!productId) {
@@ -59,7 +59,7 @@ function ProductPage() {
         };
         
         fetchProductAndReviews();
-    }, [productId]);
+    }, [productId]); // productId가 바뀔 때만 데이터를 다시 불러옵니다.
 
     // --- 핸들러 함수들 ---
 
@@ -72,6 +72,7 @@ function ProductPage() {
         setSelectedOptions(prev => [...prev, { option: option, quantity: 1 }]);
     };
     
+    // 수량 변경 핸들러: 이제 optionId와 newQuantity 두 개의 인자만 받습니다.
     const handleQuantityChange = (optionId, newQuantity) => {
         if (newQuantity < 1) return;
         setSelectedOptions(prev => prev.map(item =>
@@ -190,6 +191,8 @@ function ProductPage() {
                                 onRemove={() => handleRemoveOption(item.option.id)}
                                 finalPrice={((productData.price + (item.option.additionalPrice || 0)) * item.quantity).toLocaleString()}
                                 isFromProductPage={true}
+                                // 새로고침 방지를 위해 button에 type="button"이 필요하다면 ProductItem 내부에서 처리하는 것이 좋습니다.
+                                // 이 컴포넌트에는 해당 prop을 넘길 필요가 없습니다.
                             />
                         ))}
                     </div>
