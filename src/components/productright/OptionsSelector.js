@@ -1,39 +1,39 @@
+// src/components/productright/OptionsSelector.js
+
 import React from 'react';
 import styles from '../../styles/OptionsSelector.module.css';
-// react-icons에서 플러스/마이너스 아이콘 사용 가능
-// import { FaPlus, FaMinus } from 'react-icons/fa';
 
-function OptionsSelector({ optionName, price, quantity, onQuantityChange }) {
-  const decreaseQuantity = () => {
-    onQuantityChange(quantity - 1);
+function OptionsSelector({ options, onOptionSelect }) {
+  
+  const handleSelectChange = (e) => {
+    const selectedId = e.target.value;
+    if (selectedId) {
+      const selectedOptionObject = options.find(opt => opt.id === parseInt(selectedId));
+      onOptionSelect(selectedOptionObject);
+    }
+    // 선택 후 드롭다운을 기본값으로 되돌려 다시 선택할 수 있도록 함
+    e.target.value = ""; 
   };
 
-  const increaseQuantity = () => {
-    onQuantityChange(quantity + 1);
-  };
+  // 상품에 옵션이 없으면 아무것도 렌더링하지 않습니다.
+  if (!options || options.length === 0) {
+    return (
+      <div className={styles.optionsContainer}>
+        <p className={styles.noOptionsText}>선택 가능한 옵션이 없습니다.</p>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.optionsContainer}>
-      <p className={styles.optionName}>{optionName}</p>
-      <div className={styles.controlsAndPrice}>
-        <div className={styles.quantityControl}>
-          <button
-            className={`${styles.quantityButton} ${styles.decreaseButton}`}
-            onClick={decreaseQuantity}
-            disabled={quantity <= 1} // 1개 미만으로 줄일 수 없도록
-          >
-            {/* <FaMinus /> */} -
-          </button>
-          <span className={styles.quantityDisplay}>{quantity}</span>
-          <button
-            className={`${styles.quantityButton} ${styles.increaseButton}`}
-            onClick={increaseQuantity}
-          >
-            {/* <FaPlus /> */} +
-          </button>
-        </div>
-        <span className={styles.currentOptionPrice}>{(price * quantity).toLocaleString()}원</span>
-      </div>
+        <select className={styles.optionDropdown} onChange={handleSelectChange} defaultValue="">
+            <option value="" disabled>옵션을 선택해주세요</option>
+            {options.map(opt => (
+                <option key={opt.id} value={opt.id}>
+                    {opt.size} {opt.additionalPrice > 0 ? `(+${opt.additionalPrice.toLocaleString()}원)` : ''}
+                </option>
+            ))}
+        </select>
     </div>
   );
 }

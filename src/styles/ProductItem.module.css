@@ -200,3 +200,40 @@
   font-weight: bold;
   color: #333;
 }
+
+/* ProductItem.module.css 에 추가 */
+.productCardContainerSimple {
+  background-color: #f8f9fa; /* 배경색 */
+  border-radius: 6px;
+  padding: 8px; /* 내부 여백 */
+}
+
+.productCardContainerSimple .productCard {
+  box-shadow: none;
+  border: none;
+  padding: 5px;
+}
+
+.productCardContainerSimple .detailsWrapper {
+  padding-left: 8px; /* 왼쪽 여백 */
+}
+
+.productCardContainerSimple .nameLabel {
+  font-weight: normal; /* 글씨 굵기 보통으로 */
+  font-size: 0.9em;
+}
+
+.productCardContainerSimple .controlsRow {
+  margin-top: 8px;
+}
+
+/* 장바구니 페이지에서 옵션을 표시할 스타일 */
+.optionsTextDisplay {
+    font-size: 0.85em;
+    color: #555;
+    background-color: #e9ecef;
+    padding: 3px 7px;
+    border-radius: 4px;
+    margin-top: 6px;
+    display: inline-block;
+}
