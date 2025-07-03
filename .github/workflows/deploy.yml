@@ -18,9 +18,6 @@ jobs:
         with:
           path: .
 
-      ###########################
-      # 1. Setup Node.js & Build Frontend
-      ###########################
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
