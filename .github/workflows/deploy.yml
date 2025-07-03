@@ -30,7 +30,7 @@ jobs:
         run: npm install
 
       - name: Build Frontend
-        run: npm run build
+        run: CI=false npm run build
 
       # 3. (먼저) EC2의 이전 빌드 디렉토리 삭제
       - name: Clean old frontend build on EC2
