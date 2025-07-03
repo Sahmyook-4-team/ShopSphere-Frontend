@@ -13,58 +13,123 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: SSH into EC2 and Deploy
+      ###########################
+      # 0. Checkout Frontend
+      ###########################
+      - name: Checkout Frontend Repo
+        uses: actions/checkout@v3
+        with:
+          path: .
+
+      ###########################
+      # 1. Setup Node.js & Build Frontend
+      ###########################
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install Frontend Dependencies
+        run: npm install
+
+      - name: Build Frontend (ignore warnings)
+        run: CI=false npm run build
+
+      ###########################
+      # 2. Checkout Backend Repo
+      ###########################
+      - name: Checkout Backend Repo
+        uses: actions/checkout@v3
+        with:
+          repository: Sahmyook-4-team/ShopSphere-Backend
+          token: ${{ secrets.GH_TOKEN }}
+          path: backend
+
+      ###########################
+      # 3. Setup JDK & Build Backend
+      ###########################
+      - name: Set up JDK 18
+        uses: actions/setup-java@v3
+        with:
+          java-version: '18'
+          distribution: 'temurin'
+
+      - name: Build Backend JAR
+        run: |
+          cd backend
+          chmod +x ./gradlew
+          ./gradlew bootJar -x test
+
+      ###########################
+      # 4. Clean old files on EC2
+      ###########################
+      - name: Clean old build & JAR on EC2
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
           script: |
-            # 1. 프론트엔드 빌드
-            echo "--- Building Frontend ---"
-            cd ~/ShopSphere-Frontend
-            git pull
-            rm -rf build
-            npm install
-            npm run build
-
-            # 2. 빌드 파일 백엔드로 복사
-            echo "--- Copying Frontend build to Backend ---"
+            echo "--- Cleaning old files on EC2 ---"
+            rm -rf ~/ShopSphere-Frontend/build
             rm -rf ~/ShopSphere-Backend/src/main/resources/static/*
-            cp -r build/* ~/ShopSphere-Backend/src/main/resources/static/
+            rm -f ~/ShopSphere-Backend/build/libs/*.jar
 
-            # 3. 백엔드 빌드 및 재시작
-            echo "--- Restarting Backend ---"
-            cd ~/ShopSphere-Backend
-            sudo chmod 777 gradlew
-            ./gradlew bootJar -x test
+      ###########################
+      # 5. Upload build & JAR to EC2
+      ###########################
+      - name: Upload Frontend build to EC2
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          source: "build/*"
+          target: "~/ShopSphere-Frontend/build"
 
-            # 4. Docker 컨테이너 정리 (강화된 버전)
+      - name: Upload Backend JAR to EC2
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          source: "backend/build/libs/shopsphere-web-0.0.1-SNAPSHOT.jar"
+          target: "~/ShopSphere-Backend/build/libs/"
+
+      ###########################
+      # 6. SSH into EC2 and Deploy
+      ###########################
+      - name: Deploy on EC2
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          script: |
+            echo "--- Copying frontend build into backend static folder ---"
+            cp -r ~/ShopSphere-Frontend/build/* ~/ShopSphere-Backend/src/main/resources/static/
+
             CONTAINER_NAME="shopsphere-backend-app"
 
-            # 4-1. 이름으로 기존 컨테이너 중지 및 삭제
+            echo "--- Stopping existing container (if any) ---"
             if [ "$(sudo docker ps -q -f name=^/${CONTAINER_NAME}$)" ]; then
-                echo "Stopping named container: ${CONTAINER_NAME}"
-                sudo docker stop ${CONTAINER_NAME}
+              sudo docker stop ${CONTAINER_NAME}
             fi
             if [ "$(sudo docker ps -aq -f name=^/${CONTAINER_NAME}$)" ]; then
-                echo "Removing named container: ${CONTAINER_NAME}"
-                sudo docker rm ${CONTAINER_NAME}
+              sudo docker rm ${CONTAINER_NAME}
             fi
 
-            # 4-2. (보험용) 8080 포트를 사용하는 다른 컨테이너가 있다면 중지 및 삭제
+            echo "--- Checking for container on port 8080 ---"
             ZOMBIE_CONTAINER_ID=$(sudo docker ps -q --filter "publish=8080")
             if [ -n "$ZOMBIE_CONTAINER_ID" ]; then
-                echo "Stopping zombie container using port 8080: ${ZOMBIE_CONTAINER_ID}"
-                sudo docker stop $ZOMBIE_CONTAINER_ID
-                echo "Removing zombie container: ${ZOMBIE_CONTAINER_ID}"
-                sudo docker rm $ZOMBIE_CONTAINER_ID
+              echo "Stopping zombie container: ${ZOMBIE_CONTAINER_ID}"
+              sudo docker stop $ZOMBIE_CONTAINER_ID
+              sudo docker rm $ZOMBIE_CONTAINER_ID
             fi
 
-            # 5. 새로운 Docker 이미지 빌드
-            echo "--- Building new Docker image ---"
+            echo "--- Building Docker image ---"
+            cd ~/ShopSphere-Backend
             sudo docker build --no-cache -t shopsphere-backend .
 
-            # 6. 새로운 컨테이너 실행
             echo "--- Running new container ---"
             sudo docker run -d -p 8080:8080 --name ${CONTAINER_NAME} shopsphere-backend
