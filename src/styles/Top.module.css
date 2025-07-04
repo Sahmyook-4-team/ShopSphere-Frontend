@@ -430,6 +430,14 @@
     border-radius: 19px;
     background-color: #000000;
   }
+
+  .box .view-7 {
+    position: absolute;
+    width: 691px;
+    height: 533px;
+    border-radius: 19px;
+    background-color: #000000;
+  }
   /* 반소매 */
 .topImageBanSomae {
   background-image: url('../assets/Top/반소매.png'); /* 실제 이미지 파일 경로로 변경 */
