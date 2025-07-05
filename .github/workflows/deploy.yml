@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: Sahmyook-4-team/ShopSphere-Backend
-          token: ${{ secrets.GH_TOKEN }} # Private 레포지토리 접근용 토큰
+          token: ${{ secrets.GH_TOKEN }}
           path: backend # 작업 공간 내 'backend' 폴더에 코드를 받습니다.
 
       ############################################################
