@@ -31,10 +31,6 @@ jobs:
         working-directory: frontend
         run: CI=false npm run build
 
-      ############################################################
-      # 2. 백엔드 코드 체크아웃
-      # 별도의 백엔드 레포지토리 코드를 가져옵니다.
-      ############################################################
       - name: Checkout Backend Repository
         uses: actions/checkout@v3
         with:
