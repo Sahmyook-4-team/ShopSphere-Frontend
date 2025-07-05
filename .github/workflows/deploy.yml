@@ -16,7 +16,7 @@ jobs:
       - name: Checkout Frontend Repository
         uses: actions/checkout@v3
         with:
-          path: frontend # 작업 공간 내 'frontend' 폴더에 코드를 받습니다.
+          path: frontend
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
