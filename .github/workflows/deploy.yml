@@ -97,21 +97,16 @@ jobs:
             exit 1
           fi
 
-      # 6. 완성된 JAR 파일을 EC2로 전송
-      - name: Decode SSH Private Key
-        run: |
-          echo "${{ secrets.PRIVATE_KEY }}" | base64 -d > key.pem
-          chmod 600 key.pem
-      
       - name: Upload final JAR to EC2
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          key_path: key.pem
+          key: ${{ secrets.PRIVATE_KEY }}
           source: app.jar
           target: ~/ShopSphere-Backend
           debug: true
+
 
 
       ############################################################
