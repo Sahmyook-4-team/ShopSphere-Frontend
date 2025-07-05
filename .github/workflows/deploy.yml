@@ -106,13 +106,13 @@ jobs:
       # 이제 대상 디렉터리가 확실히 존재하므로 scp가 성공합니다.
       #####################################################################
       - name: Upload final JAR to EC2
-        uses: appleboy/scp-action@v0.1.4
+        uses: appleboy/scp-action@v1.0.0
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
           source: app.jar
-          target: ~/ShopSphere-Backend/ # 이제 이 디렉토리는 존재가 보장됩니다.
+          target: /home/ubuntu/ShopSphere-Backend/ # 이제 이 디렉토리는 존재가 보장됩니다.
           debug: true # 디버깅을 위해 유지하거나, 성공 후 false로 변경
 
 
