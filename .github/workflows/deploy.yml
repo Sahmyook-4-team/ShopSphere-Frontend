@@ -93,6 +93,18 @@ jobs:
             exit 1
           fi
 
+      - name: Create directory on EC2 for deployment
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          script: mkdir -p ~/ShopSphere-Backend
+
+      #####################################################################
+      # 7. 최종 JAR 파일을 EC2로 전송
+      # 이제 대상 디렉터리가 확실히 존재하므로 scp가 성공합니다.
+      #####################################################################
       - name: Upload final JAR to EC2
         uses: appleboy/scp-action@v0.1.4
         with:
@@ -100,8 +112,8 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
           source: app.jar
-          target: ~/ShopSphere-Backend
-          debug: true
+          target: ~/ShopSphere-Backend # 이제 이 디렉토리는 존재가 보장됩니다.
+          debug: true # 디버깅을 위해 유지하거나, 성공 후 false로 변경
 
 
 
