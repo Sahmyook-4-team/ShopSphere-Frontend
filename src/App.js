@@ -8,7 +8,7 @@ import {
 import Mypage from "./components/Mypage";
 import "./App.css";
 import KakaoCallback from "./components/KakaoCallback";
-import InquiryHistory from "./components/InquiryHistory";
+import InquiryHistory from "./components/inquiry/InquiryHistory";
 import Main from "./components/Main1";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
@@ -27,6 +27,7 @@ import SellerPage from './components/seller/SellerPage'; // 판매자 페이지 
 import ProductRegistrationForm from './components/seller/ProductRegistrationForm'; 
 import PaymentSuccessPage from './components/PaymentSuccessPage'; // 생성할 컴포넌트
 import PaymentFailPage from './components/PaymentFailPage'; 
+import InquiryChatRoom from './components/inquiry/InquiryChatRoom';
 function App() {
   return (
     <Router>
@@ -54,6 +55,8 @@ function App() {
         <Route path="/mypage/my-reviews" element={<MyReviewsPage />} />
         <Route path="/seller" element={<SellerPage />} />
         <Route path="/seller/product/new" element={<ProductRegistrationForm />} /> 
+        <Route path="/inquiry" element={<InquiryHistory />} />
+        <Route path="/inquiry/chat/:roomId" element={<InquiryChatRoom />} />
       </Routes>
     </Router>
   );
