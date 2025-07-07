@@ -1,16 +1,43 @@
 /* src/styles/SellerPage.module.css (또는 src/components/SellerPage.module.css) */
-.container {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 90px auto 0; /* Header 높이를 고려한 상단 마진 */
-    font-family: 'Arial, sans-serif'; /* 기본 폰트 */
+/* Tab Navigation Styles */
+.tabContainer {
+    display: flex;
+    border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 20px;
+    padding: 0 10px;
+    gap: 10px;
+}
+
+.tabButton {
+    padding: 12px 20px;
+    font-size: 1em;
+    font-weight: 500;
+    color: #4a5568;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-right: 5px;
+}
+
+.tabButton:hover {
+    color: #2b6cb0;
+    background-color: #ebf8ff;
+    border-radius: 4px 4px 0 0;
+}
+
+.tabButton.activeTab {
+    color: #2b6cb0;
+    border-bottom: 3px solid #2b6cb0;
+    font-weight: 600;
 }
 
 .pageTitle {
     text-align: center;
-    color: #333;
-    margin-bottom: 30px;
-    font-size: 2em;
+    color: #2d3748;
+    margin: 1.5rem 0 2rem;
+    font-size: 2rem;
     font-weight: 600;
 }
 
@@ -274,6 +301,12 @@
     font-size: 1.2em;
     color: #718096;
     padding: 30px 20px; /* 패딩 증가 */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 20px 0; /* 상단에 80px 패딩 추가 */
 }
 
 .noProductsText {
