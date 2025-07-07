@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { MessageSquarePlus } from "lucide-react";
+import { MessageSquarePlus, X } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,9 @@ const InquiryHistory = () => {
   const [inquiries, setInquiries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [orderItemId, setOrderItemId] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
   // 채팅방 목록 불러오기
@@ -46,7 +49,35 @@ const InquiryHistory = () => {
     if (roomId) {
       navigate(`/inquiry/chat/${roomId}`);
     } else {
-      alert("상품을 선택해주세요. (상품 선택 화면으로 이동)");
+      setIsModalOpen(true);
+    }
+  };
+
+  // 채팅방 생성 제출
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!orderItemId.trim()) {
+      alert("주문 상품 ID를 입력해주세요.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_BASE_URL}/api/inquiry-chats/rooms?orderItemId=${orderItemId}`,
+        {},
+        { withCredentials: true }
+      );
+      
+      if (response.data?.id) {
+        navigate(`/inquiry/chat/${response.data.id}`);
+      }
+    } catch (err) {
+      console.error("채팅방 생성 실패:", err);
+      alert("채팅방을 생성하는 중 오류가 발생했습니다. 다시 시도해주세요.");
+    } finally {
+      setIsSubmitting(false);
+      setIsModalOpen(false);
     }
   };
 
@@ -87,7 +118,12 @@ const InquiryHistory = () => {
               <CardContent className={styles.cardContent}>
                 <div className={styles.inquiryItem}>
                   <div className={styles.inquiryInfo}>
-                    <h3>{room.productName || '상품 문의'}</h3>
+                    <div className={styles.inquiryHeader}>
+                      <h3>{room.productName || '상품 문의'}</h3>
+                      {room.orderItemId && (
+                        <span className={styles.orderNumber}>주문번호: {room.orderItemId}</span>
+                      )}
+                    </div>
                     <p className={styles.lastMessage}>
                       {room.lastMessage || '대화를 시작해보세요!'}
                     </p>
@@ -104,6 +140,54 @@ const InquiryHistory = () => {
           ))
         )}
       </div>
+
+      {/* 주문 상품 ID 입력 모달 */}
+      {isModalOpen && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContent}>
+            <div className={styles.modalHeader}>
+              <h2>새 문의 시작하기</h2>
+              <button 
+                onClick={() => setIsModalOpen(false)}
+                className={styles.closeButton}
+              >
+                <X size={20} />
+              </button>
+            </div>
+            <form onSubmit={handleSubmit} className={styles.modalForm}>
+              <div className={styles.formGroup}>
+                <label htmlFor="orderItemId">주문 상품 ID</label>
+                <input
+                  type="text"
+                  id="orderItemId"
+                  value={orderItemId}
+                  onChange={(e) => setOrderItemId(e.target.value)}
+                  placeholder="주문 상품 ID를 입력하세요"
+                  required
+                />
+                <p className={styles.helpText}>문의하실 상품의 주문 상품 ID를 입력해주세요.</p>
+              </div>
+              <div className={styles.modalActions}>
+                <button
+                  type="button"
+                  onClick={() => setIsModalOpen(false)}
+                  className={styles.cancelButton}
+                  disabled={isSubmitting}
+                >
+                  취소
+                </button>
+                <button
+                  type="submit"
+                  className={styles.submitButton}
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? '처리 중...' : '문의 시작하기'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
