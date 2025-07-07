@@ -78,38 +78,20 @@ jobs:
       - name: Move final JAR to root for easy upload
         run: mv backend/build/libs/*.jar app.jar
         # build.gradle에서 파일명을 고정했다면 'mv backend/build/libs/app.jar app.jar'로 사용 가능
-        
-      - name: Check if app.jar exists
-        run: |
-          ls -l
-          if [ -f "app.jar" ]; then
-            echo "app.jar found successfully."
-          else
-            echo "Error: app.jar not found!"
-            exit 1
-          fi
-
-      - name: Create directory on EC2 for deployment
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.PRIVATE_KEY }}
-          script: mkdir -p ~/ShopSphere-Backend
 
       #####################################################################
       # 7. 최종 JAR 파일을 EC2로 전송
       # 이제 대상 디렉터리가 확실히 존재하므로 scp가 성공합니다.
       #####################################################################
-      - name: Upload final JAR to EC2
-        uses: appleboy/scp-action@v1.0.0
+      - name: Upload JAR to EC2
+        uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
+          # 이제 source는 매우 단순하고 명확해집니다.
           source: app.jar
-          target: /home/ubuntu/ShopSphere-Backend/ # 이제 이 디렉토리는 존재가 보장됩니다.
-          debug: true # 디버깅을 위해 유지하거나, 성공 후 false로 변경
+          target: ~/ShopSphere-Backend
 
 
 
@@ -141,6 +123,8 @@ jobs:
                 echo "--- Removing zombie container on port 8080 ---"
                 sudo docker rm -f $ZOMBIE_CONTAINER_ID
             fi
+
+            sudo docker system prune -a
 
             echo "--- Building new Docker image ---"
             # EC2의 ~/ShopSphere-Backend 폴더에는 app.jar와 Dockerfile이 있어야 합니다.
