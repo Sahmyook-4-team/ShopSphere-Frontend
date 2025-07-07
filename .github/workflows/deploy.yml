@@ -124,7 +124,7 @@ jobs:
                 sudo docker rm -f $ZOMBIE_CONTAINER_ID
             fi
 
-            sudo docker system prune -a
+            sudo docker system prune -af
 
             echo "--- Building new Docker image ---"
             # EC2의 ~/ShopSphere-Backend 폴더에는 app.jar와 Dockerfile이 있어야 합니다.
