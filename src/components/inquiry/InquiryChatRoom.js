@@ -1,8 +1,10 @@
 // src/components/InquiryChatRoom.js
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Send, ArrowLeft } from 'lucide-react';
 import axios from 'axios';
+import SockJS from 'sockjs-client';
+import { Client } from '@stomp/stompjs';
 import styles from '../../styles/InquiryChatRoom.module.css';
 
 const InquiryChatRoom = () => {
@@ -13,7 +15,8 @@ const InquiryChatRoom = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const messagesEndRef = useRef(null);
-  const [currentUser, setCurrentUser] = useState(null); // 현재 로그인한 사용자 정보 상태
+  const [currentUser, setCurrentUser] = useState(null);
+  const [stompClient, setStompClient] = useState(null);
 
   // 메시지 불러오기
   const fetchMessages = async () => {
@@ -31,33 +34,53 @@ const InquiryChatRoom = () => {
     }
   };
 
-  // 메시지 전송
-  const sendMessage = async (e) => {
+  // 메시지 보내기
+  const sendMessage = (e) => {
     e.preventDefault();
-    if (!newMessage.trim()) return;
-
-    try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/api/inquiry-chats/messages`,
-        {
-          chatRoomId: parseInt(roomId),
-          message: newMessage
-        },
-        { 
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          withCredentials: true 
-        }
-      );
-      
-      setMessages([...messages, response.data]);
-      setNewMessage('');
-    } catch (err) {
-      console.error('메시지 전송 실패:', err);
-      alert('메시지 전송에 실패했습니다.');
-    }
+    if (!newMessage.trim() || !stompClient?.connected) return;
+  
+    const chatMessage = {
+      senderId: currentUser.id,
+      message: newMessage,
+      chatRoomId: parseInt(roomId)  // 백엔드에서 Long 타입을 기대하므로 정수로 변환
+    };
+  
+    // WebSocket으로 메시지 전송 (content-type 헤더 추가)
+    stompClient.publish({
+      destination: `/app/inquiry-chat/${roomId}`,
+      body: JSON.stringify(chatMessage),
+      headers: {
+        'content-type': 'application/json'  // 이 헤더가 중요합니다!
+      }
+    });
+  
+    // 로딩 상태 표시를 위한 임시 메시지
+    const tempMessage = {
+      ...chatMessage,
+      id: `temp-${Date.now()}`,
+      sentAt: new Date().toISOString(),
+      isTemp: true
+    };
+  
+    setMessages(prev => [...prev, tempMessage]);
+    setNewMessage('');
   };
+
+  // 메시지 수신 핸들러
+  const onMessageReceived = useCallback((payload) => {
+    try {
+      const message = JSON.parse(payload.body);
+      
+      setMessages(prev => {
+        // 임시 메시지 제거 및 중복 체크
+        const filtered = prev.filter(m => !m.isTemp || m.id !== `temp-${message.id}`);
+        if (filtered.some(m => m.id === message.id)) return filtered;
+        return [...filtered, message];
+      });
+    } catch (error) {
+      console.error('메시지 파싱 오류:', error);
+    }
+  }, []);
 
   // 스크롤을 가장 아래로 이동
   const scrollToBottom = () => {
@@ -98,17 +121,47 @@ const InquiryChatRoom = () => {
     fetchCurrentUser();
   }, [navigate]);
 
+  // WebSocket 연결 설정
   useEffect(() => {
-    if (roomId && currentUser) {
-      fetchMessages();
-    }
-  }, [roomId, currentUser]);
+    if (!currentUser || !roomId) return;
+
+    const socket = new SockJS(`${process.env.REACT_APP_API_BASE_URL}/ws`);
+    const client = new Client({
+      webSocketFactory: () => socket,
+      reconnectDelay: 5000,
+      heartbeatIncoming: 4000,
+      heartbeatOutgoing: 4000,
+      onConnect: () => {
+        console.log('WebSocket 연결 성공');
+        client.subscribe(`/topic/inquiry-chat/${roomId}`, onMessageReceived);
+        fetchMessages();
+      },
+      onStompError: (frame) => {
+        console.error('WebSocket 오류 발생:', frame);
+      },
+      onWebSocketClose: () => {
+        console.log('WebSocket 연결 종료');
+      }
+    });
+
+    client.activate();
+    setStompClient(client);
+
+    return () => {
+      if (client.connected) {
+        client.deactivate();
+      }
+    };
+  }, [roomId, currentUser, onMessageReceived]);
 
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
 
-  if (loading || !currentUser) return <div className={styles.loading}>로딩 중...</div>;
+  if ((loading || !currentUser) && !stompClient?.connected) {
+    return <div className={styles.loading}>연결 중...</div>;
+  }
+  
   if (error) return <div className={styles.error}>{error}</div>;
 
   return (
@@ -125,7 +178,6 @@ const InquiryChatRoom = () => {
           <div className={styles.noMessages}>아직 메시지가 없습니다. 메시지를 입력해주세요.</div>
         ) : (
           messages.map((message) => {
-            // 현재 사용자가 보낸 메시지인지 확인
             const isCurrentUser = currentUser && message.senderId === currentUser.id;
             
             return (
@@ -157,16 +209,20 @@ const InquiryChatRoom = () => {
             placeholder="메시지를 입력하세요..."
             className={styles.messageInput}
             aria-label="메시지 입력"
+            disabled={!stompClient?.connected}
           />
           <button 
             type="submit" 
             className={styles.sendButton} 
-            disabled={!newMessage.trim()}
+            disabled={!newMessage.trim() || !stompClient?.connected}
             aria-label="메시지 보내기"
           >
             <Send size={18} />
           </button>
         </form>
+        {!stompClient?.connected && (
+          <div className={styles.connectionStatus}>연결 중입니다. 잠시만 기다려주세요...</div>
+        )}
       </div>
     </div>
   );
