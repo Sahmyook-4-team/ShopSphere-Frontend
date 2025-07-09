@@ -13,7 +13,7 @@
   
   .box .overlap {
     position: relative;
-    left: 400px;
+    width: 100%; 
     height: 733px;
   }
   
