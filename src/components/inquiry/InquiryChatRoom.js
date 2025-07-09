@@ -55,27 +55,38 @@ const InquiryChatRoom = () => {
     });
   
     // 로딩 상태 표시를 위한 임시 메시지
-    const tempMessage = {
-      ...chatMessage,
-      id: `temp-${Date.now()}`,
-      sentAt: new Date().toISOString(),
-      isTemp: true
-    };
+    // const tempId = `temp-${Date.now()}`;
+    // const tempMessage = {
+    //   ...chatMessage,
+    //   id: tempId,
+    //   tempId: chatMessage.id,  // 원본 메시지 ID 저장
+    //   sentAt: new Date().toISOString(),
+    //   isTemp: true
+    // };
   
-    setMessages(prev => [...prev, tempMessage]);
-    setNewMessage('');
+    // setMessages(prev => [...prev, tempMessage]);
+    // setNewMessage('');
   };
 
   // 메시지 수신 핸들러
   const onMessageReceived = useCallback((payload) => {
     try {
       const message = JSON.parse(payload.body);
+    
       
       setMessages(prev => {
-        // 임시 메시지 제거 및 중복 체크
-        const filtered = prev.filter(m => !m.isTemp || m.id !== `temp-${message.id}`);
-        if (filtered.some(m => m.id === message.id)) return filtered;
-        return [...filtered, message];
+        // tempId가 일치하는 임시 메시지 제거 및 중복 체크
+        const filtered = prev.filter(m => 
+          !m.isTemp || (message.id && m.tempId !== message.id)
+        );
+        
+        // 이미 동일한 ID의 메시지가 있으면 무시
+        if (message.id && filtered.some(m => m.id === message.id)) {
+          return filtered;
+        }
+        
+        // 새로운 메시지 추가 (유효한 ID가 있는 경우에만)
+        return message.id ? [...filtered, message] : filtered;
       });
     } catch (error) {
       console.error('메시지 파싱 오류:', error);

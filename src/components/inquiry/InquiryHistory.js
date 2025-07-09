@@ -131,9 +131,9 @@ const InquiryHistory = () => {
                       {room.updatedAt ? new Date(room.updatedAt).toLocaleString() : ''}
                     </p>
                   </div>
-                  <div className={`${styles.statusBadge} ${room.status === 'ANSWERED' ? styles.answered : styles.pending}`}>
+                  {/* <div className={`${styles.statusBadge} ${room.status === 'ANSWERED' ? styles.answered : styles.pending}`}>
                     {room.status === 'ANSWERED' ? '답변 완료' : '대기 중'}
-                  </div>
+                  </div> */}
                 </div>
               </CardContent>
             </Card>
