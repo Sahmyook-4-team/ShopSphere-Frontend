@@ -1,56 +1,44 @@
-import React, { useState } from 'react';
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import React, { useState, useEffect } from 'react';
 import styles from '../../styles/ChatBot.module.css';
-import bots from './bots.json';
+import axios from 'axios';
 
-
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
-  const [modelName, setModelName] = useState("쇼핑몰");
+  const [modelName, setModelName] = useState("gemini-pro");
+  const [isLoading, setIsLoading] = useState(false);
+  const [chatHistory, setChatHistory] = useState([]);
 
-  const genAi = new GoogleGenerativeAI(process.env.REACT_APP_GOOGLE_AI_API_KEY);
-
-  // 모델 초기화 함수
-  const initModel = (botConfig) => {
-    return genAi.getGenerativeModel(botConfig);
+  // 백엔드 API를 통해 채팅 메시지 전송
+  const sendMessageToBackend = async (message) => {
+    try {
+      setIsLoading(true);
+      const response = await axios.post(`${API_BASE_URL}/api/chatbot`, {
+        message,
+        modelType: modelName,
+        chatHistory: chatHistory
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      // API 응답이 문자열로 오는 경우 처리
+      const botResponse = typeof response.data === 'string' 
+        ? response.data 
+        : response.data.response || '응답을 처리할 수 없습니다.';
+      
+      return botResponse;
+    } catch (error) {
+      console.error('챗봇 API 호출 중 오류:', error);
+      return '챗봇 응답을 가져오는 중 오류가 발생했습니다.';
+    } finally {
+      setIsLoading(false);
+    }
   };
-
-  // 채팅 세션 초기화 함수
-  const initChat = (modelInstance, messageHistory) => {
-    return modelInstance.startChat({
-      history: messageHistory.map(msg => ({
-        role: msg.sender === 'user' ? 'user' : 'model',
-        parts: [{ text: msg.text }]
-      })),
-    });
-  };
-
-  // 초기 모델 및 채팅 설정
-  let model;
-  let chat;
-  switch (modelName) {
-    case "쇼핑몰":
-      model = initModel(bots.bots[0]);
-      chat = initChat(model, messages);
-      break;
-    case "미카사":
-      model = initModel(bots.bots[1]);
-      chat = initChat(model, messages);
-      break;
-    case "성진우":
-      model = initModel(bots.bots[2]);
-      chat = initChat(model, messages);
-      break;
-    case "채나윤":
-      model = initModel(bots.bots[3]);
-      chat = initChat(model, messages);
-      break;
-    default:
-      break;
-  }
 
   const toggleChat = () => {
     setIsOpen(!isOpen);
@@ -58,59 +46,48 @@ const ChatBot = () => {
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
-    if (!inputValue.trim()) return;
+    const userInput = inputValue.trim();
+    if (!userInput || isLoading) return;
 
-    // 이스터에그
-    switch (inputValue) {
-      case "쇼핑몰":
-        setModelName("쇼핑몰");
-        model = initModel(bots.bots[0]);
-        chat = initChat(model, messages);
-        console.log("쇼핑몰 모델로 전환");
-        break;
-      case "미카사":
-        setModelName("미카사");
-        model = initModel(bots.bots[1]);
-        chat = initChat(model, messages);
-        console.log("미카사 모델로 전환");
-        break;
-      case "성진우":
-        setModelName("성진우");
-        model = initModel(bots.bots[2]);
-        chat = initChat(model, messages);
-        console.log("성진우 모델로 전환");
-        break;
-      case "채나윤":
-        setModelName("채나윤");
-        model = initModel(bots.bots[3]);
-        chat = initChat(model, messages);
-        console.log("채나윤 모델로 전환");
-        break;
-      default:
-        break;
+    // 모델 전환 로직 (필요시 유지)
+    if (['gemini-pro', '쇼핑몰', '미카사', '성진우', '채나윤'].includes(userInput)) {
+      setModelName(userInput === '쇼핑몰' ? 'gemini-pro' : userInput);
+      setInputValue('');
+      return;
     }
 
-
-
-
     // 사용자 메시지 추가
-    const userMessage = { text: inputValue, sender: 'user' };
-    const updatedMessages = [...messages, userMessage];
-    setMessages(updatedMessages);
+    const userMessage = { text: userInput, sender: 'user' };
+    setMessages(prev => [...prev, userMessage]);
     setInputValue('');
 
+    // 채팅 기록 업데이트 (API 요청용)
+    const updatedChatHistory = [
+      ...chatHistory,
+      { role: 'user', content: userInput }
+    ];
+    setChatHistory(updatedChatHistory);
+
     try {
-      // API 호출 응답
-      const response = await chat.sendMessage(inputValue);
-      const botMessage = { text: response.response.text(), sender: 'bot' };
+      // 백엔드 API를 통해 응답 받기
+      const botResponse = await sendMessageToBackend(userInput);
       
-      // 이전 메시지와 새로운 봇 응답을 함께 업데이트
-      setMessages(prevMessages => [...prevMessages, botMessage]);
+      // 봇 응답 추가
+      const botMessage = { text: botResponse, sender: 'bot' };
+      setMessages(prev => [...prev, botMessage]);
+      
+      // 채팅 기록에 봇 응답 추가
+      setChatHistory(prev => [
+        ...prev,
+        { role: 'assistant', content: botResponse }
+      ]);
     } catch (error) {
-      console.error('Error generating response:', error);
-      // 에러 발생 시 사용자에게 알림
-      const errorMessage = { text: '죄송합니다. 응답을 생성하는 중 오류가 발생했습니다.', sender: 'bot' };
-      setMessages(prevMessages => [...prevMessages, errorMessage]);
+      console.error('채팅 중 오류:', error);
+      const errorMessage = { 
+        text: '챗봇 응답을 가져오는 중 오류가 발생했습니다.', 
+        sender: 'bot' 
+      };
+      setMessages(prev => [...prev, errorMessage]);
     }
   };
 
@@ -127,19 +104,22 @@ const ChatBot = () => {
             <button onClick={toggleChat} className={styles.closeButton}>&times;</button>
           </div>
           <div className={styles.chatMessages}>
-            <div 
-                className={`${styles.message} ${styles.botMessage}`}
-              >
+            {messages.length === 0 ? (
+              <div className={`${styles.message} ${styles.botMessage}`}>
                 안녕하세요! {modelName} 챗봇입니다. 무엇을 도와드릴까요?
               </div>
-            {messages.map((message, index) => (
-              <div 
-                key={index} 
-                className={`${styles.message} ${message.sender === 'user' ? styles.userMessage : styles.botMessage}`}
-              >
-                {message.text}
-              </div>
-            ))}
+            ) : (
+              <>
+                {messages.map((message, index) => (
+                  <div 
+                    key={index} 
+                    className={`${styles.message} ${message.sender === 'user' ? styles.userMessage : styles.botMessage}`}
+                  >
+                    {message.text}
+                  </div>
+                ))}
+              </>
+            )}
           </div>
           <form onSubmit={handleSendMessage} className={styles.chatInputContainer}>
             <input
