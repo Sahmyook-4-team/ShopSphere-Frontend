@@ -4,7 +4,6 @@
 .inquiryPageContainer {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1rem;
   font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
 }
 
@@ -132,7 +131,6 @@
 
 /* 상태 뱃지 */
 .statusBadge {
-  position: absolute;
   top: 1.25rem;
   right: 1.25rem;
   padding: 0.25rem 0.75rem;

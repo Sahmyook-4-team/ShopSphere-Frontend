@@ -102,7 +102,7 @@ const SalesStatistics = () => {
 
 
     return (
-        <section className={styles.section}>
+        <section>
             <h2 className={styles.sectionTitle}>판매 통계</h2>
             <div className={styles.contentArea}>
                 <p>년도별/월별/주별 판매량 데이터 및 차트가 여기에 표시됩니다.</p>
