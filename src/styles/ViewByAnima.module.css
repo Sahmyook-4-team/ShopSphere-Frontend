@@ -12,7 +12,7 @@
   /* position: relative; 가 이미 있다면 그대로 두고 transform만 추가 */
   position: relative; 
   /* calc() 함수를 사용해 미세 조정 */
-  transform: translateX(-50px);
+  transform: translateX(-100px);
 }
 
 /* 각 카테고리 버튼 행 (8개 또는 그 이하의 버튼을 가짐) */
