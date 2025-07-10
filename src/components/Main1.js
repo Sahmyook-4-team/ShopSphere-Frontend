@@ -53,10 +53,10 @@ export const Main = () => {
                 <Top />
                 <Middle />
                 <div className={styles.wrapperRow}>
-                    <Bottom productIdFromProps={7} />
-                    <Bottom productIdFromProps={8} />
-                    <Bottom productIdFromProps={9} />
-                    <Bottom productIdFromProps={10} />
+                    <Bottom productIdFromProps={20} />
+                    <Bottom productIdFromProps={21} />
+                    <Bottom productIdFromProps={22} />
+                    <Bottom productIdFromProps={23} />
                 </div>
             </div>
 
