@@ -4,7 +4,7 @@
 </div>
 
 ##### 프로젝트 소개
-### '왜?'라는 질문에서 시작된 풀스택 커머스 프로젝트, ShopSphere입니다.
+### '왜?'라는 질문에서 시작된 풀스택 커머스 프로젝트프로젝트, ShopSphere입니다.
 
 단순히 기능을 나열하는 것을 넘어, **'어떻게 하면 사용자가 더 편하게 소통하고 구매할 수 있을까?'** 라는 고민에서 출발했습니다. 
 이 고민의 해답을 찾기 위해, 저희는 Spring Boot의 강력한 백엔드와 React의 동적인 프론트엔드를 결합하여 사용자 중심의 플랫폼을 구축했습니다.
@@ -33,21 +33,28 @@
 ## 개발환경
 | Backend | Frontend | DB | VCS | CSP |
 |:---:|:---:|:---:|:---:|:---:|
-|<img src="https://img.icons8.com/color/96/spring-logo.png" width="100" alt="Spring Boot"/>|<img src="https://img.icons8.com/color/96/react-native.png" width="100" alt="React"/>|<img src="https://img.icons8.com/color/96/maria-db.png" width="100" alt="MariaDB"/>|<img src="https://img.icons8.com/material-outlined/96/github.png" width="100" alt="GitHub"/>|![alt text](image.png)|
+|<img src="https://img.icons8.com/color/96/spring-logo.png" width="100" alt="Spring Boot"/>|<img src="https://img.icons8.com/color/96/react-native.png" width="100" alt="React"/>|<img src="https://img.icons8.com/color/96/maria-db.png" width="100" alt="MariaDB"/>|<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/>|<img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white"/>|
 |Spring Boot|React|MariaDB|GitHub|AWS|
 
 | Language | IDE | Build Tool |
 |:---:|:---:|:---:|
-|<img src="https://img.icons8.com/color/70/java-coffee-cup-logo.png" width="70" alt="Java"/> <img src="https://img.icons8.com/color/70/javascript.png" width="70" alt="JavaScript"/> <img src="https://img.icons8.com/color/70/html-5.png" width="70" alt="HTML"/> <img src="https://img.icons8.com/color/70/css3.png" width="70" alt="CSS"/>|<img src="https://img.icons8.com/color/96/visual-studio-code-2019.png" width="100" alt="VSCode"/>|<img src="https://simpleicons.org/icons/gradle.svg" width="70" alt="Gradle"/> <img src="https://img.icons8.com/color/70/npm.png" width="70" alt="NPM"/>|
+|<img src="https://img.icons8.com/color/70/java-coffee-cup-logo.png" width="70" alt="Java"/> <img src="https://img.icons8.com/color/70/javascript.png" width="70" alt="JavaScript"/> <img src="https://img.icons8.com/color/70/html-5.png" width="70" alt="HTML"/> <img src="https://img.icons8.com/color/70/css3.png" width="70" alt="CSS"/>|<img src="https://img.icons8.com/color/96/visual-studio-code-2019.png" width="100" alt="VSCode"/>|<img src="https://simpleicons.org/icons/gradle.svg" width="70" alt="Gradle"/> <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white"/>|
 |Java, JavaScript, HTML, CSS|VSCode|Gradle, NPM|
 
 #### 개발환경 상세     
 |환경|사용|버전|
-|:---:|:---|:---|
+|:---:|:---:|:---:|
 | **OS** |<img src="https://img.shields.io/badge/OS%20Independent-gray?style=for-the-badge"/>|Windows, macOS, Linux 무관|
-| **Server** | <img src="https://img.shields.io/badge/apache%20tomcat-%23F8DC75.svg?style=for-the-badge&logo=apache-tomcat&logoColor=black"/>|Spring Boot 내장 Tomcat|
+| **프론트엔드** | <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white"/>|19.1.0|
+| **라우팅** | <img src="https://img.shields.io/badge/React%20Router%20DOM-CA4245?style=for-the-badge&logo=react-router&logoColor=white"/>|7.6.0|
+| **CSS** | <img src="https://img.shields.io/badge/Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"/>| - |
+| **상태 관리** | <img src="https://img.shields.io/badge/zustand-000000?style=for-the-badge"/>| - |
+| **결제** | <img src="https://img.shields.io/badge/Toss%20Payments-000000?style=for-the-badge"/>|1.9.1|
+| **테스트** | <img src="https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white"/> <img src="https://img.shields.io/badge/Testing%20Library-E33332?style=for-the-badge"/>| - |
+| **빌드** | <img src="https://img.shields.io/badge/CRACO-000000?style=for-the-badge"/> <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white"/>| - |
 | **IDE** | <img src="https://img.shields.io/badge/Visual%20Studio%20Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white"/>| - |
-| **CSP** | <img src="https://img.shields.io/badge/Kakao%20Cloud-FFCD00?style=for-the-badge&logo=kakao&logoColor=black"/> | - |
+| **Server** | <img src="https://img.shields.io/badge/apache%20tomcat-%23F8DC75.svg?style=for-the-badge&logo=apache-tomcat&logoColor=black"/>|Spring Boot 내장 Tomcat|
+| **CSP** | <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white"/> | - |
 | **VCS** | <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/> | - |
 | <hr> | <hr> | <hr> |
 | **Backend** | <img src="https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white"/> | `3.4.5` |
