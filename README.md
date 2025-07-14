@@ -33,14 +33,13 @@
 ## 개발환경
 | Backend | Frontend | DB | VCS | CSP |
 |:---:|:---:|:---:|:---:|:---:|
-|<img src="https://img.icons8.com/color/96/spring-logo.png" width="100" alt="Spring Boot"/>|<img src="https://img.icons8.com/color/96/react-native.png" width="100" alt="React"/>|<img src="https://img.icons8.com/color/96/maria-db.png" width="100" alt="MariaDB"/>|<img src="https://img.icons8.com/material-outlined/96/github.png" width="100" alt="GitHub"/>|<img src="https://img.icons8.com/?size=100&id=WHRLQdbEXQ16&format=png&color=000000" width="100" alt="Cloud Service"/>|
-|Spring Boot|React|MariaDB|GitHub|Kakao Cloud|
+|<img src="https://img.icons8.com/color/96/spring-logo.png" width="100" alt="Spring Boot"/>|<img src="https://img.icons8.com/color/96/react-native.png" width="100" alt="React"/>|<img src="https://img.icons8.com/color/96/maria-db.png" width="100" alt="MariaDB"/>|<img src="https://img.icons8.com/material-outlined/96/github.png" width="100" alt="GitHub"/>|![alt text](image.png)|
+|Spring Boot|React|MariaDB|GitHub|AWS|
 
 | Language | IDE | Build Tool |
 |:---:|:---:|:---:|
-|<img src="https://img.icons8.com/color/96/java-coffee-cup-logo.png" width="100" alt="Java"/> <img src="https://img.icons8.com/color/96/javascript.png" width="100" alt="JavaScript"/>|<img src="https://img.icons8.com/color/96/visual-studio-code-2019.png" width="100" alt="VSCode"/>|<img src="https://img.shields.io/badge/Gradle-02303A.svg?style=for-the-badge&logo=gradle&logoColor=white" height="40" alt="Gradle"/> <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white" height="40" alt="NPM"/>|
-|Java, JavaScript|VSCode|Gradle, NPM|
-
+|<img src="https://img.icons8.com/color/70/java-coffee-cup-logo.png" width="70" alt="Java"/> <img src="https://img.icons8.com/color/70/javascript.png" width="70" alt="JavaScript"/> <img src="https://img.icons8.com/color/70/html-5.png" width="70" alt="HTML"/> <img src="https://img.icons8.com/color/70/css3.png" width="70" alt="CSS"/>|<img src="https://img.icons8.com/color/96/visual-studio-code-2019.png" width="100" alt="VSCode"/>|<img src="https://simpleicons.org/icons/gradle.svg" width="70" alt="Gradle"/> <img src="https://img.icons8.com/color/70/npm.png" width="70" alt="NPM"/>|
+|Java, JavaScript, HTML, CSS|VSCode|Gradle, NPM|
 
 #### 개발환경 상세     
 |환경|사용|버전|
