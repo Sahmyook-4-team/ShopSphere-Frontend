@@ -30,7 +30,7 @@ function PaymentSuccessPage() {
                 // 성공 시, 결제 완료 페이지나 주문 상세 페이지로 이동
                 const confirmedOrder = await response.json();
                 alert('결제가 성공적으로 완료되었습니다.');
-                navigate(`/`); // 예: 주문 상세 페이지로 이동
+                navigate(`/mypage/orders`); // 예: 주문 내역 페이지로 이동
 
             } catch (error) {
                 console.error("Payment confirmation failed:", error);
