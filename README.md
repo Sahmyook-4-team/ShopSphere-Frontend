@@ -1,70 +1,119 @@
-# Getting Started with Create React App
+## ShopSphere Project
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="https://github.com/user-attachments/assets/bf3efd80-989e-4ac8-837d-9eff685e74c5" />
+</div>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+##### 프로젝트 소개
+### '왜?'라는 질문에서 시작된 풀스택 커머스 프로젝트, ShopSphere입니다.
 
-## Available Scripts
+단순히 기능을 나열하는 것을 넘어, **'어떻게 하면 사용자가 더 편하게 소통하고 구매할 수 있을까?'** 라는 고민에서 출발했습니다. 
+이 고민의 해답을 찾기 위해, 저희는 Spring Boot의 강력한 백엔드와 React의 동적인 프론트엔드를 결합하여 사용자 중심의 플랫폼을 구축했습니다.
 
-In the project directory, you can run:
+백엔드에서는 **Spring Security**를 이용한 인증/인가 처리와 **JPA**를 통한 효율적인 데이터 관리를, 
+프론트엔드에서는 **WebSocket**을 이용한 실시간 채팅과 **Toss Payments 연동**을 통해 끊김 없는(Seamless) 사용자 경험을 구현하며 풀스택 개발 역량을 종합적으로 녹여냈습니다.
+##### 사이트 주소: http://gapi-pms.github.io
+##### 설치 방법: <a href="/docs/설치 방법/README.md" target="_blank">설치 방법</a>
+<br>
+<br>
+<br>
 
-### `npm start`
+## 팀원 
+|최진환|김동현|김윤진|박규태|
+|:---:|:---:|:---:|:---:|
+|<a href="https://github.com/trumanjinhwan" target="_blank"><img src="https://avatars.githubusercontent.com/u/190100768?v=4" height="150px"/><br>trumanjinhwan</a>|<a href="https://github.com/kimdonghyun296" target="_blank"><img src="https://avatars.githubusercontent.com/u/193192616?v=4" height="150px"/><br>kimdonghyun296</a>|<a href="https://github.com/yunndaeng" target="_blank"><img src="https://avatars.githubusercontent.com/u/193191038?v=4" height="150px"/><br>yunndaeng</a>|<a href="https://github.com/ZaRi1l" target="_blank"><img src="https://avatars.githubusercontent.com/u/133009070?v=4" height="150px"/><br>ZaRi1l</a>|
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### 맡은 역할
+| 이름 |업무|
+|:---:|---|
+|최진환| 로그인/회원가입 프론트엔드, 로그인/회원가입 백엔드, 상품검색 프론트엔드, 상품검색 백엔드, 상품등록 프론트엔드, 상품정보 프론트엔드, 상품정보 백엔드, 상품구매 백엔드, 상품구매 프론트엔드, 리뷰&별점 프론트엔드, 배포/운영, CI/CD, ppt만들기, 유스케이스 다이어그램
+|김동현|DB구축, 카카오 로그인 구현, 토스 페이먼츠 구현, 장바구니 프론트엔드, 구매내역 ID 띄우기, 시퀀스 다이어그램, 클래스 다이어그램, E-R 다이어그램, 해상도를 고려한 CSS 수정
+|김윤진|상품정보 페이지, 장바구니 프론트엔드, 장바구니 벡엔드, 1:1 문의 구매자Ver, 깃 레파지토리 README.md
+|박규태|로그인/회원가입 백엔드, 상품검색 백엔드, 상품등록 백엔드, 상품정보 백엔드, 상품구매 백엔드, 장바구니 백엔드, 리뷰&별점 백엔드, 판매 통계 백엔드, 판매 통계 프론트엔드, 상품등록 옵션, 1:1 문의 판매자Ver, 챗봇
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 개발환경
+| Backend | Frontend | DB | VCS | CSP |
+|:---:|:---:|:---:|:---:|:---:|
+|<img src="https://img.icons8.com/color/96/spring-logo.png" width="100" alt="Spring Boot"/>|<img src="https://img.icons8.com/color/96/react-native.png" width="100" alt="React"/>|<img src="https://img.icons8.com/color/96/maria-db.png" width="100" alt="MariaDB"/>|<img src="https://img.icons8.com/material-outlined/96/github.png" width="100" alt="GitHub"/>|![alt text](image.png)|
+|Spring Boot|React|MariaDB|GitHub|AWS|
 
-### `npm test`
+| Language | IDE | Build Tool |
+|:---:|:---:|:---:|
+|<img src="https://img.icons8.com/color/70/java-coffee-cup-logo.png" width="70" alt="Java"/> <img src="https://img.icons8.com/color/70/javascript.png" width="70" alt="JavaScript"/> <img src="https://img.icons8.com/color/70/html-5.png" width="70" alt="HTML"/> <img src="https://img.icons8.com/color/70/css3.png" width="70" alt="CSS"/>|<img src="https://img.icons8.com/color/96/visual-studio-code-2019.png" width="100" alt="VSCode"/>|<img src="https://simpleicons.org/icons/gradle.svg" width="70" alt="Gradle"/> <img src="https://img.icons8.com/color/70/npm.png" width="70" alt="NPM"/>|
+|Java, JavaScript, HTML, CSS|VSCode|Gradle, NPM|
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### 개발환경 상세     
+|환경|사용|버전|
+|:---:|:---|:---|
+| **OS** |<img src="https://img.shields.io/badge/OS%20Independent-gray?style=for-the-badge"/>|Windows, macOS, Linux 무관|
+| **Server** | <img src="https://img.shields.io/badge/apache%20tomcat-%23F8DC75.svg?style=for-the-badge&logo=apache-tomcat&logoColor=black"/>|Spring Boot 내장 Tomcat|
+| **IDE** | <img src="https://img.shields.io/badge/Visual%20Studio%20Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white"/>| - |
+| **CSP** | <img src="https://img.shields.io/badge/Kakao%20Cloud-FFCD00?style=for-the-badge&logo=kakao&logoColor=black"/> | - |
+| **VCS** | <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/> | - |
+| <hr> | <hr> | <hr> |
+| **Backend** | <img src="https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white"/> | `3.4.5` |
+| **Language (BE)** | <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white"/>| JDK: `17`|
+| **Build Tool (BE)** | <img src="https://img.shields.io/badge/Gradle-02303A.svg?style=for-the-badge&logo=gradle&logoColor=white"/> | - |
+| <hr> | <hr> | <hr> |
+| **Frontend** | <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/>| React: `18.2.0` |
+| **Language (FE)** | <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/> | ES6+, JSX |
+| **Package Manager**| <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white"/> | - |
+| **Library (FE)** | <img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"/> <img src="https://img.shields.io/badge/stompjs-E33A2B?style=for-the-badge"/> | axios, @stomp/stompjs, sockjs-client |
+| <hr> | <hr> | <hr> |
+| **DB** | <img src="https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=mariadb&logoColor=white"/>| - |
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br><br>
+## 요구사항
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<div style="text-align: center;">
+    <img height="500px" src="/docs/소프트웨어 설계/요구 사항.png" alt="alt text" />
+</div>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### 요구사항 분석(기능 정리)
+|요구사항|상세내용|
+|:---:|---|
+| 로그인 & 회원가입 | 회원 조회, 추가, 삭제, 수정 |
+| 작업 | 회원 조회, 추가, 삭제, 수정 |
+| 백로그 | 진행"완료"인 작업들의 모음 |
+| 대시보드 | 대시보드 추가, 삭제, 수정 |
+| 동료 | 동료 추가, 삭제, 조회 |
+| 캘린더 | 작업의 시작일을 캘린더의 표시, 작업 삭제 시 해당 작업을 캘린더에서 삭제 |
 
-### `npm run eject`
+<br><br>
+## 우리 프로젝트
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+#### 작업
+<div style="text-align: center;">
+    <img src="/docs/구현 사진/메인화면.png" height="100%" alt="alt text" />
+</div> 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### 대시보드
+<div style="text-align: center;">
+    <img src="/docs/구현 사진/대시보드.png" height="100%" alt="alt text" />
+</div> 
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<br>
 
-## Learn More
+#### 캘린더
+<div style="text-align: center;">
+    <img src="/docs/구현 사진/달력.png" height="100%" alt="alt text" />
+</div> 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<br>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<br><br>
 
-### Code Splitting
+## 구현 사진
+<a href="/docs/구현 사진/README.md" target="_blank">구현 사진</a>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<br><br>
 
-### Analyzing the Bundle Size
+## 소프트웨어 설계
+<a href="/docs/소프트웨어 설계/README.md" target="_blank">소프트웨어 설계</a>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<br><br>
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## PMS 레퍼런스 (Monday.dev)
+<a href="/docs/PMS 레퍼런스 사진 모음/README.md" target="_blank">PMS 레퍼런스 (Monday.dev)</a>
