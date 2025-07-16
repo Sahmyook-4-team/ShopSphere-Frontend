@@ -12,7 +12,7 @@
 백엔드에서는 **Spring Security**를 이용한 인증/인가 처리와 **JPA**를 통한 효율적인 데이터 관리를, 
 프론트엔드에서는 **WebSocket**을 이용한 실시간 채팅과 **Toss Payments 연동**을 통해 끊김 없는(Seamless) 사용자 경험을 구현하며 풀스택 개발 역량을 종합적으로 녹여냈습니다.
 ##### 사이트 주소: https://shopsphere123.duckdns.org
-##### 설치 방법: <a href="/docs/설치 방법/README.md" target="_blank">설치 방법</a>
+##### 설치 방법: <a href="/dosc/설치방법/README.md" target="_blank">설치방법</a>
 <br>
 <br>
 <br>
@@ -87,29 +87,113 @@
 | 판매자 기능 | 상품 관리, 판매 통계, 주문 관리, 고객 관리 |
 
 <br><br>
-## 우리 프로젝트
-
-#### 작업
-
-
-<br>
-
-#### 대시보드
-
-
-<br>
-
-#### 캘린더
- 
-
-<br>
-
-<br><br>
-
 ## 구현 사진
+
+#### 메인화면
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/구현 사진/메인화면.png" />
+</div>
+
+
+<br>
+
+#### 상품검색
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/구현 사진/상품검색1.png" />
+</div>
+
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/구현 사진/상품검색2.png" />
+</div>
+<br>
+
+#### 상품등록
+ <div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/구현 사진/상품등록.png" />
+</div>
+
+<br>
+
+#### 상품상세 페이지
+ <div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/구현 사진/상품상세페이지.png" />
+</div>
+
+<br>
+
 
 <br><br>
 
 ## 소프트웨어 설계
+
+### UseCase Diagram
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/Usecase_구매자.png" />
+</div>
+
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/Usecase_판매자.png" />
+</div>
+
+
+
+<br>
+
+### Sequence Diagram
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/SequenceDiagram_상품구매.png" />
+</div>
+
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/SequenceDiagram_상품검색.png" />
+</div>
+
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/SequenceDiagram_상품등록.png" />
+</div>
+
+<br>
+
+### Class Diagram
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/Class_User.png" />
+</div>
+
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/Class_Product.png" />
+</div>
+
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/Class_ProductCategory.png" />
+</div>
+
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/Class_Cart.png" />
+</div>
+
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/Class_Order.png" />
+</div>
+
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/Class_Review.png" />
+</div>
+
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/Class_상품등록.png" />
+</div>
+
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/Class_파일업로드.png" />
+</div>
+ 
+<br>
+
+### E-R Diagrame
+ <div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/ERD.png" />
+</div>
+
+<br>
 
 <br><br>
