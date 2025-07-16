@@ -11,7 +11,7 @@
 
 백엔드에서는 **Spring Security**를 이용한 인증/인가 처리와 **JPA**를 통한 효율적인 데이터 관리를, 
 프론트엔드에서는 **WebSocket**을 이용한 실시간 채팅과 **Toss Payments 연동**을 통해 끊김 없는(Seamless) 사용자 경험을 구현하며 풀스택 개발 역량을 종합적으로 녹여냈습니다.
-##### 사이트 주소: http://3.36.71.122:8080/
+##### 사이트 주소: https://shopsphere123.duckdns.org
 ##### 설치 방법: <a href="/docs/설치 방법/README.md" target="_blank">설치 방법</a>
 <br>
 <br>
@@ -121,6 +121,3 @@
 <a href="/docs/소프트웨어 설계/README.md" target="_blank">소프트웨어 설계</a>
 
 <br><br>
-
-## PMS 레퍼런스 (Monday.dev)
-<a href="/docs/PMS 레퍼런스 사진 모음/README.md" target="_blank">PMS 레퍼런스 (Monday.dev)</a>
