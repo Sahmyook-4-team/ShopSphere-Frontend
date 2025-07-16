@@ -114,23 +114,73 @@
 
 ## 소프트웨어 설계
 
-#### UseCase Diagram
+### UseCase Diagram
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/Usecase_구매자.png" />
+</div>
+
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/Usecase_판매자.png" />
+</div>
+
 
 
 <br>
 
-#### Sequence Diagram
+### Sequence Diagram
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/SequenceDiagram_상품구매.png" />
+</div>
 
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/SequenceDiagram_상품검색.png" />
+</div>
+
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/SequenceDiagram_상품등록.png" />
+</div>
 
 <br>
 
-#### Class Diagram
+### Class Diagram
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/Class_User.png" />
+</div>
+
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/Class_Product.png" />
+</div>
+
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/Class_ProductCategory.png" />
+</div>
+
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/Class_Cart.png" />
+</div>
+
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/Class_Order.png" />
+</div>
+
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/Class_Review.png" />
+</div>
+
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/Class_상품등록.png" />
+</div>
+
+<div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/Class_파일업로드.png" />
+</div>
  
-
 <br>
 
-#### E-R Diagrame
- 
+### E-R Diagrame
+ <div style="text-align: center;">
+    <img alt="shopshere_main" src="/dosc/소프트웨어 설계/ERD.png" />
+</div>
 
 <br>
 
