@@ -196,7 +196,7 @@ const NewInquiryTab = () => {
         `${process.env.REACT_APP_API_BASE_URL}/api/inquiry-chats/rooms`,
         null, // POST 요청이지만 body는 비어있음
         {
-          params: { orderItemId: orderItemId }, // 쿼리 파라미터로 orderItemId 전송
+          params: { orderItemId: orderItemId }, 
           withCredentials: true
         }
       );
