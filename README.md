@@ -90,34 +90,26 @@
 ## 우리 프로젝트
 
 #### 작업
-<div style="text-align: center;">
-    <img src="/docs/구현 사진/메인화면.png" height="100%" alt="alt text" />
-</div> 
+
 
 <br>
 
 #### 대시보드
-<div style="text-align: center;">
-    <img src="/docs/구현 사진/대시보드.png" height="100%" alt="alt text" />
-</div> 
+
 
 <br>
 
 #### 캘린더
-<div style="text-align: center;">
-    <img src="/docs/구현 사진/달력.png" height="100%" alt="alt text" />
-</div> 
+ 
 
 <br>
 
 <br><br>
 
 ## 구현 사진
-<a href="/docs/구현 사진/README.md" target="_blank">구현 사진</a>
 
 <br><br>
 
 ## 소프트웨어 설계
-<a href="/docs/소프트웨어 설계/README.md" target="_blank">소프트웨어 설계</a>
 
 <br><br>
