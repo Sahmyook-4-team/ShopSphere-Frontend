@@ -1,3 +1,7 @@
+html {
+  overflow-y: scroll;
+}
+
 .App {
   text-align: center;
 }
@@ -39,10 +43,12 @@
 
 .app-container {
   display: flex;
-  justify-content: center;   /* 수평 정렬 */
-  align-items: center;       /* 수직 정렬 */
+  justify-content: center;   /* 자식요소 자체를 중앙에 배치 */
+  align-items: flex-start;   /* 자식요소를 컨테이너 상단에 배치 */
+  width: 100%;
   min-height: 100vh;
-  padding-top: 80px;         /* 헤더 높이만큼 여백 */
+  padding-top: 80px;
   box-sizing: border-box;
 }
+
 
