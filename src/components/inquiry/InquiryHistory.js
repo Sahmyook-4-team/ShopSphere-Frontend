@@ -187,9 +187,35 @@ const NewInquiryTab = () => {
     fetchOrders();
   }, []);
 
-  const handleClick = async (roomId) => {
-    if (roomId) {
-      navigate(`/inquiry/chat/${roomId}`);
+  const handleClick = async (orderItemId) => {
+    if (!orderItemId) return;
+  
+    try {
+      // 1. 백엔드에 채팅방 생성 또는 조회를 요청한다.
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_BASE_URL}/api/inquiry-chats/rooms`,
+        null, // POST 요청이지만 body는 비어있음
+        {
+          params: { orderItemId: orderItemId }, // 쿼리 파라미터로 orderItemId 전송
+          withCredentials: true
+        }
+      );
+  
+      // 2. 응답으로 받은 채팅방 정보에서 채팅방 ID(roomId)를 추출한다.
+      const chatRoom = response.data;
+      const roomId = chatRoom.id;
+  
+      // 3. 획득한 실제 채팅방 ID로 채팅방 페이지로 이동한다.
+      if (roomId) {
+        navigate(`/inquiry/chat/${roomId}`);
+      } else {
+        console.error("채팅방 ID를 받아오지 못했습니다.");
+        alert("채팅방에 입장하는 데 실패했습니다.");
+      }
+  
+    } catch (error) {
+      console.error("채팅방 생성/조회 실패:", error);
+      alert("오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
     }
   };
 
