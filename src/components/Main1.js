@@ -72,9 +72,6 @@ export const Main = () => {
                 </button>
             )}
 
-            {/* ChatBot 컴포넌트 */}
-            {/* ChatBot.module.css에서 .chatButton의 bottom 값을 조정해야 할 수 있음 */}
-            {/* 또는 ChatBot 컴포넌트 자체에 prop을 전달하여 bottom 위치를 동적으로 설정 */}
             <ChatBot />
         </>
     );

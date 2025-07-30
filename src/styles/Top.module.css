@@ -13,7 +13,7 @@
   
   .box .overlap {
     position: relative;
-    left: 400px;
+    width: 100%; 
     height: 733px;
   }
   
@@ -127,7 +127,7 @@
     position: absolute;
     top: 70px;
     left: 19px;
-    width: 24px;
+    width: 26px;
     font-family: "Inter-SemiBold", Helvetica;
     font-size: 13px;
     font-weight: 600;

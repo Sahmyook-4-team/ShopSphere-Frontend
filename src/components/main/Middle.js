@@ -58,7 +58,7 @@ export const Middle = () => {
       const params = {
         sort: currentSortOption,
         page: 0, // 항상 첫 페이지
-        size: 5, // 5개만 요청
+        size: 4, // 5개만 요청
       };
 
       if (selectedCategoryId !== null) {
@@ -134,7 +134,7 @@ export const Middle = () => {
         {/* 로딩 중일 때 스켈레톤 UI */}
         {loadingProducts && (
           <div className={styles.productGrid}>
-            {[...Array(5)].map((_, index) => (
+            {[...Array(4)].map((_, index) => (
               <SkeletonProductCard key={`skeleton-${index}`} />
             ))}
           </div>

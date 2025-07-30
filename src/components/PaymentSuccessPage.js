@@ -1,6 +1,8 @@
 // src/pages/PaymentSuccessPage.js
+
 import React, { useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import '../styles/PaymentSuccessPage.css'; // CSS 파일 import
 
 function PaymentSuccessPage() {
     const [searchParams] = useSearchParams();
@@ -28,15 +30,14 @@ function PaymentSuccessPage() {
                 }
                 
                 // 성공 시, 결제 완료 페이지나 주문 상세 페이지로 이동
-                const confirmedOrder = await response.json();
+                await response.json();
                 alert('결제가 성공적으로 완료되었습니다.');
-                navigate(`/`); // 예: 주문 상세 페이지로 이동
+                navigate(`/mypage/orders`); // 주문 내역 페이지로 이동
 
             } catch (error) {
                 console.error("Payment confirmation failed:", error);
-                alert(`오류가 발생했습니다: ${error.message}`);
-                // 실패 페이지로 이동하거나 사용자에게 오류 안내
-                navigate('/payment/fail'); 
+                // 실패 페이지로 이동 시, 실패 관련 정보를 쿼리 파라미터로 전달할 수 있습니다.
+                navigate(`/payment/fail?message=${encodeURIComponent(error.message)}`); 
             }
         };
 
@@ -44,9 +45,12 @@ function PaymentSuccessPage() {
     }, [searchParams, navigate]);
 
     return (
-        <div>
-            <h2>결제 승인 중...</h2>
-            <p>잠시만 기다려주세요. 자동으로 페이지가 이동됩니다.</p>
+        <div className="success-page-container">
+            <div className="success-card">
+                <div className="spinner"></div>
+                <h2>결제 승인 중...</h2>
+                <p>잠시만 기다려주세요. 자동으로 페이지가 이동됩니다.</p>
+            </div>
         </div>
     );
 }

@@ -8,7 +8,7 @@ import {
 import Mypage from "./components/Mypage";
 import "./App.css";
 import KakaoCallback from "./components/KakaoCallback";
-import InquiryHistory from "./components/InquiryHistory";
+import InquiryHistory from "./components/inquiry/InquiryHistory";
 import Main from "./components/Main1";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
@@ -27,23 +27,34 @@ import SellerPage from './components/seller/SellerPage'; // 판매자 페이지 
 import ProductRegistrationForm from './components/seller/ProductRegistrationForm'; 
 import PaymentSuccessPage from './components/PaymentSuccessPage'; // 생성할 컴포넌트
 import PaymentFailPage from './components/PaymentFailPage'; 
+import InquiryChatRoom from './components/inquiry/InquiryChatRoom';
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/payment/success" element={<PaymentSuccessPage />} />
         <Route path="/payment/fail" element={<PaymentFailPage />} />
-        <Route path="/" element={<Main />} />
+
+        {/* 👇 이 부분을 수정했습니다 👇 */}
+        <Route 
+          path="/" 
+          element={
+            <div className="app-container">
+              <Main />
+            </div>
+          } 
+        />
+        
         <Route path="/oauth/kakao/callback" element={<KakaoCallback />} /> 
         <Route path="/cartoption" element={<CartOption />} />
         <Route path="/searchdialog" element={<SearchDialog />} />
         <Route path="/mypage/inquiries" element={<InquiryHistory />} />
-        <Route path="/" element={<Main />} />
-        <Route path="/login" element={<Login />} />      {/* ✅ 여기 있어야 함 */}
-        <Route path="/signup" element={<Signup />} /> {/* ✅ 회원가입 라우팅 */}
-        <Route path="/mypage" element={<Mypage />} /> {/* ✅ 마이페이지 라우팅 */}
-        <Route path="/mypage/profile" element={<Profile />} /> {/* ✅ 프로필 라우팅 */}
-        {/* ✅ 상품 상세 페이지 라우트 추가 (동적 파라미터 productId 사용) */}
+        {/* '/' 경로가 중복되므로 아래 라인은 삭제해도 됩니다. */}
+        {/* <Route path="/" element={<Main />} /> */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/mypage" element={<Mypage />} />
+        <Route path="/mypage/profile" element={<Profile />} />
         <Route path="/product/:productId" element={<ProductPage />} />      
         <Route path="/cart" element={<ShoppingCartPage />} />
         <Route path="/search-results" element={<SearchResultsPage />} />
@@ -54,15 +65,15 @@ function App() {
         <Route path="/mypage/my-reviews" element={<MyReviewsPage />} />
         <Route path="/seller" element={<SellerPage />} />
         <Route path="/seller/product/new" element={<ProductRegistrationForm />} /> 
+        <Route path="/inquiry" element={<InquiryHistory />} />
+        <Route path="/inquiry/chat/:roomId" element={<InquiryChatRoom />} />
       </Routes>
     </Router>
   );
 }
 
 const ReviewWritePage = () => {
-  const { productId } = useParams(); // URL에서 productId를 가져옴
-  // 필요하다면 여기서 productId로 상품 정보를 미리 가져와서 ReviewWriteForm에 initialProductInfo로 전달할 수 있습니다.
-  // 또는 ReviewWriteForm 내부에서 직접 가져오도록 둡니다.
+  const { productId } = useParams();
   return <ReviewWriteForm productId={productId} />;
 };
 
